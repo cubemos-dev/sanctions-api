@@ -16,7 +16,7 @@ servers:
 paths:
   /search/entities/person:
     post:
-      summary: Search for a person through desired sanction lists
+      summary: Search for a person through sanction lists
       operationId: post-search-entities-organizations
       responses:
         '200':
@@ -63,7 +63,7 @@ paths:
     parameters: []
   /search/entities/organization:
     post:
-      summary: ''
+      summary: Search for an organization through sanction lists
       operationId: post-search-entities-organizations
       responses:
         '200':
@@ -89,11 +89,15 @@ paths:
     parameters: []
   /search/location/address:
     post:
-      summary: ''
+      summary: Search for an entity based on an address through sanction lists
       operationId: post-search-address-geo
       responses:
         '200':
           description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching persons found in the desired sanction lists.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/locationSearchResult'
         '400':
           description: Bad Request
         '401':
@@ -104,13 +108,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/geoSearchResult'
+              $ref: '#/components/schemas/addressSearch'
         description: Payload request scheme for single search
       description: POST call for the single search on an organization or person through the desired sanction lists in a radius around a location
     parameters: []
   /bulksearch/entities/person:
     post:
-      summary: ''
+      summary: Search for multiple persons through sanction lists
       operationId: post-bulksearch-entities-person
       responses:
         '200':
@@ -128,7 +132,7 @@ paths:
         description: Input payload for the bulk search query on persons
   /search/location/geo:
     post:
-      summary: ''
+      summary: Search for an entity based on geographical co-ordinates through sanction list
       operationId: post-search-location-geo
       responses:
         '200':
@@ -136,7 +140,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/geoSearchResult'
+                $ref: '#/components/schemas/locationSearchResult'
       requestBody:
         content:
           application/json:
@@ -370,9 +374,10 @@ components:
           description: "List of aliases that the organization has for it's name. "
           items:
             type: string
-    geoBasicsearch:
+    geoSearch:
       title: geoBasicSearch
       type: object
+      description: Basic search identifiers for an entity through a sanction list based on geographical co-ordinates
       properties:
         latitude:
           type: string
@@ -388,27 +393,17 @@ components:
           description: Threshold value for the matching similarity below which the results will not be returned
         name:
           type: string
-          description: full name of the person or the organization to search for at the given location
-        is_person:
-          type: boolean
-          description: |-
-            Indicator of the input name being a person or an organization.
-            If the value is true, it is a person and otherwise it is an organization.
+          description: full name of the entity to search for at the given location
+        entity:
+          type: string
+          description: Identifier of the entity type
       required:
         - latitude
         - logitude
         - radius
         - match_similarity_threshold
         - name
-        - is_person
-      description: Basic search identifiers for an entity through a sanction list based on geographical co-ordinates
-    geoAdvancedsearch:
-      title: geoAdvancedSearch
-      type: object
-      properties:
-        strict_entry_identifiers:
-          type: string
-      description: Advanced search for an entity through a sanction list based on geographical co-ordinates
+        - entity
     organizationSearchResult:
       title: organizationSearchResult
       type: object
@@ -419,7 +414,7 @@ components:
           type: integer
         organizations:
           $ref: '#/components/schemas/organization'
-    geoSearchResult:
+    locationSearchResult:
       title: geoSearchResult
       type: object
       description: Response of a search query based on geographical co-ordinates through the desired sanction lists
@@ -457,14 +452,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/personSearchResult'
-    geoSearch:
-      title: geoSearch
+    addressSearch:
+      title: addressSearch
       type: object
       properties:
-        basic:
-          $ref: '#/components/schemas/geoBasicsearch'
-        advanced:
-          $ref: '#/components/schemas/geoAdvancedsearch'
+        address_line_1:
+          type: string
+          description: First line of the address
+        address_line_2:
+          type: string
+          description: Second line of address
+        additional_address_lines:
+          type: string
+          description: All the other additional address lines
+        city:
+          type: string
+          description: Name of the city
+        pin_code:
+          type: string
+          description: Pin code
+        country:
+          type: string
+          description: Name of the country
+        match_similarity_threshold:
+          type: string
+          description: Similiarity threshold below which the results would not be returned
+        name:
+          type: string
+          description: Name of the entity
+        entity:
+          type: string
+          description: 'Identifier of the entity '
   securitySchemes:
     cubemos_api_key:
       name: API Key
