@@ -25,7 +25,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/responseperson'
+                $ref: '#/components/schemas/personSearchResult'
         '400':
           description: Bad Request
         '401':
@@ -37,7 +37,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchperson'
+              $ref: '#/components/schemas/personSearch'
           application/xml:
             schema:
               type: object
@@ -71,7 +71,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/responseorga'
+                $ref: '#/components/schemas/organizationSearchResult'
         '400':
           description: Bad Request
         '401':
@@ -83,7 +83,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/searchorga'
+              $ref: '#/components/schemas/organizationSearch'
         description: Payload request schema for single search
       description: "POST call for the single search on an organization's details through the desired sanction lists"
     parameters: []
@@ -118,13 +118,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/bulkresponseperson'
+                $ref: '#/components/schemas/personBulkSearchResult'
       description: POST call for bulk searches on a person details through the desired sanction lists
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/bulksearchperson'
+              $ref: '#/components/schemas/personBulkSearch'
         description: Input payload for the bulk search query on persons
   /search/location/geo:
     post:
@@ -132,7 +132,11 @@ paths:
       operationId: post-search-location-geo
       responses:
         '200':
-          description: OK
+          description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching entities were found in the desired sanction lists.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/geoSearchResult'
       requestBody:
         content:
           application/json:
@@ -140,10 +144,10 @@ paths:
               $ref: '#/components/schemas/geoSearch'
 components:
   schemas:
-    personfuzzysearch:
-      title: person_fuzzy
+    personBasicSearch:
+      title: personBasicSearch
       type: object
-      description: Fuzzy search identifiers for a person through a sanction list
+      description: Basic search identifiers for a person through a sanction list
       x-examples: {}
       properties:
         full_name:
@@ -195,10 +199,10 @@ components:
       required:
         - full_name
         - sanction_list
-    personfilterssearch:
-      title: person_filters
+    personAdvancedsearch:
+      title: personAdvanced
       type: object
-      description: fileterd search for a person through a sanction list
+      description: Advanced search for a person through a sanction list
       properties:
         title:
           type: string
@@ -229,9 +233,9 @@ components:
       x-examples: {}
       properties:
         basic:
-          $ref: '#/components/schemas/personfuzzysearch'
+          $ref: '#/components/schemas/personBasicSearch'
         advanced:
-          $ref: '#/components/schemas/personfilterssearch'
+          $ref: '#/components/schemas/personAdvancedsearch'
     person:
       title: person
       type: object
@@ -296,7 +300,7 @@ components:
           type: string
           description: The sanction list in which a valid result was found
       description: ''
-    orgafuzzysearch:
+    organizationBasicSearch:
       title: orgafuzzysearch
       type: object
       properties:
@@ -324,7 +328,8 @@ components:
       required:
         - organization_name
         - sanction_list
-    orgafilterssearch:
+      description: Basic search identifiers for an organization through a sanction list
+    organizationAdvancedsearch:
       title: orgafilterssearch
       type: object
       properties:
@@ -333,16 +338,17 @@ components:
           description: |-
             Identifiers of the entry fields against which the match similarity has to be 100% in the results
             The identifiers can be from the basic fields and advanced fields
+      description: Advanced search for an organization through a sanction list
     organizationSearch:
       title: searchOrganization
       type: object
+      description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
       properties:
         basic:
-          $ref: '#/components/schemas/orgafuzzysearch'
+          $ref: '#/components/schemas/organizationBasicSearch'
         advanced:
-          $ref: '#/components/schemas/orgafilterssearch'
-      description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
-    orgafuzzyresponse:
+          $ref: '#/components/schemas/organizationAdvancedsearch'
+    organization:
       title: orgafuzzyresponse
       type: object
       properties:
@@ -364,8 +370,8 @@ components:
           description: "List of aliases that the organization has for it's name. "
           items:
             type: string
-    geofuzzysearch:
-      title: geofuzzysearch
+    geoBasicsearch:
+      title: geoBasicSearch
       type: object
       properties:
         latitude:
@@ -395,57 +401,52 @@ components:
         - match_similarity_threshold
         - name
         - is_person
-    geofilterssearch:
-      title: geofilterssearch
+      description: Basic search identifiers for an entity through a sanction list based on geographical co-ordinates
+    geoAdvancedsearch:
+      title: geoAdvancedSearch
       type: object
       properties:
         strict_entry_identifiers:
           type: string
-    geoSearch:
-      title: geoSearch
-      type: object
-      properties:
-        basic:
-          $ref: '#/components/schemas/geofuzzysearch'
-        advanced:
-          $ref: '#/components/schemas/geofilterssearch'
-      description: The identifiers based on which the search will be performed for an entity through the desired sanction lists
+      description: Advanced search for an entity through a sanction list based on geographical co-ordinates
     organizationSearchResult:
       title: organizationSearchResult
       type: object
-      properties:
-        number_of_organizations:
-          type: string
-          description: Number of organizations found
-        organizations:
-          $ref: '#/components/schemas/orgafuzzyresponse'
       description: Response payload for the query on a organization through the desired sanction lists
-    responsegeo:
-      title: responsegeo
+      properties:
+        organizations_identified:
+          description: Number of organizations found
+          type: integer
+        organizations:
+          $ref: '#/components/schemas/organization'
+    geoSearchResult:
+      title: geoSearchResult
       type: object
+      description: Response of a search query based on geographical co-ordinates through the desired sanction lists
       properties:
         entity_type:
-          type: boolean
-          description: 'Indicator of whether the output responses for persons are filled or for organizations. If the value is true, it means the persons are filled and organizations are empty and vice versa if false. '
+          type: string
+          description: Indicates what type of an entity is searched for
         persons:
-          $ref: '#/components/schemas/responseperson'
+          $ref: '#/components/schemas/personSearchResult'
         organizations:
-          $ref: '#/components/schemas/responseorga'
+          $ref: '#/components/schemas/organizationSearchResult'
       required:
         - entity_type
-    bulksearchperson:
-      title: bulksearchperson
+    personBulkSearch:
+      title: personBulkSearch
       type: object
       description: Bulk search payload for persons
       properties:
         number_of_persons:
           type: integer
+          description: Number of persons to search for through the desired sanction lists
         persons:
           type: array
           items:
-            $ref: '#/components/schemas/searchperson'
-    bulkresponseperson:
-      title: bulkresponseperson
+            $ref: '#/components/schemas/personSearch'
+    personBulkSearchResult:
+      title: personBulkSearchResult
       type: object
       description: Response payload of the bulk search on persons
       properties:
@@ -455,7 +456,15 @@ components:
         persons_results:
           type: array
           items:
-            $ref: '#/components/schemas/responseperson'
+            $ref: '#/components/schemas/personSearchResult'
+    geoSearch:
+      title: geoSearch
+      type: object
+      properties:
+        basic:
+          $ref: '#/components/schemas/geoBasicsearch'
+        advanced:
+          $ref: '#/components/schemas/geoAdvancedsearch'
   securitySchemes:
     cubemos_api_key:
       name: API Key
