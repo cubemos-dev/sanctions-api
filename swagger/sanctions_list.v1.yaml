@@ -1,0 +1,463 @@
+openapi: 3.0.0
+info:
+  title: Sanctions List API
+  version: '1.0'
+  description: 'cubemos Sanctions list API in order to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime '
+  contact:
+    name: cubemos gmbh
+    url: www.cubemos.com
+    email: meet@cubemos.com
+  license:
+    name: cubemos license
+  termsOfService: 'https://www.cubemos.com/general-terms/'
+servers:
+  - url: api.cubemos.com
+    description: ''
+paths:
+  /search/entities/person:
+    post:
+      summary: Search for a person through desired sanction lists
+      operationId: post-search-entities-organizations
+      responses:
+        '200':
+          description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching persons found in the desired sanction lists.'
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseperson'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      description: "POST call for the single search on a person's details through the desired sanction lists"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/searchperson'
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+          text/html:
+            schema:
+              type: object
+              properties: {}
+          text/plain:
+            schema:
+              type: object
+              properties: {}
+          application/EDI-X12:
+            schema:
+              type: object
+              properties: {}
+        description: Payload request schema for single search
+      parameters: []
+    parameters: []
+  /search/entities/organization:
+    post:
+      summary: ''
+      operationId: post-search-entities-organizations
+      responses:
+        '200':
+          description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching organization found in the desired sanction lists.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseorga'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/searchorga'
+        description: Payload request schema for single search
+      description: "POST call for the single search on an organization's details through the desired sanction lists"
+    parameters: []
+  /search/location/address:
+    post:
+      summary: ''
+      operationId: post-search-address-geo
+      responses:
+        '200':
+          description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching persons found in the desired sanction lists.'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/geoSearchResult'
+        description: Payload request scheme for single search
+      description: POST call for the single search on an organization or person through the desired sanction lists in a radius around a location
+    parameters: []
+  /bulksearch/entities/person:
+    post:
+      summary: ''
+      operationId: post-bulksearch-entities-person
+      responses:
+        '200':
+          description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching persons found in the desired sanction lists.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bulkresponseperson'
+      description: POST call for bulk searches on a person details through the desired sanction lists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bulksearchperson'
+        description: Input payload for the bulk search query on persons
+  /search/location/geo:
+    post:
+      summary: ''
+      operationId: post-search-location-geo
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/geoSearch'
+components:
+  schemas:
+    personfuzzysearch:
+      title: person_fuzzy
+      type: object
+      description: Fuzzy search identifiers for a person through a sanction list
+      x-examples: {}
+      properties:
+        full_name:
+          type: string
+          description: Full name of a person (first_names + middle_names + last_names )
+          example: john junior senior smith
+        first_name:
+          type: string
+          description: All the first names of the person
+          example: john
+        middle_name:
+          type: string
+          description: All the middle names of the person
+          example: junior senior
+        last_name:
+          type: string
+          description: All the last names of the person
+          example: smith
+        alias:
+          type: array
+          description: 'All the aliases of the person as an array '
+          example: kingslayer
+          uniqueItems: true
+          items:
+            type: string
+        gender:
+          type: string
+          description: 'Gender of the person '
+          example: male
+        dob:
+          type: string
+          description: Date of birth of the person
+          example: 01.01.1950
+        nationality:
+          type: array
+          description: Nationalities of the person as an array
+          example: USA
+          items:
+            type: string
+        sanction_list:
+          type: array
+          description: All the sanction lists as an array through which the search has to be made
+          items:
+            type: string
+        match_similarity_threshold:
+          type: string
+          description: Similarity threshold below which the results will not be returned
+          example: '0.75'
+      required:
+        - full_name
+        - sanction_list
+    personfilterssearch:
+      title: person_filters
+      type: object
+      description: fileterd search for a person through a sanction list
+      properties:
+        title:
+          type: string
+          description: Job title or positional title held by the person
+          example: Prime minister of a country
+        full_address:
+          type: string
+          example: '12, street, 12345 city, country'
+          description: Full address as a string from door number to country
+        dob_year:
+          type: array
+          description: Possible birth years if the date of birth is not clear
+          example: '1950, 1952'
+          items:
+            type: integer
+        strict_entry_identifier:
+          type: array
+          description: |-
+            Identifiers of the entry fields against which the match similarity has to be 100% in the results
+            The identifiers can be from the basic fields and advanced fields
+          example: 'full_name, dob'
+          items:
+            type: string
+    personSearch:
+      title: personSearch
+      type: object
+      description: The identifiers based on which the search will be performed for a person through the desired sanction lists
+      x-examples: {}
+      properties:
+        basic:
+          $ref: '#/components/schemas/personfuzzysearch'
+        advanced:
+          $ref: '#/components/schemas/personfilterssearch'
+    person:
+      title: person
+      type: object
+      description: Details found for each person in each sanction list based on the query parameters
+      x-examples: {}
+      properties:
+        entries_from_sanction_lists:
+          type: array
+          description: The raw information from the identifies entry of the sanction list
+          items:
+            $ref: '#/components/schemas/sanctionlistentryperuid'
+        addresses_available:
+          type: array
+          description: Boolean value to show if the address of the person is available or not
+          items:
+            type: string
+        dob_available:
+          type: array
+          description: Boolean value to show if the exact date of birth of the person is available or not
+          items:
+            type: string
+        match_similarity:
+          type: array
+          description: |
+            Match similarity for each search result corresponding to the sanction list
+          items:
+            type: string
+        aliases:
+          type: array
+          description: List of aliases that the person carries for his/her name.
+          items:
+            type: string
+        number_of_identified_lists:
+          type: integer
+          description: 'Number of sanction lists in which an entry could be identified '
+      required:
+        - number_of_identified_lists
+    personSearchResult:
+      title: personSearchResult
+      description: Response payload for the query on a person through the desired sanction lists
+      type: object
+      properties:
+        persons_identified:
+          type: integer
+        persons:
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
+    sanctionlistentryperuid:
+      title: sanctionlistentryperuid
+      type: object
+      properties:
+        number_of_entries:
+          type: integer
+          description: number of entries with the same unique id in the sanction list
+        entries:
+          type: array
+          description: raw entries from the sanction list
+          items:
+            type: string
+        sanction_list:
+          type: string
+          description: The sanction list in which a valid result was found
+      description: ''
+    orgafuzzysearch:
+      title: orgafuzzysearch
+      type: object
+      properties:
+        organization_name:
+          type: string
+          example: cubemos gmbh
+          description: Name of the organization for which the search through sanction lists has to be made
+        address:
+          type: string
+          example: 'mehlbeerenstraße 2, 82024 taufkirchen'
+          description: Full address of the organization
+        head_quarter_country:
+          type: string
+          example: germany
+          description: Country name in which the head quarter is located
+        sanction_list:
+          type: array
+          description: Sanction lists through which the search has to be made
+          items:
+            type: string
+        match_similarity_threshold:
+          type: string
+          example: '0.5'
+          description: Threshold value for the matching similarity below which the results will not be returned
+      required:
+        - organization_name
+        - sanction_list
+    orgafilterssearch:
+      title: orgafilterssearch
+      type: object
+      properties:
+        strict_entry_identifiers:
+          type: string
+          description: |-
+            Identifiers of the entry fields against which the match similarity has to be 100% in the results
+            The identifiers can be from the basic fields and advanced fields
+    organizationSearch:
+      title: searchOrganization
+      type: object
+      properties:
+        basic:
+          $ref: '#/components/schemas/orgafuzzysearch'
+        advanced:
+          $ref: '#/components/schemas/orgafilterssearch'
+      description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
+    orgafuzzyresponse:
+      title: orgafuzzyresponse
+      type: object
+      properties:
+        sanction_list:
+          type: string
+          description: Sanction lists in which the results were found
+        entry_from_sanction_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/sanctionlistentryperuid'
+        match_similarity:
+          type: array
+          description: |
+            Match similarity for each search result corresponding to the sanction list
+          items:
+            type: string
+        aliases:
+          type: array
+          description: "List of aliases that the organization has for it's name. "
+          items:
+            type: string
+    geofuzzysearch:
+      title: geofuzzysearch
+      type: object
+      properties:
+        latitude:
+          type: string
+          description: The latitude of the location
+        logitude:
+          type: string
+          description: The longitude of the location
+        radius:
+          type: string
+          description: Search radius around the input latitude and logitude in km
+        match_similarity_threshold:
+          type: string
+          description: Threshold value for the matching similarity below which the results will not be returned
+        name:
+          type: string
+          description: full name of the person or the organization to search for at the given location
+        is_person:
+          type: boolean
+          description: |-
+            Indicator of the input name being a person or an organization.
+            If the value is true, it is a person and otherwise it is an organization.
+      required:
+        - latitude
+        - logitude
+        - radius
+        - match_similarity_threshold
+        - name
+        - is_person
+    geofilterssearch:
+      title: geofilterssearch
+      type: object
+      properties:
+        strict_entry_identifiers:
+          type: string
+    geoSearch:
+      title: geoSearch
+      type: object
+      properties:
+        basic:
+          $ref: '#/components/schemas/geofuzzysearch'
+        advanced:
+          $ref: '#/components/schemas/geofilterssearch'
+      description: The identifiers based on which the search will be performed for an entity through the desired sanction lists
+    organizationSearchResult:
+      title: organizationSearchResult
+      type: object
+      properties:
+        number_of_organizations:
+          type: string
+          description: Number of organizations found
+        organizations:
+          $ref: '#/components/schemas/orgafuzzyresponse'
+      description: Response payload for the query on a organization through the desired sanction lists
+    responsegeo:
+      title: responsegeo
+      type: object
+      properties:
+        entity_type:
+          type: boolean
+          description: 'Indicator of whether the output responses for persons are filled or for organizations. If the value is true, it means the persons are filled and organizations are empty and vice versa if false. '
+        persons:
+          $ref: '#/components/schemas/responseperson'
+        organizations:
+          $ref: '#/components/schemas/responseorga'
+      required:
+        - entity_type
+    bulksearchperson:
+      title: bulksearchperson
+      type: object
+      description: Bulk search payload for persons
+      properties:
+        number_of_persons:
+          type: integer
+        persons:
+          type: array
+          items:
+            $ref: '#/components/schemas/searchperson'
+    bulkresponseperson:
+      title: bulkresponseperson
+      type: object
+      description: Response payload of the bulk search on persons
+      properties:
+        number_of_persons:
+          type: integer
+          description: Number of persons whose results have returned. Same as the input parameter of number of persons. The entry for which no results were found are denoted with null in the persons_results array.
+        persons_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/responseperson'
+  securitySchemes:
+    cubemos_api_key:
+      name: API Key
+      type: apiKey
+      in: query
