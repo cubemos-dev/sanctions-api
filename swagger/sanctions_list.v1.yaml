@@ -110,7 +110,7 @@ paths:
             schema:
               $ref: '#/components/schemas/addressSearch'
         description: Payload request scheme for single search
-      description: POST call for the single search on an organization or person through the desired sanction lists in a radius around a location
+      description: POST call for the single search on an entity through the desired sanction lists in a radius around an address
     parameters: []
   /bulksearch/entities/person:
     post:
@@ -146,6 +146,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/geoSearch'
+        description: Payload request scheme for single search
+      description: POST call for the single search on an entity through the desired sanction lists in a radius around a geographical co-ordinate
 components:
   schemas:
     personBasicSearch:
@@ -483,6 +485,9 @@ components:
         entity:
           type: string
           description: 'Identifier of the entity '
+        search_radius:
+          type: string
+          description: Search radius around the address
   securitySchemes:
     cubemos_api_key:
       name: API Key
