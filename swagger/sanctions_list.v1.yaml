@@ -106,8 +106,24 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/organizationSearch'
+            examples:
+              Example:
+                value:
+                  sanction_list:
+                    - UN-Sanctions List
+                    - EU-Financial Sanctions List
+                  basic:
+                    organization_name: cubemos gmbh
+                    country_code: DE
+                  advanced:
+                    address:
+                      country_code: DE
+                      zip_code: 82024
+                      city: Munich
+                      street: Mehlbeerenstraße 2
+                    headquarter_country: DE
         description: Payload request schema for single search
-      description: "POST call for the single search on an organization's details through the desired sanction lists"
+      description: Search an organization through the sanction lists
     parameters: []
   /search/location/address:
     post:
@@ -145,7 +161,7 @@ paths:
         description: Payload request scheme for single search
       description: Search on an entity through the desired sanction lists in at an address
     parameters: []
-  /bulksearch/entities/person:
+  /batchsearch/entities/person:
     post:
       summary: Search for multiple persons through sanction lists
       operationId: post-bulksearch-entities-person
@@ -156,7 +172,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/personBulkSearchResult'
-      description: Searches on multiple persons through the sanction lists
+      description: Searches for multiple persons at a time through the sanction lists
       requestBody:
         content:
           application/json:
@@ -170,8 +186,9 @@ paths:
             schema:
               type: object
               properties: {}
-        description: Input payload for the bulk search query on persons
+        description: Input payload for the batch search on persons
       parameters: []
+    parameters: []
   /search/location/geo:
     post:
       summary: Search for an entity based on geographical co-ordinates through sanction list
@@ -324,54 +341,47 @@ components:
     organizationBasicSearch:
       title: orgafuzzysearch
       type: object
+      description: Basic search identifiers for an organization through a sanction list
       properties:
         organization_name:
           type: string
           example: cubemos gmbh
           description: Name of the organization for which the search through sanction lists has to be made
-        address:
+        country_code:
           type: string
-          example: 'mehlbeerenstraße 2, 82024 taufkirchen'
-          description: Full address of the organization
-        head_quarter_country:
-          type: string
-          example: germany
-          description: Country name in which the head quarter is located
-        sanction_list:
-          type: array
-          description: Sanction lists through which the search has to be made
-          items:
-            type: string
-        match_similarity_threshold:
-          type: string
-          example: '0.5'
-          description: Threshold value for the matching similarity below which the results will not be returned
+          description: ISO country code in which the organization is located
       required:
         - organization_name
-        - sanction_list
-      description: Basic search identifiers for an organization through a sanction list
     organizationAdvancedsearch:
       title: orgafilterssearch
       type: object
-      properties:
-        strict_entry_identifiers:
-          type: string
-          description: |-
-            Identifiers of the entry fields against which the match similarity has to be 100% in the results
-            The identifiers can be from the basic fields and advanced fields
       description: Advanced search for an organization through a sanction list
+      properties:
+        address:
+          $ref: '#/components/schemas/address'
+        headquarter_country:
+          type: string
+          description: ISO country code of the place where the headquarters of the organization is located
     organizationSearch:
       title: searchOrganization
       type: object
       description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
       properties:
+        sanction_list:
+          type: array
+          description: Sanction lists through which the search has to be made
+          items:
+            type: string
         basic:
           $ref: '#/components/schemas/organizationBasicSearch'
         advanced:
           $ref: '#/components/schemas/organizationAdvancedsearch'
+      required:
+        - sanction_list
     organization:
       title: organization
       type: object
+      description: organization details
       properties:
         name:
           type: string
@@ -387,7 +397,10 @@ components:
           description: "List of aliases that the organization has for it's name. "
           items:
             type: string
-      description: organization details
+        sanction_lists:
+          type: array
+          items:
+            $ref: '#/components/schemas/sanctionListEntryPerUid'
     geo:
       title: geo
       type: object
@@ -435,9 +448,11 @@ components:
       type: object
       description: Bulk search payload for persons
       properties:
-        number_of_persons:
-          type: integer
-          description: Number of persons to search for through the desired sanction lists
+        indices:
+          type: array
+          description: Index assigned to each person being searched for
+          items:
+            type: integer
         persons:
           type: array
           items:
@@ -458,15 +473,18 @@ components:
       title: addressSearch
       type: object
       description: query payload for an address search
+      x-examples: {}
       properties:
         sanction_lists:
           type: array
-          description: First line of the address
+          description: Sanction lists through which the search has to be made
           items:
             type: string
         address:
           $ref: '#/components/schemas/address'
-      x-examples: {}
+      required:
+        - sanction_lists
+        - address
     person:
       title: person_
       type: object
@@ -501,16 +519,20 @@ components:
     address:
       title: address
       type: object
+      description: Basic search identifiers for an entity through a sanction list based on an address
       properties:
-        country:
+        country_code:
           type: string
+          description: '2 digit ISO country code '
         zip_code:
           type: integer
+          description: 'Zip code of the area '
         city:
           type: string
+          description: Name of the city
         street:
           type: string
-      description: Basic search identifiers for an entity through a sanction list based on an address
+          description: Name of the street
     geoSearch:
       title: geoSearch
       type: object
@@ -518,10 +540,14 @@ components:
       properties:
         sanction_lists:
           type: array
+          description: The sanction lists through which the search has to be made
           items:
             type: string
         geo:
           $ref: '#/components/schemas/geo'
+      required:
+        - sanction_lists
+        - geo
   securitySchemes:
     cubemos_api_key:
       name: API Key
