@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Sanctions List API
   version: '1.0'
-  description: 'cubemos Sanctions list API in order to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime '
+  description: 'cubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime '
   contact:
     name: cubemos gmbh
     url: www.cubemos.com
@@ -38,6 +38,28 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/personSearch'
+            examples:
+              Example:
+                value:
+                  person_search:
+                    full_name: john junior senior smith
+                    first_names: john
+                    middle_names: junior senior
+                    last_names: smith
+                    aliases:
+                      - don john
+                      - godfather
+                    gender: male
+                    dob: 01.01.1950
+                    nationalities: DE
+                    sanction_lists:
+                      - UN-Sanctions List
+                      - EU-Financial Sanctions List
+                  advanced_attributes:
+                    title: Prime minister of a country
+                    full_address: 'Herman Straße 2, 12345 Berlin, Germany'
+                    dob_year_ambiguity: '1950, 1952'
+                    must_attributes: 'full_name, dob'
           application/xml:
             schema:
               type: object
@@ -109,8 +131,19 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/addressSearch'
+            examples:
+              Example:
+                value:
+                  sanction_lists:
+                    - EU-financial sanctions list
+                    - UN-sanctions list
+                  address:
+                    country: DE
+                    zip_code: 12345
+                    city: Berlin
+                    street: Hermann Straße 1
         description: Payload request scheme for single search
-      description: POST call for the single search on an entity through the desired sanction lists in a radius around an address
+      description: Search on an entity through the desired sanction lists in at an address
     parameters: []
   /bulksearch/entities/person:
     post:
@@ -123,7 +156,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/personBulkSearchResult'
-      description: POST call for bulk searches on a person details through the desired sanction lists
+      description: Searches on multiple persons through the sanction lists
       requestBody:
         content:
           application/json:
@@ -155,8 +188,19 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/geoSearch'
+            examples:
+              Example:
+                value:
+                  sanction_lists:
+                    - EU-financial sanctions list
+                    - UN-sanctions list
+                  geo:
+                    latitude: 0.1234
+                    logitude: 0.1234
+                    radius: 500
         description: Payload request scheme for single search
-      description: POST call for the single search on an entity through the desired sanction lists in a radius around a geographical co-ordinate
+      description: Search on an entity through the desired sanction lists in a radius around a geographical co-ordinate
+      parameters: []
 components:
   schemas:
     personBasicSearch:
@@ -225,7 +269,7 @@ components:
           type: string
           example: '12, street, 12345 city, country'
           description: Full address as a string from door number to country
-        dob_year:
+        dob_year_ambiguity:
           type: array
           description: Possible birth years if the date of birth is not clear
           example: '1950, 1952'
@@ -249,43 +293,6 @@ components:
           $ref: '#/components/schemas/personBasicSearch'
         advanced_attributes:
           $ref: '#/components/schemas/personAdvancedsearch'
-    person:
-      title: person
-      type: object
-      description: Details found for each person in each sanction list based on the query parameters
-      x-examples: {}
-      properties:
-        entries_from_sanction_lists:
-          type: array
-          description: The raw information from the identifies entry of the sanction list
-          items:
-            $ref: '#/components/schemas/sanctionlistentryperuid'
-        address:
-          type: array
-          description: Boolean value to show if the address of the person is available or not
-          items:
-            type: string
-        dob:
-          type: array
-          description: Boolean value to show if the exact date of birth of the person is available or not
-          items:
-            type: string
-        match_similarity:
-          type: array
-          description: |
-            Match similarity for each search result corresponding to the sanction list
-          items:
-            type: string
-        aliases:
-          type: array
-          description: List of aliases that the person carries for his/her name.
-          items:
-            type: string
-        number_of_identified_lists:
-          type: integer
-          description: 'Number of sanction lists in which an entry could be identified '
-      required:
-        - number_of_identified_lists
     personSearchResult:
       title: personSearchResult
       description: Response payload for the query on a person through the desired sanction lists
@@ -293,18 +300,20 @@ components:
       properties:
         persons_identified:
           type: integer
+          description: Number of persons identified matching to the input query
         persons:
           type: array
           items:
             $ref: '#/components/schemas/person'
-    sanctionlistentryperuid:
-      title: sanctionlistentryperuid
+    sanctionListEntryPerUid:
+      title: sanctionListEntryPerUid
       type: object
+      description: ''
       properties:
         number_of_entries:
           type: integer
           description: number of entries with the same unique id in the sanction list
-        entries:
+        array_of_list_entries:
           type: array
           description: raw entries from the sanction list
           items:
@@ -312,7 +321,6 @@ components:
         sanction_list:
           type: string
           description: The sanction list in which a valid result was found
-      description: ''
     organizationBasicSearch:
       title: orgafuzzysearch
       type: object
@@ -362,57 +370,42 @@ components:
         advanced:
           $ref: '#/components/schemas/organizationAdvancedsearch'
     organization:
-      title: orgafuzzyresponse
+      title: organization
       type: object
       properties:
-        sanction_list:
+        name:
           type: string
           description: Sanction lists in which the results were found
-        entry_from_sanction_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/sanctionlistentryperuid'
-        match_similarity:
-          type: array
+        address:
+          $ref: '#/components/schemas/address'
+        headquarter_country:
           description: |
             Match similarity for each search result corresponding to the sanction list
-          items:
-            type: string
+          type: string
         aliases:
           type: array
           description: "List of aliases that the organization has for it's name. "
           items:
             type: string
-    geoSearch:
-      title: geoBasicSearch
+      description: organization details
+    geo:
+      title: geo
       type: object
       description: Basic search identifiers for an entity through a sanction list based on geographical co-ordinates
       properties:
         latitude:
-          type: string
+          type: number
           description: The latitude of the location
         logitude:
-          type: string
+          type: number
           description: The longitude of the location
         radius:
-          type: string
-          description: Search radius around the input latitude and logitude in km
-        match_similarity_threshold:
-          type: string
-          description: Threshold value for the matching similarity below which the results will not be returned
-        name:
-          type: string
-          description: full name of the entity to search for at the given location
-        entity:
-          type: string
-          description: Identifier of the entity type
+          type: integer
+          description: Search radius around the input latitude and logitude in meters
       required:
         - latitude
         - logitude
         - radius
-        - match_similarity_threshold
-        - name
-        - entity
     organizationSearchResult:
       title: organizationSearchResult
       type: object
@@ -428,15 +421,15 @@ components:
       type: object
       description: Response of a search query based on geographical co-ordinates through the desired sanction lists
       properties:
-        entity_type:
-          type: string
+        number_of_matches:
           description: Indicates what type of an entity is searched for
+          type: integer
         persons:
           $ref: '#/components/schemas/personSearchResult'
         organizations:
           $ref: '#/components/schemas/organizationSearchResult'
       required:
-        - entity_type
+        - number_of_matches
     personBulkSearch:
       title: personBulkSearch
       type: object
@@ -464,57 +457,71 @@ components:
     addressSearch:
       title: addressSearch
       type: object
+      description: query payload for an address search
       properties:
-        address_line_1:
-          type: string
+        sanction_lists:
+          type: array
           description: First line of the address
-        address_line_2:
-          type: string
-          description: Second line of address
-        additional_address_lines:
-          type: string
-          description: All the other additional address lines
-        city:
-          type: string
-          description: Name of the city
-        pin_code:
-          type: string
-          description: Pin code
-        country:
-          type: string
-          description: Name of the country
-        match_similarity_threshold:
-          type: string
-          description: Similiarity threshold below which the results would not be returned
-        name:
-          type: string
-          description: Name of the entity
-        entity:
-          type: string
-          description: 'Identifier of the entity '
-        search_radius:
-          type: string
-          description: Search radius around the address
-    person_:
+          items:
+            type: string
+        address:
+          $ref: '#/components/schemas/address'
+      x-examples: {}
+    person:
       title: person_
       type: object
       properties:
         first_name:
           type: string
+          description: First name of the query
         middle_name:
           type: string
         last_name:
           type: string
         dob:
           type: string
+          description: Date of birth of the person
         gender:
           type: string
+          description: Gender of the person
         aliases:
-          type: string
-        nationality:
-          type: string
+          type: array
+          description: List of all the aliases that the person has
+          items:
+            type: string
+        nationalities:
+          type: array
+          description: Nationalities of a person denoted as by their respective ISO country codes
+          items:
+            type: string
         array_of_sanction_lists:
+          type: array
+          items:
+            $ref: '#/components/schemas/sanctionListEntryPerUid'
+    address:
+      title: address
+      type: object
+      properties:
+        country:
           type: string
+        zip_code:
+          type: integer
+        city:
+          type: string
+        street:
+          type: string
+      description: Basic search identifiers for an entity through a sanction list based on an address
+    geoSearch:
+      title: geoSearch
+      type: object
+      description: ''
+      properties:
+        sanction_lists:
+          type: array
+          items:
+            type: string
+        geo:
+          $ref: '#/components/schemas/geo'
   securitySchemes:
     cubemos_api_key:
       name: API Key
