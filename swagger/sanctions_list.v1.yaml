@@ -32,7 +32,7 @@ paths:
           description: Unauthorized
         '500':
           description: Internal Server Error
-      description: "POST call for the single search on a person's details through the desired sanction lists"
+      description: Search a person through sanction lists
       requestBody:
         content:
           application/json:
@@ -129,7 +129,16 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/personBulkSearch'
+            examples: {}
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/personBulkSearch'
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
         description: Input payload for the bulk search query on persons
+      parameters: []
   /search/location/geo:
     post:
       summary: Search for an entity based on geographical co-ordinates through sanction list
@@ -160,22 +169,22 @@ components:
           type: string
           description: Full name of a person (first_names + middle_names + last_names )
           example: john junior senior smith
-        first_name:
+        first_names:
           type: string
           description: All the first names of the person
           example: john
-        middle_name:
+        middle_names:
           type: string
           description: All the middle names of the person
           example: junior senior
-        last_name:
+        last_names:
           type: string
           description: All the last names of the person
           example: smith
-        alias:
+        aliases:
           type: array
           description: 'All the aliases of the person as an array '
-          example: kingslayer
+          example: 'don john, godfather'
           uniqueItems: true
           items:
             type: string
@@ -187,24 +196,22 @@ components:
           type: string
           description: Date of birth of the person
           example: 01.01.1950
-        nationality:
+        nationalities:
           type: array
-          description: Nationalities of the person as an array
+          description: Nationalities of the person as an array of 2 letter ISO country code
           example: USA
           items:
             type: string
-        sanction_list:
+        sanction_lists:
           type: array
           description: All the sanction lists as an array through which the search has to be made
+          example: 'UN Sanctions List, EU Financial Sanctions List'
+          uniqueItems: true
           items:
             type: string
-        match_similarity_threshold:
-          type: string
-          description: Similarity threshold below which the results will not be returned
-          example: '0.75'
       required:
         - full_name
-        - sanction_list
+        - sanction_lists
     personAdvancedsearch:
       title: personAdvanced
       type: object
@@ -224,7 +231,7 @@ components:
           example: '1950, 1952'
           items:
             type: integer
-        strict_entry_identifier:
+        must_attributes:
           type: array
           description: |-
             Identifiers of the entry fields against which the match similarity has to be 100% in the results
@@ -238,9 +245,9 @@ components:
       description: The identifiers based on which the search will be performed for a person through the desired sanction lists
       x-examples: {}
       properties:
-        basic:
+        person_search:
           $ref: '#/components/schemas/personBasicSearch'
-        advanced:
+        advanced_attributes:
           $ref: '#/components/schemas/personAdvancedsearch'
     person:
       title: person
@@ -253,12 +260,12 @@ components:
           description: The raw information from the identifies entry of the sanction list
           items:
             $ref: '#/components/schemas/sanctionlistentryperuid'
-        addresses_available:
+        address:
           type: array
           description: Boolean value to show if the address of the person is available or not
           items:
             type: string
-        dob_available:
+        dob:
           type: array
           description: Boolean value to show if the exact date of birth of the person is available or not
           items:
@@ -488,6 +495,26 @@ components:
         search_radius:
           type: string
           description: Search radius around the address
+    person_:
+      title: person_
+      type: object
+      properties:
+        first_name:
+          type: string
+        middle_name:
+          type: string
+        last_name:
+          type: string
+        dob:
+          type: string
+        gender:
+          type: string
+        aliases:
+          type: string
+        nationality:
+          type: string
+        array_of_sanction_lists:
+          type: string
   securitySchemes:
     cubemos_api_key:
       name: API Key
