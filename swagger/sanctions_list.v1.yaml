@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Sanctions List API
   version: '1.0'
-  description: 'cubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime '
+  description: "### Introduction\ncubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime. \n\n### Features\n1. Easy integration\n2. Example code for various languages\n3. Strict and fuzzy search \n4. Batch search \n\n### Supported Sanction Lists\n1. EU Financial Sanctions List\n2. UN Sanctions List\n3. Politically Exposed Persons"
   contact:
     name: cubemos gmbh
     url: www.cubemos.com
@@ -32,7 +32,7 @@ paths:
           description: Unauthorized
         '500':
           description: Internal Server Error
-      description: Search a person through sanction lists
+      description: "### Search a person through sanction lists\nThis API call allows you to perform a search through the desired sanction lists for a person. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
       requestBody:
         content:
           application/json:
@@ -58,7 +58,9 @@ paths:
                   advanced_attributes:
                     title: Prime minister of a country
                     full_address: 'Herman Straße 2, 12345 Berlin, Germany'
-                    dob_year_ambiguity: '1950, 1952'
+                    dob_year_ambiguity:
+                      - '1950'
+                      - '1952'
                     must_attributes: 'full_name, dob'
           application/xml:
             schema:
@@ -80,7 +82,9 @@ paths:
             schema:
               type: object
               properties: {}
-        description: Payload request schema for single search
+        description: |-
+          ### Payload request schema for single search
+          In order to perform a search on a person through the sanction lists, the full name and the desired sanction lists are required. This would return a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
       parameters: []
     parameters: []
   /search/entities/organization:
@@ -94,6 +98,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/organizationSearchResult'
+          headers: {}
         '400':
           description: Bad Request
         '401':
@@ -122,8 +127,10 @@ paths:
                       city: Munich
                       street: Mehlbeerenstraße 2
                     headquarter_country: DE
-        description: Payload request schema for single search
-      description: Search an organization through the sanction lists
+        description: |-
+          ### Payload request schema for single search
+          In order to perform a search on an organization through the sanction lists, the name and the desired sanction lists are required. This would return a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
+      description: "### Search an organization through sanction lists\nThis API call allows you to perform a search through the desired sanction lists for an organization. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
     parameters: []
   /search/location/address:
     post:
@@ -158,8 +165,8 @@ paths:
                     zip_code: 12345
                     city: Berlin
                     street: Hermann Straße 1
-        description: Payload request scheme for single search
-      description: Search on an entity through the desired sanction lists in at an address
+        description: "### Payload request scheme for single search\nIn order to search for a location bassed on the address, the sanction lists as well as the address details are required. Additional address lines can be placed into the advanced search attributes. The resulting payload consists of all the entities found at the address with their respective match scores. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
+      description: "### Search on an entity through the desired sanction lists in at an address\nThis API call allows you to perform a search through the desired sanction lists for any entity at the desired location. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
     parameters: []
   /batchsearch/entities/person:
     post:
@@ -171,14 +178,53 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/personBulkSearchResult'
-      description: Searches for multiple persons at a time through the sanction lists
+                $ref: '#/components/schemas/personBatchSearchResult'
+      description: "### Searches for multiple persons at a time through the sanction lists\nThis API call allows you to perform a batch search for multiple persons through the desired sanction lists. The search results returned are a list of list of all entries from the sanction lists which match to the input along with the degree of the match. "
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/personBulkSearch'
-            examples: {}
+              $ref: '#/components/schemas/personBatchSearch'
+            examples:
+              Example:
+                value:
+                  indices:
+                    - 0
+                  persons:
+                    - person_search:
+                        full_name: john junior senior smith
+                        first_names: john
+                        middle_names: junior senior
+                        last_names: smith
+                        aliases: 'don john, godfather'
+                        gender: male
+                        dob: 01.01.1950
+                        nationalities: US
+                        sanction_lists:
+                          - UN-Sanctions List
+                          - EU-Financial Sanctions List
+                      advanced_attributes:
+                        title: Prime minister of a country
+                        full_address: '12, street, 12345 city, country'
+                        dob_year_ambiguity: '1950, 1952'
+                        must_attributes: 'full_name, dob'
+                    - person_search:
+                        full_name: john senior smith
+                        first_names: john
+                        middle_names: senior
+                        last_names: smith
+                        aliases: 'grandmaster, godfather the supreme'
+                        gender: male
+                        dob: 01.01.1920
+                        nationalities: US
+                        sanction_lists:
+                          - UN-Sanctions List
+                          - EU-Financial Sanctions List
+                      advanced_attributes:
+                        title: Prime minister of a country
+                        full_address: '12, street, 12345 city, country'
+                        dob_year_ambiguity: '1910, 1920'
+                        must_attributes: 'full_name, dob'
           application/xml:
             schema:
               $ref: '#/components/schemas/personBulkSearch'
@@ -186,7 +232,9 @@ paths:
             schema:
               type: object
               properties: {}
-        description: Input payload for the batch search on persons
+        description: |-
+          ### Payload request schema for single search
+          In order to perform a search on a batch of persons through the sanction lists, the full name and the desired sanction lists are required. Additionally, a unique index has to be allocated to each person to which the results would be mapped as well. The search returns a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
       parameters: []
     parameters: []
   /search/location/geo:
@@ -215,9 +263,61 @@ paths:
                     latitude: 0.1234
                     logitude: 0.1234
                     radius: 500
-        description: Payload request scheme for single search
-      description: Search on an entity through the desired sanction lists in a radius around a geographical co-ordinate
+        description: "### Payload request scheme for single search\nIn order to search for a location bassed on the geographical co-ordinates, the sanction lists as well as precise co-ordinates are required. The resulting payload consists of all the entities found at the address with their respective match scores. Please note that the higher the search radius, the bigger could be the output response payload.  "
+      description: "### Search on an entity through the desired sanction lists in a radius around a geographical co-ordinate\nThis API call allows you to perform a search through the desired sanction lists for any entity at the desired location. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
       parameters: []
+  /batchsearch/entities/organization:
+    post:
+      summary: ''
+      operationId: post-batchsearch-entities-organization
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/organizationBatchSearchResult'
+      description: "### Searches for multiple organizations at a time through the sanction lists\nThis API call allows you to perform a batch search for multiple organizations through the desired sanction lists. The search results returned are a list of list of all entries from the sanction lists which match to the input along with the degree of the match. "
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/organizationBatchSearch'
+            examples:
+              Example:
+                value:
+                  indices:
+                    - 0
+                  organizations:
+                    - sanction_lists:
+                        - EU-Financial Sanctions List
+                        - UN-Sanctions List
+                      basic_attributes:
+                        organization_name: cubemos gmbh
+                        country_code: string
+                      advanced_attributes:
+                        address:
+                          country_code: DE
+                          zip_code: 82024
+                          city: Munich
+                          street: Mehlbeeren straße 2
+                        headquarter_country: DE
+                    - sanction_lists:
+                        - EU-Financial Sanctions List
+                        - UN-Sanctions List
+                      basic_attributes:
+                        organization_name: framos gmbh
+                        country_code: string
+                      advanced_attributes:
+                        address:
+                          country_code: DE
+                          zip_code: 82024
+                          city: Munich
+                          street: Mehlbeeren straße 2
+                        headquarter_country: DE
+        description: |-
+          ### Payload request schema for batch search
+          In order to perform a search on multiple organizations through the sanction lists, the name and the desired sanction lists are required. Additionally, a unique index has to be assigned to each organization searched for in order to map the results to it in the output payload. The search returns a list with all the possible matches with a score. Advanced attributes can be provided in order to make the search results stricter.
 components:
   schemas:
     personBasicSearch:
@@ -263,16 +363,8 @@ components:
           example: USA
           items:
             type: string
-        sanction_lists:
-          type: array
-          description: All the sanction lists as an array through which the search has to be made
-          example: 'UN Sanctions List, EU Financial Sanctions List'
-          uniqueItems: true
-          items:
-            type: string
       required:
         - full_name
-        - sanction_lists
     personAdvancedsearch:
       title: personAdvanced
       type: object
@@ -306,7 +398,12 @@ components:
       description: The identifiers based on which the search will be performed for a person through the desired sanction lists
       x-examples: {}
       properties:
-        person_search:
+        sanction_lists:
+          type: array
+          description: All the sanction lists as an array through which the search has to be made
+          items:
+            type: string
+        basic_attributes:
           $ref: '#/components/schemas/personBasicSearch'
         advanced_attributes:
           $ref: '#/components/schemas/personAdvancedsearch'
@@ -338,6 +435,9 @@ components:
         sanction_list:
           type: string
           description: The sanction list in which a valid result was found
+        match_score:
+          type: number
+          description: The probability of the match denoted as a score between 0 and 1
     organizationBasicSearch:
       title: orgafuzzysearch
       type: object
@@ -367,17 +467,17 @@ components:
       type: object
       description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
       properties:
-        sanction_list:
+        sanction_lists:
           type: array
           description: Sanction lists through which the search has to be made
           items:
             type: string
-        basic:
+        basic_attributes:
           $ref: '#/components/schemas/organizationBasicSearch'
-        advanced:
+        advanced_attributes:
           $ref: '#/components/schemas/organizationAdvancedsearch'
       required:
-        - sanction_list
+        - sanction_lists
     organization:
       title: organization
       type: object
@@ -443,10 +543,10 @@ components:
           $ref: '#/components/schemas/organizationSearchResult'
       required:
         - number_of_matches
-    personBulkSearch:
-      title: personBulkSearch
+    personBatchSearch:
+      title: personBatchSearch
       type: object
-      description: Bulk search payload for persons
+      description: Batch search payload for persons
       properties:
         indices:
           type: array
@@ -457,14 +557,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/personSearch'
-    personBulkSearchResult:
-      title: personBulkSearchResult
+    personBatchSearchResult:
+      title: personBatchSearchResult
       type: object
-      description: Response payload of the bulk search on persons
+      description: Response payload of the batch search on persons
       properties:
-        number_of_persons:
-          type: integer
-          description: Number of persons whose results have returned. Same as the input parameter of number of persons. The entry for which no results were found are denoted with null in the persons_results array.
+        indices:
+          type: array
+          description: Unique index corresponding to each person searched for and for which the results could be found
+          items:
+            type: integer
         persons_results:
           type: array
           items:
@@ -482,6 +584,14 @@ components:
             type: string
         address:
           $ref: '#/components/schemas/address'
+        advanced_attribute:
+          type: object
+          properties:
+            additional_address_lines:
+              type: array
+              description: Additional address lines to search for
+              items:
+                type: string
       required:
         - sanction_lists
         - address
@@ -512,7 +622,7 @@ components:
           description: Nationalities of a person denoted as by their respective ISO country codes
           items:
             type: string
-        array_of_sanction_lists:
+        sanction_lists:
           type: array
           items:
             $ref: '#/components/schemas/sanctionListEntryPerUid'
@@ -548,6 +658,34 @@ components:
       required:
         - sanction_lists
         - geo
+    organizationBatchSearch:
+      title: organizationBatchSearch
+      type: object
+      properties:
+        indices:
+          type: array
+          description: Index assigned to each person being searched for
+          items:
+            type: integer
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationSearch'
+      description: query payload for batch search on organizations
+    organizationBatchSearchResult:
+      title: organizationBulkSearchResult
+      type: object
+      description: response payload of batch search on organisations
+      properties:
+        indices:
+          type: array
+          description: Unique index corresponding to each person searched for and for which the results could be found
+          items:
+            type: integer
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationSearchResult'
   securitySchemes:
     cubemos_api_key:
       name: API Key
