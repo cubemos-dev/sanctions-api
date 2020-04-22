@@ -268,7 +268,7 @@ paths:
       parameters: []
   /batchsearch/entities/organization:
     post:
-      summary: ''
+      summary: Search for multiple organizations through sanction lists
       operationId: post-batchsearch-entities-organization
       responses:
         '200':
@@ -366,7 +366,7 @@ components:
       required:
         - full_name
     personAdvancedsearch:
-      title: personAdvanced
+      title: personAdvancedSearch
       type: object
       description: Advanced search for a person through a sanction list
       properties:
@@ -422,7 +422,7 @@ components:
     sanctionListEntryPerUid:
       title: sanctionListEntryPerUid
       type: object
-      description: ''
+      description: List of raw entries from the sanction lists in which the result has been matched
       properties:
         number_of_entries:
           type: integer
@@ -439,7 +439,7 @@ components:
           type: number
           description: The probability of the match denoted as a score between 0 and 1
     organizationBasicSearch:
-      title: orgafuzzysearch
+      title: organizationBasicSearch
       type: object
       description: Basic search identifiers for an organization through a sanction list
       properties:
@@ -453,7 +453,7 @@ components:
       required:
         - organization_name
     organizationAdvancedsearch:
-      title: orgafilterssearch
+      title: organizationAdvancedSearch
       type: object
       description: Advanced search for an organization through a sanction list
       properties:
@@ -463,7 +463,7 @@ components:
           type: string
           description: ISO country code of the place where the headquarters of the organization is located
     organizationSearch:
-      title: searchOrganization
+      title: organizationSearch
       type: object
       description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
       properties:
@@ -530,7 +530,7 @@ components:
         organizations:
           $ref: '#/components/schemas/organization'
     locationSearchResult:
-      title: geoSearchResult
+      title: locationSearchResult
       type: object
       description: Response of a search query based on geographical co-ordinates through the desired sanction lists
       properties:
@@ -596,7 +596,7 @@ components:
         - sanction_lists
         - address
     person:
-      title: person_
+      title: person
       type: object
       properties:
         first_name:
@@ -626,6 +626,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/sanctionListEntryPerUid'
+      description: person details
     address:
       title: address
       type: object
@@ -646,7 +647,7 @@ components:
     geoSearch:
       title: geoSearch
       type: object
-      description: ''
+      description: query payload for an geo search
       properties:
         sanction_lists:
           type: array
