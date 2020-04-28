@@ -98,6 +98,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/organizationSearchResult'
+              examples: {}
           headers: {}
         '400':
           description: Bad Request
@@ -365,31 +366,21 @@ components:
             type: string
       required:
         - full_name
-    personAdvancedsearch:
+    searchConfig:
       title: personAdvancedSearch
       type: object
       description: Advanced search for a person through a sanction list
       properties:
-        title:
-          type: string
-          description: Job title or positional title held by the person
-          example: Prime minister of a country
-        full_address:
-          type: string
-          example: '12, street, 12345 city, country'
-          description: Full address as a string from door number to country
-        dob_year_ambiguity:
+        sanction_lists:
           type: array
-          description: Possible birth years if the date of birth is not clear
-          example: '1950, 1952'
+          description: All the sanction lists as an array through which the search has to be made
           items:
-            type: integer
-        must_attributes:
+            type: string
+        must_match_attributes:
           type: array
           description: |-
             Identifiers of the entry fields against which the match similarity has to be 100% in the results
             The identifiers can be from the basic fields and advanced fields
-          example: 'full_name, dob'
           items:
             type: string
     personSearch:
@@ -398,15 +389,10 @@ components:
       description: The identifiers based on which the search will be performed for a person through the desired sanction lists
       x-examples: {}
       properties:
-        sanction_lists:
-          type: array
-          description: All the sanction lists as an array through which the search has to be made
-          items:
-            type: string
-        basic_attributes:
+        search_config:
+          $ref: '#/components/schemas/searchConfig'
+        person:
           $ref: '#/components/schemas/personBasicSearch'
-        advanced_attributes:
-          $ref: '#/components/schemas/personAdvancedsearch'
     personSearchResult:
       title: personSearchResult
       description: Response payload for the query on a person through the desired sanction lists
@@ -457,27 +443,23 @@ components:
       type: object
       description: Advanced search for an organization through a sanction list
       properties:
-        address:
-          $ref: '#/components/schemas/address'
-        headquarter_country:
+        name:
           type: string
           description: ISO country code of the place where the headquarters of the organization is located
+          example: cubemos gmbh
+        country_code:
+          type: string
+          description: 'ISO country code '
+          example: DE
     organizationSearch:
       title: organizationSearch
       type: object
       description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
       properties:
-        sanction_lists:
-          type: array
-          description: Sanction lists through which the search has to be made
-          items:
-            type: string
-        basic_attributes:
+        search_config:
           $ref: '#/components/schemas/organizationBasicSearch'
-        advanced_attributes:
+        organization:
           $ref: '#/components/schemas/organizationAdvancedsearch'
-      required:
-        - sanction_lists
     organization:
       title: organization
       type: object
@@ -577,23 +559,12 @@ components:
       description: query payload for an address search
       x-examples: {}
       properties:
-        sanction_lists:
-          type: array
-          description: Sanction lists through which the search has to be made
-          items:
-            type: string
+        search_config:
+          $ref: '#/components/schemas/searchConfig'
         address:
           $ref: '#/components/schemas/address'
-        advanced_attribute:
-          type: object
-          properties:
-            additional_address_lines:
-              type: array
-              description: Additional address lines to search for
-              items:
-                type: string
       required:
-        - sanction_lists
+        - search_config
         - address
     person:
       title: person
@@ -649,15 +620,12 @@ components:
       type: object
       description: query payload for an geo search
       properties:
-        sanction_lists:
-          type: array
-          description: The sanction lists through which the search has to be made
-          items:
-            type: string
+        search_config:
+          $ref: '#/components/schemas/searchConfig'
         geo:
           $ref: '#/components/schemas/geo'
       required:
-        - sanction_lists
+        - search_config
         - geo
     organizationBatchSearch:
       title: organizationBatchSearch
