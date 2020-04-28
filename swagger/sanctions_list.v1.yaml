@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Sanctions List API
   version: '1.0'
-  description: "### Introduction\ncubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime. \n\n### Features\n1. Easy integration\n2. Example code for various languages\n3. Strict and fuzzy search \n4. Batch search \n\n### Supported Sanction Lists\n1. EU Financial Sanctions List\n2. UN Sanctions List\n3. Politically Exposed Persons"
+  description: "### Introduction\ncubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime. \n\n\n\n### Features\n1. Easy integration\n2. Example code for various languages\n3. Strict and fuzzy search \n4. Batch search \n\n### Supported Sanction Lists\n1. EU Financial Sanctions List\n2. UN Sanctions List\n3. Politically Exposed Persons"
   contact:
     name: cubemos gmbh
     url: www.cubemos.com
