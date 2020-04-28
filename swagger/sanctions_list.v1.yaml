@@ -42,26 +42,22 @@ paths:
               Example:
                 value:
                   person_search:
-                    full_name: john junior senior smith
-                    first_names: john
-                    middle_names: junior senior
-                    last_names: smith
-                    aliases:
-                      - don john
-                      - godfather
-                    gender: male
-                    dob: 01.01.1950
-                    nationalities: DE
-                    sanction_lists:
-                      - UN-Sanctions List
-                      - EU-Financial Sanctions List
-                  advanced_attributes:
-                    title: Prime minister of a country
-                    full_address: 'Herman Straße 2, 12345 Berlin, Germany'
-                    dob_year_ambiguity:
-                      - '1950'
-                      - '1952'
-                    must_attributes: 'full_name, dob'
+                    search_config:
+                      sanction_lists:
+                        - cfsp
+                        - sdn
+                      must_match_attributes:
+                        - last_name
+                        - nationality
+                    person:
+                      first_name: Serhii
+                      middle_name: ''
+                      last_name: Kliuiev
+                      full_name: Serhii Kliuiev
+                      alias: Serhiy Klyuyev
+                      gender: male
+                      nationality: UA
+                      dob: 19.08.1969
           application/xml:
             schema:
               type: object
@@ -115,19 +111,14 @@ paths:
             examples:
               Example:
                 value:
-                  sanction_list:
-                    - UN-Sanctions List
-                    - EU-Financial Sanctions List
-                  basic:
-                    organization_name: cubemos gmbh
-                    country_code: DE
-                  advanced:
-                    address:
+                  organization_search:
+                    search_config:
+                      sanction_lists:
+                        - cfsp
+                        - sdn
+                    organization:
+                      name: cubemos gmbh
                       country_code: DE
-                      zip_code: 82024
-                      city: Munich
-                      street: Mehlbeerenstraße 2
-                    headquarter_country: DE
         description: |-
           ### Payload request schema for single search
           In order to perform a search on an organization through the sanction lists, the name and the desired sanction lists are required. This would return a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
@@ -180,6 +171,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/personBatchSearchResult'
+              examples:
+                example-1:
+                  value:
+                    person_batch_search:
+                      search_config:
+                        sanction_lists:
+                          - cfsp
+                          - sdn
+                        indices:
+                          - ID2
+                          - ID3
+                          - ID4
+                          - ID332
+                          - ID333
+                          - ID334
+                        must_match_attributes:
+                          - last_name
+                          - nationality
+                      persons:
+                        - first_name: Serhii
+                          middle_name: ''
+                          last_name: Kliuiev
+                          full_name: Serhii Kliuiev
+                          alias: Serhiy Klyuyev
+                          gender: male
+                          nationality: UA
+                          dob: 19.08.1969
+                        - first_name: Marie
+                          middle_name: Lynn
+                          last_name: Franklin
+                          full_name: Marie Lynn Franklin
+                          alias: Marilynn Franklin
+                          gender: female
+                          nationality: US
+                          dob: 12.03.1984
       description: "### Searches for multiple persons at a time through the sanction lists\nThis API call allows you to perform a batch search for multiple persons through the desired sanction lists. The search results returned are a list of list of all entries from the sanction lists which match to the input along with the degree of the match. "
       requestBody:
         content:
@@ -189,43 +215,38 @@ paths:
             examples:
               Example:
                 value:
-                  indices:
-                    - 0
-                  persons:
-                    - person_search:
-                        full_name: john junior senior smith
-                        first_names: john
-                        middle_names: junior senior
-                        last_names: smith
-                        aliases: 'don john, godfather'
+                  person_batch_search:
+                    search_config:
+                      sanction_lists:
+                        - cfsp
+                        - sdn
+                      indices:
+                        - ID2
+                        - ID3
+                        - ID4
+                        - ID332
+                        - ID333
+                        - ID334
+                      must_match_attributes:
+                        - last_name
+                        - nationality
+                    persons:
+                      - first_name: Serhii
+                        middle_name: ''
+                        last_name: Kliuiev
+                        full_name: Serhii Kliuiev
+                        alias: Serhiy Klyuyev
                         gender: male
-                        dob: 01.01.1950
-                        nationalities: US
-                        sanction_lists:
-                          - UN-Sanctions List
-                          - EU-Financial Sanctions List
-                      advanced_attributes:
-                        title: Prime minister of a country
-                        full_address: '12, street, 12345 city, country'
-                        dob_year_ambiguity: '1950, 1952'
-                        must_attributes: 'full_name, dob'
-                    - person_search:
-                        full_name: john senior smith
-                        first_names: john
-                        middle_names: senior
-                        last_names: smith
-                        aliases: 'grandmaster, godfather the supreme'
-                        gender: male
-                        dob: 01.01.1920
-                        nationalities: US
-                        sanction_lists:
-                          - UN-Sanctions List
-                          - EU-Financial Sanctions List
-                      advanced_attributes:
-                        title: Prime minister of a country
-                        full_address: '12, street, 12345 city, country'
-                        dob_year_ambiguity: '1910, 1920'
-                        must_attributes: 'full_name, dob'
+                        nationality: UA
+                        dob: 19.08.1969
+                      - first_name: Marie
+                        middle_name: Lynn
+                        last_name: Franklin
+                        full_name: Marie Lynn Franklin
+                        alias: Marilynn Franklin
+                        gender: female
+                        nationality: US
+                        dob: 12.03.1984
           application/xml:
             schema:
               $ref: '#/components/schemas/personBulkSearch'
@@ -287,35 +308,23 @@ paths:
             examples:
               Example:
                 value:
-                  indices:
-                    - 0
-                  organizations:
-                    - sanction_lists:
-                        - EU-Financial Sanctions List
-                        - UN-Sanctions List
-                      basic_attributes:
-                        organization_name: cubemos gmbh
-                        country_code: string
-                      advanced_attributes:
-                        address:
-                          country_code: DE
-                          zip_code: 82024
-                          city: Munich
-                          street: Mehlbeeren straße 2
-                        headquarter_country: DE
-                    - sanction_lists:
-                        - EU-Financial Sanctions List
-                        - UN-Sanctions List
-                      basic_attributes:
-                        organization_name: framos gmbh
-                        country_code: string
-                      advanced_attributes:
-                        address:
-                          country_code: DE
-                          zip_code: 82024
-                          city: Munich
-                          street: Mehlbeeren straße 2
-                        headquarter_country: DE
+                  organization_batch_search:
+                    search_config:
+                      sanction_lists:
+                        - cfsp
+                        - sdn
+                      indices:
+                        - ID2
+                        - ID3
+                        - ID4
+                        - ID332
+                        - ID333
+                        - ID334
+                    organizations:
+                      - name: cubemos gmbh
+                        country_code: DE
+                      - name: framos gmbh
+                        country_code: DE
         description: |-
           ### Payload request schema for batch search
           In order to perform a search on multiple organizations through the sanction lists, the name and the desired sanction lists are required. Additionally, a unique index has to be assigned to each organization searched for in order to map the results to it in the output payload. The search returns a list with all the possible matches with a score. Advanced attributes can be provided in order to make the search results stricter.
