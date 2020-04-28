@@ -530,15 +530,25 @@ components:
       type: object
       description: Batch search payload for persons
       properties:
-        indices:
-          type: array
-          description: Index assigned to each person being searched for
-          items:
-            type: integer
+        search_config:
+          type: object
+          properties:
+            sanction_lists:
+              type: array
+              items:
+                type: string
+            indices:
+              type: array
+              items:
+                type: string
+            must_match_attributes:
+              type: array
+              items:
+                type: string
         persons:
           type: array
           items:
-            $ref: '#/components/schemas/personSearch'
+            $ref: '#/components/schemas/personBasicSearch'
     personBatchSearchResult:
       title: personBatchSearchResult
       type: object
@@ -630,17 +640,23 @@ components:
     organizationBatchSearch:
       title: organizationBatchSearch
       type: object
+      description: query payload for batch search on organizations
       properties:
-        indices:
-          type: array
-          description: Index assigned to each person being searched for
-          items:
-            type: integer
+        search_config:
+          type: object
+          properties:
+            sanction_lists:
+              type: array
+              items:
+                type: string
+            indices:
+              type: array
+              items:
+                type: integer
         organizations:
           type: array
           items:
-            $ref: '#/components/schemas/organizationSearch'
-      description: query payload for batch search on organizations
+            $ref: '#/components/schemas/organizationAdvancedsearch'
     organizationBatchSearchResult:
       title: organizationBulkSearchResult
       type: object
