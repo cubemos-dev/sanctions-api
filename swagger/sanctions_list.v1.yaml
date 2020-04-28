@@ -330,7 +330,7 @@ paths:
           In order to perform a search on multiple organizations through the sanction lists, the name and the desired sanction lists are required. Additionally, a unique index has to be assigned to each organization searched for in order to map the results to it in the output payload. The search returns a list with all the possible matches with a score. Advanced attributes can be provided in order to make the search results stricter.
 components:
   schemas:
-    personBasicSearch:
+    personSearchAttributes:
       title: personBasicSearch
       type: object
       description: Basic search identifiers for a person through a sanction list
@@ -340,25 +340,22 @@ components:
           type: string
           description: Full name of a person (first_names + middle_names + last_names )
           example: john junior senior smith
-        first_names:
+        first_name:
           type: string
           description: All the first names of the person
           example: john
-        middle_names:
+        middle_name:
           type: string
           description: All the middle names of the person
           example: junior senior
-        last_names:
+        last_name:
           type: string
           description: All the last names of the person
           example: smith
-        aliases:
-          type: array
+        alias:
           description: 'All the aliases of the person as an array '
           example: 'don john, godfather'
-          uniqueItems: true
-          items:
-            type: string
+          type: string
         gender:
           type: string
           description: 'Gender of the person '
@@ -367,12 +364,10 @@ components:
           type: string
           description: Date of birth of the person
           example: 01.01.1950
-        nationalities:
-          type: array
+        nationality:
           description: Nationalities of the person as an array of 2 letter ISO country code
           example: USA
-          items:
-            type: string
+          type: string
       required:
         - full_name
     searchConfig:
@@ -401,7 +396,7 @@ components:
         search_config:
           $ref: '#/components/schemas/searchConfig'
         person:
-          $ref: '#/components/schemas/personBasicSearch'
+          $ref: '#/components/schemas/personSearchAttributes'
     personSearchResult:
       title: personSearchResult
       description: Response payload for the query on a person through the desired sanction lists
@@ -433,21 +428,7 @@ components:
         match_score:
           type: number
           description: The probability of the match denoted as a score between 0 and 1
-    organizationBasicSearch:
-      title: organizationBasicSearch
-      type: object
-      description: Basic search identifiers for an organization through a sanction list
-      properties:
-        organization_name:
-          type: string
-          example: cubemos gmbh
-          description: Name of the organization for which the search through sanction lists has to be made
-        country_code:
-          type: string
-          description: ISO country code in which the organization is located
-      required:
-        - organization_name
-    organizationAdvancedsearch:
+    organizationSearchAttributes:
       title: organizationAdvancedSearch
       type: object
       description: Advanced search for an organization through a sanction list
@@ -466,9 +447,9 @@ components:
       description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
       properties:
         search_config:
-          $ref: '#/components/schemas/organizationBasicSearch'
+          $ref: '#/components/schemas/searchConfig'
         organization:
-          $ref: '#/components/schemas/organizationAdvancedsearch'
+          $ref: '#/components/schemas/organizationSearchAttributes'
     organization:
       title: organization
       type: object
