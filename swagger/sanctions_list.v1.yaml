@@ -538,7 +538,7 @@ components:
         persons:
           type: array
           items:
-            $ref: '#/components/schemas/personBasicSearch'
+            $ref: '#/components/schemas/personSearch'
     personBatchSearchResult:
       title: personBatchSearchResult
       type: object
@@ -646,7 +646,7 @@ components:
         organizations:
           type: array
           items:
-            $ref: '#/components/schemas/organizationAdvancedsearch'
+            $ref: '#/components/schemas/organizationSearch'
     organizationBatchSearchResult:
       title: organizationBulkSearchResult
       type: object
