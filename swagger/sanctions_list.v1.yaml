@@ -25,7 +25,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/personSearchResult'
+                type: array
+                items:
+                  $ref: '#/components/schemas/person'
         '400':
           description: Bad Request
         '401':
@@ -93,7 +95,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/organizationSearchResult'
+                type: array
+                items:
+                  $ref: '#/components/schemas/organization'
               examples: {}
           headers: {}
         '400':
@@ -397,15 +401,6 @@ components:
           $ref: '#/components/schemas/searchConfig'
         person:
           $ref: '#/components/schemas/personSearchAttributes'
-    personSearchResult:
-      title: personSearchResult
-      description: Response payload for the query on a person through the desired sanction lists
-      type: object
-      properties:
-        persons:
-          type: array
-          items:
-            $ref: '#/components/schemas/person'
     organizationSearchAttributes:
       title: organizationAdvancedSearch
       type: object
@@ -468,13 +463,6 @@ components:
         - latitude
         - logitude
         - radius
-    organizationSearchResult:
-      title: organizationSearchResult
-      type: object
-      description: Response payload for the query on a organization through the desired sanction lists
-      properties:
-        organizations:
-          $ref: '#/components/schemas/organization'
     locationSearchResult:
       title: locationSearchResult
       type: object
@@ -484,9 +472,13 @@ components:
           description: Indicates what type of an entity is searched for
           type: integer
         persons:
-          $ref: '#/components/schemas/personSearchResult'
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
         organizations:
-          $ref: '#/components/schemas/organizationSearchResult'
+          type: array
+          items:
+            $ref: '#/components/schemas/organization'
       required:
         - number_of_matches
     personBatchSearch:
@@ -512,7 +504,7 @@ components:
         persons:
           type: array
           items:
-            $ref: '#/components/schemas/personSearch'
+            $ref: '#/components/schemas/personSearchAttributes'
     personBatchSearchResult:
       title: personBatchSearchResult
       type: object
@@ -526,7 +518,7 @@ components:
         persons_results:
           type: array
           items:
-            $ref: '#/components/schemas/personSearchResult'
+            $ref: '#/components/schemas/person'
     addressSearch:
       title: addressSearch
       type: object
@@ -616,10 +608,14 @@ components:
               type: array
               items:
                 type: integer
+            must_match_attributes:
+              type: array
+              items:
+                type: string
         organizations:
           type: array
           items:
-            $ref: '#/components/schemas/organizationSearch'
+            $ref: '#/components/schemas/organizationSearchAttributes'
     organizationBatchSearchResult:
       title: organizationBulkSearchResult
       type: object
@@ -633,7 +629,7 @@ components:
         organizations:
           type: array
           items:
-            $ref: '#/components/schemas/organizationSearchResult'
+            $ref: '#/components/schemas/organization'
   securitySchemes:
     cubemos_api_key:
       name: API Key
