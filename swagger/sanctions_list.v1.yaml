@@ -11,7 +11,7 @@ info:
     name: cubemos license
   termsOfService: 'https://www.cubemos.com/general-terms/'
 servers:
-  - url: api.cubemos.com
+  - url: sanctions-api.cubemos.com
     description: ''
 paths:
   /search/entities/person:
@@ -402,32 +402,10 @@ components:
       description: Response payload for the query on a person through the desired sanction lists
       type: object
       properties:
-        persons_identified:
-          type: integer
-          description: Number of persons identified matching to the input query
         persons:
           type: array
           items:
             $ref: '#/components/schemas/person'
-    sanctionListEntryPerUid:
-      title: sanctionListEntryPerUid
-      type: object
-      description: List of raw entries from the sanction lists in which the result has been matched
-      properties:
-        number_of_entries:
-          type: integer
-          description: number of entries with the same unique id in the sanction list
-        array_of_list_entries:
-          type: array
-          description: raw entries from the sanction list
-          items:
-            type: string
-        sanction_list:
-          type: string
-          description: The sanction list in which a valid result was found
-        match_score:
-          type: number
-          description: The probability of the match denoted as a score between 0 and 1
     organizationSearchAttributes:
       title: organizationAdvancedSearch
       type: object
@@ -469,10 +447,9 @@ components:
           description: "List of aliases that the organization has for it's name. "
           items:
             type: string
-        sanction_lists:
-          type: array
-          items:
-            $ref: '#/components/schemas/sanctionListEntryPerUid'
+        list_entry_url:
+          type: string
+          description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the sanction list in which the result is extracted from
     geo:
       title: geo
       type: object
@@ -496,9 +473,6 @@ components:
       type: object
       description: Response payload for the query on a organization through the desired sanction lists
       properties:
-        organizations_identified:
-          description: Number of organizations found
-          type: integer
         organizations:
           $ref: '#/components/schemas/organization'
     locationSearchResult:
@@ -569,6 +543,7 @@ components:
     person:
       title: person
       type: object
+      description: person details
       properties:
         first_name:
           type: string
@@ -593,11 +568,9 @@ components:
           description: Nationalities of a person denoted as by their respective ISO country codes
           items:
             type: string
-        sanction_lists:
-          type: array
-          items:
-            $ref: '#/components/schemas/sanctionListEntryPerUid'
-      description: person details
+        list_entry_url:
+          type: string
+          description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the sanction list in which the result is extracted from
     address:
       title: address
       type: object
