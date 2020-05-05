@@ -918,8 +918,6 @@ components:
         street:
           type: string
           description: Name of the street
-      x-tags:
-        - Models
     geoSearch:
       title: geoSearch
       type: object
@@ -974,6 +972,8 @@ components:
       properties:
         id:
           type: string
+      x-tags:
+        - Sanction List Payloads
     cfsp:
       title: cfsp
       type: object
