@@ -84,6 +84,8 @@ paths:
           ### Payload request schema for single search
           In order to perform a search on a person through the sanction lists, the full name and the desired sanction lists are required. This would return a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
       parameters: []
+      tags:
+        - Entity Search
     parameters: []
   /search/entities/organization:
     post:
@@ -127,6 +129,8 @@ paths:
           ### Payload request schema for single search
           In order to perform a search on an organization through the sanction lists, the name and the desired sanction lists are required. This would return a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
       description: "### Search an organization through sanction lists\nThis API call allows you to perform a search through the desired sanction lists for an organization. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
+      tags:
+        - Entity Search
     parameters: []
   /search/location/address:
     post:
@@ -163,6 +167,8 @@ paths:
                     street: Hermann Straße 1
         description: "### Payload request scheme for single search\nIn order to search for a location bassed on the address, the sanction lists as well as the address details are required. Additional address lines can be placed into the advanced search attributes. The resulting payload consists of all the entities found at the address with their respective match scores. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
       description: "### Search on an entity through the desired sanction lists in at an address\nThis API call allows you to perform a search through the desired sanction lists for any entity at the desired location. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
+      tags:
+        - Entity Search
     parameters: []
   /batchsearch/entities/person:
     post:
@@ -262,6 +268,8 @@ paths:
           ### Payload request schema for single search
           In order to perform a search on a batch of persons through the sanction lists, the full name and the desired sanction lists are required. Additionally, a unique index has to be allocated to each person to which the results would be mapped as well. The search returns a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
       parameters: []
+      tags:
+        - Entity Search
     parameters: []
   /search/location/geo:
     post:
@@ -292,6 +300,8 @@ paths:
         description: "### Payload request scheme for single search\nIn order to search for a location bassed on the geographical co-ordinates, the sanction lists as well as precise co-ordinates are required. The resulting payload consists of all the entities found at the address with their respective match scores. Please note that the higher the search radius, the bigger could be the output response payload.  "
       description: "### Search on an entity through the desired sanction lists in a radius around a geographical co-ordinate\nThis API call allows you to perform a search through the desired sanction lists for any entity at the desired location. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
       parameters: []
+      tags:
+        - Entity Search
   /batchsearch/entities/organization:
     post:
       summary: Search for multiple organizations through sanction lists
@@ -332,6 +342,8 @@ paths:
         description: |-
           ### Payload request schema for batch search
           In order to perform a search on multiple organizations through the sanction lists, the name and the desired sanction lists are required. Additionally, a unique index has to be assigned to each organization searched for in order to map the results to it in the output payload. The search returns a list with all the possible matches with a score. Advanced attributes can be provided in order to make the search results stricter.
+      tags:
+        - Entity Search
 components:
   schemas:
     personSearchAttributes:
@@ -585,6 +597,8 @@ components:
         street:
           type: string
           description: Name of the street
+      x-tags:
+        - Models
     geoSearch:
       title: geoSearch
       type: object
