@@ -368,6 +368,8 @@ paths:
           ### Payload request schema for single search
           In order to perform a search on a batch of persons through the sanction lists, the full name and the desired sanction lists are required. Additionally, a unique index has to be allocated to each person to which the results would be mapped as well. The search returns a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
       parameters: []
+      tags:
+        - Batch Search
     parameters: []
   /search/location/geo:
     post:
@@ -522,6 +524,8 @@ paths:
         description: |-
           ### Payload request schema for batch search
           In order to perform a search on multiple organizations through the sanction lists, the name and the desired sanction lists are required. Additionally, a unique index has to be assigned to each organization searched for in order to map the results to it in the output payload. The search returns a list with all the possible matches with a score. Advanced attributes can be provided in order to make the search results stricter.
+      tags:
+        - Batch Search
   '/sanctions/list/entry/{uuid}':
     get:
       summary: Your GET endpoint
