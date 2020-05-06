@@ -17,7 +17,7 @@ paths:
   /search/entities/person:
     post:
       summary: person search
-      operationId: post-search-entities-organizations
+      operationId: post-search-entities-person
       responses:
         '200':
           description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching persons found in the desired sanction lists.'
@@ -116,7 +116,7 @@ paths:
   /search/entities/organization:
     post:
       summary: organization search
-      operationId: post-search-entities-organizations
+      operationId: post-search-entities-organization
       responses:
         '200':
           description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching organization found in the desired sanction lists.'
@@ -182,7 +182,7 @@ paths:
   /search/location/address:
     post:
       summary: address search
-      operationId: post-search-address-geo
+      operationId: post-search-address
       responses:
         '200':
           description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching persons found in the desired sanction lists.'
@@ -359,7 +359,7 @@ paths:
                         dob: 12.03.1984
           application/xml:
             schema:
-              $ref: '#/components/schemas/personBulkSearch'
+              $ref: '#/components/schemas/personBatchSearch'
           multipart/form-data:
             schema:
               type: object
@@ -374,7 +374,7 @@ paths:
   /search/location/geo:
     post:
       summary: geo search
-      operationId: post-search-location-geo
+      operationId: post-search-geo
       responses:
         '200':
           description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching entities were found in the desired sanction lists.'
@@ -526,7 +526,7 @@ paths:
         - Batch Search
   '/list/sdn/{uid}':
     get:
-      summary: Your GET endpoint
+      summary: SDN list entry
       tags:
         - Sanction List Entry
       responses:
@@ -550,9 +550,10 @@ paths:
         name: uid
         in: path
         description: The UID in the SDN sanctions list from which all the entries will be returned
+        required: true
   '/list/cfsp/{entityLogicalID}':
     get:
-      summary: Your GET endpoint
+      summary: CFSP list entry
       tags:
         - Sanction List Entry
       responses:
@@ -691,8 +692,6 @@ paths:
           description: Internal Server Error
       operationId: get-search-sanctions-list-entry
       description: Get the entry from the official sanctions list based on the result from the search calls
-      requestBody:
-        description: ''
       parameters: []
     parameters:
       - schema:
