@@ -11,8 +11,7 @@ info:
     name: cubemos license
   termsOfService: 'https://www.cubemos.com/general-terms/'
 servers:
-  - url: sanctions-api.cubemos.com
-    description: ''
+  - url: 'https://akegb6b3l7.execute-api.eu-central-1.amazonaws.com/v1_staging'
 paths:
   /search/entities/person:
     post:
