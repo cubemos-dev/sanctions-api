@@ -16,7 +16,7 @@ servers:
 paths:
   /search/entities/person:
     post:
-      summary: Search for a person through sanction lists
+      summary: person search
       operationId: post-search-entities-organizations
       responses:
         '200':
@@ -25,9 +25,9 @@ paths:
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/person'
-                type: array
               examples:
                 example:
                   value:
@@ -115,7 +115,7 @@ paths:
     parameters: []
   /search/entities/organization:
     post:
-      summary: Search for an organization through sanction lists
+      summary: organization search
       operationId: post-search-entities-organizations
       responses:
         '200':
@@ -123,9 +123,9 @@ paths:
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/organization'
-                type: array
               examples:
                 example:
                   value:
@@ -181,7 +181,7 @@ paths:
     parameters: []
   /search/location/address:
     post:
-      summary: Search for an entity based on an address through sanction lists
+      summary: address search
       operationId: post-search-address-geo
       responses:
         '200':
@@ -264,7 +264,7 @@ paths:
     parameters: []
   /batchsearch/entities/person:
     post:
-      summary: Search for multiple persons through sanction lists
+      summary: batch person search
       operationId: post-bulksearch-entities-person
       responses:
         '200':
@@ -272,9 +272,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
                 items:
                   $ref: '#/components/schemas/personBatchSearchResult'
+                type: array
               examples:
                 example:
                   value:
@@ -373,7 +373,7 @@ paths:
     parameters: []
   /search/location/geo:
     post:
-      summary: Search for an entity based on geographical co-ordinates through sanction list
+      summary: geo search
       operationId: post-search-location-geo
       responses:
         '200':
@@ -447,7 +447,7 @@ paths:
       parameters: []
   /batchsearch/entities/organization:
     post:
-      summary: Search for multiple organizations through sanction lists
+      summary: batch organization search
       operationId: post-batchsearch-entities-organization
       responses:
         '200':
@@ -455,9 +455,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
                 items:
                   $ref: '#/components/schemas/organizationBatchSearchResult'
+                type: array
               examples:
                 example:
                   value:
@@ -524,6 +524,32 @@ paths:
           In order to perform a search on multiple organizations through the sanction lists, the name and the desired sanction lists are required. Additionally, a unique index has to be assigned to each organization searched for in order to map the results to it in the output payload. The search returns a list with all the possible matches with a score. Advanced attributes can be provided in order to make the search results stricter.
       tags:
         - Batch Search
+  '/list/sdn/{uid}':
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Sanction List Entry
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sdn'
+              examples:
+                example:
+                  value:
+                    publishDate: ''
+                    recordCount: ''
+                    uid: ''
+      operationId: get-list-sdn
+      description: Get the entry from the official sanctions list based on the result from the search calls
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        description: The UID in the SDN sanctions list from which all the entries will be returned
   '/list/cfsp/{entityLogicalID}':
     get:
       summary: Your GET endpoint
@@ -675,32 +701,6 @@ paths:
         in: path
         required: true
         description: The entity logical ID in the CFSP sanctions list from which all the entries will be returned
-  '/list/sdn/{uid}':
-    get:
-      summary: Your GET endpoint
-      tags:
-        - Sanction List Entry
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/sdn'
-              examples:
-                example:
-                  value:
-                    publishDate: ''
-                    recordCount: ''
-                    uid: ''
-      operationId: get-list-sdn
-      description: Get the entry from the official sanctions list based on the result from the search calls
-    parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        description: The UID in the SDN sanctions list from which all the entries will be returned
 components:
   schemas:
     personSearchAttributes:
@@ -855,19 +855,19 @@ components:
           properties:
             sanction_lists:
               type: array
+              description: The sanction lists through which the entity shall be searched through
               items:
                 type: string
-              description: The sanction lists through which the entity shall be searched through
             indices:
               type: array
+              description: The indices assigned to each person to which the data in the response is mapped
               items:
                 type: string
-              description: The indices assigned to each person to which the data in the response is mapped
             must_match_attributes:
               type: array
+              description: The attributes which will be enforced as a strict filter
               items:
                 type: string
-              description: The attributes which will be enforced as a strict filter
         persons:
           type: array
           items:
@@ -877,12 +877,12 @@ components:
       type: object
       description: Response payload of the batch search on persons
       properties:
-        index:
-          type: integer
         person:
           type: array
           items:
             $ref: '#/components/schemas/person'
+        index:
+          type: integer
     addressSearch:
       title: addressSearch
       type: object
@@ -899,6 +899,7 @@ components:
     person:
       title: person
       type: object
+      description: person details
       properties:
         first_name:
           type: string
@@ -928,7 +929,6 @@ components:
         list_entry_url:
           type: string
           description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the sanction list in which the result is extracted from
-      description: person details
     address:
       title: address
       type: object
@@ -987,40 +987,13 @@ components:
       type: object
       description: response payload of batch search on organisations
       properties:
-        index:
-          description: Unique index corresponding to each person searched for and for which the results could be found
-          type: integer
         organizations:
           type: array
           items:
             $ref: '#/components/schemas/organization'
-    sdn:
-      title: sdn
-      type: object
-      x-tags:
-        - Sanction List Payloads
-      properties:
-        publishDate:
-          type: string
-        recordCount:
-          type: string
-        uid:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        sdnType:
-          type: string
-        program:
-          type: string
-        aka:
-          type: string
-        dateOfBirth:
-          type: string
-        placeOfBirth:
-          type: string
-      x-examples: {}
+        index:
+          description: Unique index corresponding to each person searched for and for which the results could be found
+          type: integer
     cfsp:
       title: cfsp
       type: object
@@ -1265,6 +1238,33 @@ components:
       x-tags:
         - Sanction List Payloads
       description: ''
+    sdn:
+      title: sdn
+      type: object
+      properties:
+        placeOfBirth:
+          type: string
+        dateOfBirth:
+          type: string
+        aka:
+          type: string
+        program:
+          type: string
+        sdnType:
+          type: string
+        lastName:
+          type: string
+        firstName:
+          type: string
+        uid:
+          type: string
+        recordCount:
+          type: string
+        publishDate:
+          type: string
+      x-examples: {}
+      x-tags:
+        - Sanction List Payloads
   securitySchemes:
     cubemos_api_key:
       name: API Key
