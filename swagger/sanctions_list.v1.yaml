@@ -42,7 +42,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?entityLogicalID=12345'
                       - person:
                           first_name: Serhii
                           middle_name: ''
@@ -747,7 +747,7 @@ components:
       type: object
       description: Advanced search for a person through a sanction list
       properties:
-        sanction_lists:
+        watch_lists:
           type: array
           description: All the sanction lists as an array through which the search has to be made
           items:
@@ -1264,8 +1264,4 @@ components:
       x-examples: {}
       x-tags:
         - Sanction List Payloads
-  securitySchemes:
-    cubemos_api_key:
-      name: API Key
-      type: apiKey
-      in: query
+  securitySchemes: {}
