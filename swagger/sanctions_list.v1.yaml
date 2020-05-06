@@ -11,7 +11,7 @@ info:
     name: cubemos license
   termsOfService: 'https://www.cubemos.com/general-terms/'
 servers:
-  - url: api.cubemos.com
+  - url: sanctions-api.cubemos.com
     description: ''
 paths:
   /search/entities/person:
@@ -25,7 +25,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/personSearchResult'
+                items:
+                  $ref: '#/components/schemas/person'
+                type: array
+              examples:
+                example:
+                  value:
+                    persons:
+                      - person:
+                          first_name: Serhii
+                          middle_name: ''
+                          last_name: Kliuiev
+                          dob: 19.08.1969
+                          gender: male
+                          alias:
+                            - Serhiy Klyuyev
+                          nationalities:
+                            - UA
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                      - person:
+                          first_name: Serhii
+                          middle_name: ''
+                          last_name: Kliuiev
+                          dob: 19.08.1969
+                          gender: male
+                          alias:
+                            - Serhiy Klyuyev
+                          nationalities:
+                            - UA
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?entityLogicalID=12345'
         '400':
           description: Bad Request
         '401':
@@ -42,26 +70,22 @@ paths:
               Example:
                 value:
                   person_search:
-                    full_name: john junior senior smith
-                    first_names: john
-                    middle_names: junior senior
-                    last_names: smith
-                    aliases:
-                      - don john
-                      - godfather
-                    gender: male
-                    dob: 01.01.1950
-                    nationalities: DE
-                    sanction_lists:
-                      - UN-Sanctions List
-                      - EU-Financial Sanctions List
-                  advanced_attributes:
-                    title: Prime minister of a country
-                    full_address: 'Herman Straße 2, 12345 Berlin, Germany'
-                    dob_year_ambiguity:
-                      - '1950'
-                      - '1952'
-                    must_attributes: 'full_name, dob'
+                    search_config:
+                      sanction_lists:
+                        - cfsp
+                        - sdn
+                      must_match_attributes:
+                        - last_name
+                        - nationality
+                    person:
+                      first_name: Serhii
+                      middle_name: ''
+                      last_name: Kliuiev
+                      full_name: Serhii Kliuiev
+                      alias: Serhiy Klyuyev
+                      gender: male
+                      nationality: UA
+                      dob: 19.08.1969
           application/xml:
             schema:
               type: object
@@ -86,6 +110,8 @@ paths:
           ### Payload request schema for single search
           In order to perform a search on a person through the sanction lists, the full name and the desired sanction lists are required. This would return a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
       parameters: []
+      tags:
+        - Entity Search
     parameters: []
   /search/entities/organization:
     post:
@@ -97,7 +123,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/organizationSearchResult'
+                items:
+                  $ref: '#/components/schemas/organization'
+                type: array
+              examples:
+                example:
+                  value:
+                    organizations:
+                      - organization:
+                          address:
+                            country: DE
+                            zip_code: 12345
+                            city: Berlin
+                            street: Hermann Straße 1
+                          headquarter_country: DE
+                          aliases: []
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                      - organization:
+                          address:
+                            country: DE
+                            zip_code: 87654
+                            city: Munich
+                            street: Hermann Straße 1
+                          headquarter_country: DE
+                          aliases: []
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
           headers: {}
         '400':
           description: Bad Request
@@ -114,23 +164,20 @@ paths:
             examples:
               Example:
                 value:
-                  sanction_list:
-                    - UN-Sanctions List
-                    - EU-Financial Sanctions List
-                  basic:
-                    organization_name: cubemos gmbh
-                    country_code: DE
-                  advanced:
-                    address:
+                  organization_search:
+                    search_config:
+                      sanction_lists:
+                        - cfsp
+                        - sdn
+                    organization:
+                      name: cubemos gmbh
                       country_code: DE
-                      zip_code: 82024
-                      city: Munich
-                      street: Mehlbeerenstraße 2
-                    headquarter_country: DE
         description: |-
           ### Payload request schema for single search
           In order to perform a search on an organization through the sanction lists, the name and the desired sanction lists are required. This would return a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
       description: "### Search an organization through sanction lists\nThis API call allows you to perform a search through the desired sanction lists for an organization. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
+      tags:
+        - Entity Search
     parameters: []
   /search/location/address:
     post:
@@ -143,6 +190,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/locationSearchResult'
+              examples:
+                example:
+                  value:
+                    persons:
+                      - person:
+                          first_name: Serhii
+                          middle_name: ''
+                          last_name: Kliuiev
+                          dob: 19.08.1969
+                          gender: male
+                          alias:
+                            - Serhiy Klyuyev
+                          nationalities:
+                            - UA
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                      - person:
+                          first_name: Serhii
+                          middle_name: ''
+                          last_name: Kliuiev
+                          dob: 19.08.1969
+                          gender: male
+                          alias:
+                            - Serhiy Klyuyev
+                          nationalities:
+                            - UA
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                    organizations:
+                      - organization:
+                          address:
+                            country: DE
+                            zip_code: 12345
+                            city: Berlin
+                            street: Hermann Straße 1
+                          headquarter_country: DE
+                          aliases: []
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                      - organization:
+                          address:
+                            country: DE
+                            zip_code: 87654
+                            city: Munich
+                            street: Hermann Straße 1
+                          headquarter_country: DE
+                          aliases: []
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
         '400':
           description: Bad Request
         '401':
@@ -167,6 +259,8 @@ paths:
                     street: Hermann Straße 1
         description: "### Payload request scheme for single search\nIn order to search for a location bassed on the address, the sanction lists as well as the address details are required. Additional address lines can be placed into the advanced search attributes. The resulting payload consists of all the entities found at the address with their respective match scores. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
       description: "### Search on an entity through the desired sanction lists in at an address\nThis API call allows you to perform a search through the desired sanction lists for any entity at the desired location. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
+      tags:
+        - Entity Search
     parameters: []
   /batchsearch/entities/person:
     post:
@@ -178,7 +272,50 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/personBatchSearchResult'
+                type: array
+                items:
+                  $ref: '#/components/schemas/personBatchSearchResult'
+              examples:
+                example:
+                  value:
+                    personsBatch:
+                      - index: 1
+                        persons:
+                          - person:
+                              first_name: Serhii
+                              middle_name: ''
+                              last_name: Kliuiev
+                              dob: 19.08.1969
+                              gender: male
+                              alias:
+                                - Serhiy Klyuyev
+                              nationalities:
+                                - UA
+                              list_entry_url: 'GET https://sanctions-api.cubemos.com/sanctions/list/entry/?=12345 HTTP/1.1'
+                          - person:
+                              first_name: Serhii
+                              middle_name: ''
+                              last_name: Kliuiev
+                              dob: 19.08.1969
+                              gender: male
+                              alias:
+                                - Serhiy Klyuyev
+                              nationalities:
+                                - UA
+                              list_entry_url: 'GET https://sanctions-api.cubemos.com/sanctions/list/entry/?=12345 HTTP/1.1'
+                      - index: 2
+                        persons:
+                          - person:
+                              first_name: Serhii
+                              middle_name: ''
+                              last_name: Kliuiev
+                              dob: 19.08.1969
+                              gender: male
+                              alias:
+                                - Serhiy Klyuyev
+                              nationalities:
+                                - UA
+                              list_entry_url: 'GET https://sanctions-api.cubemos.com/sanctions/list/entry/?=12345 HTTP/1.1'
       description: "### Searches for multiple persons at a time through the sanction lists\nThis API call allows you to perform a batch search for multiple persons through the desired sanction lists. The search results returned are a list of list of all entries from the sanction lists which match to the input along with the degree of the match. "
       requestBody:
         content:
@@ -188,43 +325,38 @@ paths:
             examples:
               Example:
                 value:
-                  indices:
-                    - 0
-                  persons:
-                    - person_search:
-                        full_name: john junior senior smith
-                        first_names: john
-                        middle_names: junior senior
-                        last_names: smith
-                        aliases: 'don john, godfather'
+                  person_batch_search:
+                    search_config:
+                      sanction_lists:
+                        - cfsp
+                        - sdn
+                      indices:
+                        - ID2
+                        - ID3
+                        - ID4
+                        - ID332
+                        - ID333
+                        - ID334
+                      must_match_attributes:
+                        - last_name
+                        - nationality
+                    persons:
+                      - first_name: Serhii
+                        middle_name: ''
+                        last_name: Kliuiev
+                        full_name: Serhii Kliuiev
+                        alias: Serhiy Klyuyev
                         gender: male
-                        dob: 01.01.1950
-                        nationalities: US
-                        sanction_lists:
-                          - UN-Sanctions List
-                          - EU-Financial Sanctions List
-                      advanced_attributes:
-                        title: Prime minister of a country
-                        full_address: '12, street, 12345 city, country'
-                        dob_year_ambiguity: '1950, 1952'
-                        must_attributes: 'full_name, dob'
-                    - person_search:
-                        full_name: john senior smith
-                        first_names: john
-                        middle_names: senior
-                        last_names: smith
-                        aliases: 'grandmaster, godfather the supreme'
-                        gender: male
-                        dob: 01.01.1920
-                        nationalities: US
-                        sanction_lists:
-                          - UN-Sanctions List
-                          - EU-Financial Sanctions List
-                      advanced_attributes:
-                        title: Prime minister of a country
-                        full_address: '12, street, 12345 city, country'
-                        dob_year_ambiguity: '1910, 1920'
-                        must_attributes: 'full_name, dob'
+                        nationality: UA
+                        dob: 19.08.1969
+                      - first_name: Marie
+                        middle_name: Lynn
+                        last_name: Franklin
+                        full_name: Marie Lynn Franklin
+                        alias: Marilynn Franklin
+                        gender: female
+                        nationality: US
+                        dob: 12.03.1984
           application/xml:
             schema:
               $ref: '#/components/schemas/personBulkSearch'
@@ -236,6 +368,8 @@ paths:
           ### Payload request schema for single search
           In order to perform a search on a batch of persons through the sanction lists, the full name and the desired sanction lists are required. Additionally, a unique index has to be allocated to each person to which the results would be mapped as well. The search returns a list with all the possible matches with a score of the match. Advanced attributes can be provided in order to make the search results stricter.
       parameters: []
+      tags:
+        - Batch Search
     parameters: []
   /search/location/geo:
     post:
@@ -248,6 +382,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/locationSearchResult'
+              examples:
+                example:
+                  value:
+                    persons:
+                      - person:
+                          first_name: Serhii
+                          middle_name: ''
+                          last_name: Kliuiev
+                          dob: 19.08.1969
+                          gender: male
+                          alias:
+                            - Serhiy Klyuyev
+                          nationalities:
+                            - UA
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry?entityLogicalID=12345'
+                      - person:
+                          first_name: Serhii
+                          middle_name: ''
+                          last_name: Kliuiev
+                          dob: 19.08.1969
+                          gender: male
+                          alias:
+                            - Serhiy Klyuyev
+                          nationalities:
+                            - UA
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry?entityLogicalID=12345'
+                    organizations:
+                      - organization:
+                          address:
+                            country: DE
+                            zip_code: 12345
+                            city: Berlin
+                            street: Hermann Straße 1
+                          headquarter_country: DE
+                          aliases: []
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry?entityLogicalID=12345'
+                      - organization:
+                          address:
+                            country: DE
+                            zip_code: 87654
+                            city: Munich
+                            street: Hermann Straße 1
+                          headquarter_country: DE
+                          aliases: []
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry?entityLogicalID=12345'
       requestBody:
         content:
           application/json:
@@ -276,7 +455,44 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/organizationBatchSearchResult'
+                type: array
+                items:
+                  $ref: '#/components/schemas/organizationBatchSearchResult'
+              examples:
+                example:
+                  value:
+                    organizationsBatch:
+                      - index: 1
+                        organization:
+                          - organization:
+                              address:
+                                country: DE
+                                zip_code: 12345
+                                city: Berlin
+                                street: Hermann Straße 1
+                              headquarter_country: DE
+                              aliases: []
+                              list_entry_url: 'GET https://sanctions-api.cubemos.com/sanctions/list/entry/?=12345 HTTP/1.1'
+                          - organization:
+                              address:
+                                country: DE
+                                zip_code: 87654
+                                city: Munich
+                                street: Hermann Straße 1
+                              headquarter_country: DE
+                              aliases: []
+                              list_entry_url: 'GET https://sanctions-api.cubemos.com/sanctions/list/entry/?=12345 HTTP/1.1'
+                      - index: 2
+                        organization:
+                          - organization:
+                              address:
+                                country: DE
+                                zip_code: 12345
+                                city: Berlin
+                                street: Hermann Straße 1
+                              headquarter_country: DE
+                              aliases: []
+                              list_entry_url: 'GET https://sanctions-api.cubemos.com/sanctions/list/entry/?=12345 HTTP/1.1'
       description: "### Searches for multiple organizations at a time through the sanction lists\nThis API call allows you to perform a batch search for multiple organizations through the desired sanction lists. The search results returned are a list of list of all entries from the sanction lists which match to the input along with the degree of the match. "
       requestBody:
         content:
@@ -286,41 +502,208 @@ paths:
             examples:
               Example:
                 value:
-                  indices:
-                    - 0
-                  organizations:
-                    - sanction_lists:
-                        - EU-Financial Sanctions List
-                        - UN-Sanctions List
-                      basic_attributes:
-                        organization_name: cubemos gmbh
-                        country_code: string
-                      advanced_attributes:
-                        address:
-                          country_code: DE
-                          zip_code: 82024
-                          city: Munich
-                          street: Mehlbeeren straße 2
-                        headquarter_country: DE
-                    - sanction_lists:
-                        - EU-Financial Sanctions List
-                        - UN-Sanctions List
-                      basic_attributes:
-                        organization_name: framos gmbh
-                        country_code: string
-                      advanced_attributes:
-                        address:
-                          country_code: DE
-                          zip_code: 82024
-                          city: Munich
-                          street: Mehlbeeren straße 2
-                        headquarter_country: DE
+                  organization_batch_search:
+                    search_config:
+                      sanction_lists:
+                        - cfsp
+                        - sdn
+                      indices:
+                        - ID2
+                        - ID3
+                        - ID4
+                        - ID332
+                        - ID333
+                        - ID334
+                    organizations:
+                      - name: cubemos gmbh
+                        country_code: DE
+                      - name: framos gmbh
+                        country_code: DE
         description: |-
           ### Payload request schema for batch search
           In order to perform a search on multiple organizations through the sanction lists, the name and the desired sanction lists are required. Additionally, a unique index has to be assigned to each organization searched for in order to map the results to it in the output payload. The search returns a list with all the possible matches with a score. Advanced attributes can be provided in order to make the search results stricter.
+      tags:
+        - Batch Search
+  '/list/cfsp/{entityLogicalID}':
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Sanction List Entry
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cfsp'
+              examples:
+                example:
+                  value:
+                    fileGenerationDate: 29/04/2020
+                    Entity_LogicalId: 43
+                    Entity_EU_ReferenceNumber: EU.85.7
+                    Entity_UnitedNationId: ''
+                    Entity_DesignationDate: ''
+                    Entity_DesignationDetails: ''
+                    Entity_Remark: (UNSC RESOLUTION 1483 BASIS)
+                    Entity_SubjectType: P
+                    Entity_SubjectType_ClassificationCode: person
+                    Entity_Regulation_Type: regulation
+                    Entity_Regulation_OrganisationType: commission
+                    Entity_Regulation_PublicationDate: '2003-07-08'
+                    Entity_Regulation_EntryIntoForceDate: '2003-07-07'
+                    Entity_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                    Entity_Regulation_Programme: IRQ
+                    Entity_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                    NameAlias_LastName: ''
+                    NameAlias_FirstName: ''
+                    NameAlias_MiddleName: ''
+                    NameAlias_WholeName: Aziz Salih al-Numan
+                    NameAlias_NameLanguage: ''
+                    NameAlias_Gender: ''
+                    NameAlias_Title: ''
+                    NameAlias_Function: Former Governor of Karbala and An Najaf;
+                    NameAlias_LogicalId: 64
+                    NameAlias_RegulationLanguage: EN
+                    NameAlias_Remark: ''
+                    NameAlias_Regulation_Type: regulation
+                    NameAlias_Regulation_OrganisationType: commission
+                    NameAlias_Regulation_PublicationDate: '2003-07-08'
+                    NameAlias_Regulation_EntryIntoForceDate: '2003-07-07'
+                    NameAlias_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                    NameAlias_Regulation_Programme: IRQ
+                    NameAlias_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                    Address_City: ''
+                    Address_Street: ''
+                    Address_PoBox: ''
+                    Address_ZipCode: ''
+                    Address_Region: ''
+                    Address_Place: ''
+                    Address_AsAtListingTime: ''
+                    Address_ContactInfo: ''
+                    Address_CountryIso2Code: ''
+                    Address_CountryDescription: ''
+                    Address_LogicalId: ''
+                    Address_RegulationLanguage: ''
+                    Address_Remark: ''
+                    Address_Regulation_Type: ''
+                    Address_Regulation_OrganisationType: ''
+                    Address_Regulation_PublicationDate: ''
+                    Address_Regulation_EntryIntoForceDate: ''
+                    Address_Regulation_NumberTitle: ''
+                    Address_Regulation_Programme: ''
+                    Address_Regulation_PublicationUrl: ''
+                    BirthDate_BirthDate: ''
+                    BirthDate_Day: ''
+                    BirthDate_Month: ''
+                    BirthDate_Year: ''
+                    BirthDate_YearRangeFrom: ''
+                    BirthDate_YearRangeTo: ''
+                    BirthDate_Circa: ''
+                    BirthDate_CalendarType: ''
+                    BirthDate_ZipCode: ''
+                    BirthDate_Region: ''
+                    BirthDate_Place: ''
+                    BirthDate_City: ''
+                    BirthDate_CountryIso2Code: ''
+                    BirthDate_CountryDescription: ''
+                    BirthDate_LogicalId: ''
+                    BirthDate_RegulationLanguage: ''
+                    BirthDate_Remark: ''
+                    BirthDate_Regulation_Type: ''
+                    BirthDate_Regulation_OrganisationType: ''
+                    BirthDate_Regulation_PublicationDate: ''
+                    BirthDate_Regulation_EntryIntoForceDate: ''
+                    BirthDate_Regulation_NumberTitle: ''
+                    BirthDate_Regulation_Programme: ''
+                    BirthDate_Regulation_PublicationUrl: ''
+                    Identification_Number: ''
+                    Identification_Diplomatic: ''
+                    Identification_KnownExpired: ''
+                    Identification_KnownFalse: ''
+                    Identification_ReportedLost: ''
+                    Identification_RevokedByIssuer: ''
+                    Identification_IssuedBy: ''
+                    Identification_IssuedDate: ''
+                    Identification_ValidFrom: ''
+                    Identification_ValidTo: ''
+                    Identification_LatinNumber: ''
+                    Identification_NameOnDocument: ''
+                    Identification_TypeCode: ''
+                    Identification_TypeDescription: ''
+                    Identification_Region: ''
+                    Identification_CountryIso2Code: ''
+                    Identification_CountryDescription: ''
+                    Identification_LogicalId: ''
+                    Identification_RegulationLanguage: ''
+                    Identification_Remark: ''
+                    Identification_Regulation_Type: ''
+                    Identification_Regulation_OrganisationType: ''
+                    Identification_Regulation_PublicationDate: ''
+                    Identification_Regulation_EntryIntoForceDate: ''
+                    Identification_Regulation_NumberTitle: ''
+                    Identification_Regulation_Programme: ''
+                    Identification_Regulation_PublicationUrl: ''
+                    Citizenship_Region: ''
+                    Citizenship_CountryIso2Code: ''
+                    Citizenship_CountryDescription: ''
+                    Citizenship_LogicalId: ''
+                    Citizenship_RegulationLanguage: ''
+                    Citizenship_Remark: ''
+                    Citizenship_Regulation_Type: ''
+                    Citizenship_Regulation_OrganisationType: ''
+                    Citizenship_Regulation_PublicationDate: ''
+                    Citizenship_Regulation_EntryIntoForceDate: ''
+                    Citizenship_Regulation_NumberTitle: ''
+                    Citizenship_Regulation_Programme: ''
+                    Citizenship_Regulation_PublicationUrl: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      operationId: get-search-sanctions-list-entry
+      description: Get the entry from the official sanctions list based on the result from the search calls
+      requestBody:
+        description: ''
+      parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: entityLogicalID
+        in: path
+        required: true
+        description: The entity logical ID in the CFSP sanctions list from which all the entries will be returned
+  '/list/sdn/{uid}':
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Sanction List Entry
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sdn'
+              examples:
+                example:
+                  value:
+                    publishDate: ''
+                    recordCount: ''
+                    uid: ''
+      operationId: get-list-sdn
+      description: Get the entry from the official sanctions list based on the result from the search calls
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        description: The UID in the SDN sanctions list from which all the entries will be returned
 components:
   schemas:
-    personBasicSearch:
+    personSearchAttributes:
       title: personBasicSearch
       type: object
       description: Basic search identifiers for a person through a sanction list
@@ -330,25 +713,22 @@ components:
           type: string
           description: Full name of a person (first_names + middle_names + last_names )
           example: john junior senior smith
-        first_names:
+        first_name:
           type: string
           description: All the first names of the person
           example: john
-        middle_names:
+        middle_name:
           type: string
           description: All the middle names of the person
           example: junior senior
-        last_names:
+        last_name:
           type: string
           description: All the last names of the person
           example: smith
-        aliases:
-          type: array
+        alias:
           description: 'All the aliases of the person as an array '
           example: 'don john, godfather'
-          uniqueItems: true
-          items:
-            type: string
+          type: string
         gender:
           type: string
           description: 'Gender of the person '
@@ -357,39 +737,27 @@ components:
           type: string
           description: Date of birth of the person
           example: 01.01.1950
-        nationalities:
-          type: array
+        nationality:
           description: Nationalities of the person as an array of 2 letter ISO country code
           example: USA
-          items:
-            type: string
+          type: string
       required:
         - full_name
-    personAdvancedsearch:
+    searchConfig:
       title: personAdvancedSearch
       type: object
       description: Advanced search for a person through a sanction list
       properties:
-        title:
-          type: string
-          description: Job title or positional title held by the person
-          example: Prime minister of a country
-        full_address:
-          type: string
-          example: '12, street, 12345 city, country'
-          description: Full address as a string from door number to country
-        dob_year_ambiguity:
+        sanction_lists:
           type: array
-          description: Possible birth years if the date of birth is not clear
-          example: '1950, 1952'
+          description: All the sanction lists as an array through which the search has to be made
           items:
-            type: integer
-        must_attributes:
+            type: string
+        must_match_attributes:
           type: array
           description: |-
             Identifiers of the entry fields against which the match similarity has to be 100% in the results
             The identifiers can be from the basic fields and advanced fields
-          example: 'full_name, dob'
           items:
             type: string
     personSearch:
@@ -398,86 +766,32 @@ components:
       description: The identifiers based on which the search will be performed for a person through the desired sanction lists
       x-examples: {}
       properties:
-        sanction_lists:
-          type: array
-          description: All the sanction lists as an array through which the search has to be made
-          items:
-            type: string
-        basic_attributes:
-          $ref: '#/components/schemas/personBasicSearch'
-        advanced_attributes:
-          $ref: '#/components/schemas/personAdvancedsearch'
-    personSearchResult:
-      title: personSearchResult
-      description: Response payload for the query on a person through the desired sanction lists
-      type: object
-      properties:
-        persons_identified:
-          type: integer
-          description: Number of persons identified matching to the input query
-        persons:
-          type: array
-          items:
-            $ref: '#/components/schemas/person'
-    sanctionListEntryPerUid:
-      title: sanctionListEntryPerUid
-      type: object
-      description: List of raw entries from the sanction lists in which the result has been matched
-      properties:
-        number_of_entries:
-          type: integer
-          description: number of entries with the same unique id in the sanction list
-        array_of_list_entries:
-          type: array
-          description: raw entries from the sanction list
-          items:
-            type: string
-        sanction_list:
-          type: string
-          description: The sanction list in which a valid result was found
-        match_score:
-          type: number
-          description: The probability of the match denoted as a score between 0 and 1
-    organizationBasicSearch:
-      title: organizationBasicSearch
-      type: object
-      description: Basic search identifiers for an organization through a sanction list
-      properties:
-        organization_name:
-          type: string
-          example: cubemos gmbh
-          description: Name of the organization for which the search through sanction lists has to be made
-        country_code:
-          type: string
-          description: ISO country code in which the organization is located
-      required:
-        - organization_name
-    organizationAdvancedsearch:
+        search_config:
+          $ref: '#/components/schemas/searchConfig'
+        person:
+          $ref: '#/components/schemas/personSearchAttributes'
+    organizationSearchAttributes:
       title: organizationAdvancedSearch
       type: object
       description: Advanced search for an organization through a sanction list
       properties:
-        address:
-          $ref: '#/components/schemas/address'
-        headquarter_country:
+        name:
           type: string
           description: ISO country code of the place where the headquarters of the organization is located
+          example: cubemos gmbh
+        country_code:
+          type: string
+          description: 'ISO country code '
+          example: DE
     organizationSearch:
       title: organizationSearch
       type: object
       description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
       properties:
-        sanction_lists:
-          type: array
-          description: Sanction lists through which the search has to be made
-          items:
-            type: string
-        basic_attributes:
-          $ref: '#/components/schemas/organizationBasicSearch'
-        advanced_attributes:
-          $ref: '#/components/schemas/organizationAdvancedsearch'
-      required:
-        - sanction_lists
+        search_config:
+          $ref: '#/components/schemas/searchConfig'
+        organization:
+          $ref: '#/components/schemas/organizationSearchAttributes'
     organization:
       title: organization
       type: object
@@ -497,10 +811,9 @@ components:
           description: "List of aliases that the organization has for it's name. "
           items:
             type: string
-        sanction_lists:
-          type: array
-          items:
-            $ref: '#/components/schemas/sanctionListEntryPerUid'
+        list_entry_url:
+          type: string
+          description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the sanction list in which the result is extracted from
     geo:
       title: geo
       type: object
@@ -519,81 +832,69 @@ components:
         - latitude
         - logitude
         - radius
-    organizationSearchResult:
-      title: organizationSearchResult
-      type: object
-      description: Response payload for the query on a organization through the desired sanction lists
-      properties:
-        organizations_identified:
-          description: Number of organizations found
-          type: integer
-        organizations:
-          $ref: '#/components/schemas/organization'
     locationSearchResult:
       title: locationSearchResult
       type: object
       description: Response of a search query based on geographical co-ordinates through the desired sanction lists
       properties:
-        number_of_matches:
-          description: Indicates what type of an entity is searched for
-          type: integer
         persons:
-          $ref: '#/components/schemas/personSearchResult'
+          type: array
+          items:
+            $ref: '#/components/schemas/person'
         organizations:
-          $ref: '#/components/schemas/organizationSearchResult'
-      required:
-        - number_of_matches
+          type: array
+          items:
+            $ref: '#/components/schemas/organization'
     personBatchSearch:
       title: personBatchSearch
       type: object
       description: Batch search payload for persons
       properties:
-        indices:
-          type: array
-          description: Index assigned to each person being searched for
-          items:
-            type: integer
+        search_config:
+          type: object
+          properties:
+            sanction_lists:
+              type: array
+              items:
+                type: string
+              description: The sanction lists through which the entity shall be searched through
+            indices:
+              type: array
+              items:
+                type: string
+              description: The indices assigned to each person to which the data in the response is mapped
+            must_match_attributes:
+              type: array
+              items:
+                type: string
+              description: The attributes which will be enforced as a strict filter
         persons:
           type: array
           items:
-            $ref: '#/components/schemas/personSearch'
+            $ref: '#/components/schemas/personSearchAttributes'
     personBatchSearchResult:
       title: personBatchSearchResult
       type: object
       description: Response payload of the batch search on persons
       properties:
-        indices:
-          type: array
-          description: Unique index corresponding to each person searched for and for which the results could be found
-          items:
-            type: integer
-        persons_results:
+        index:
+          type: integer
+        person:
           type: array
           items:
-            $ref: '#/components/schemas/personSearchResult'
+            $ref: '#/components/schemas/person'
     addressSearch:
       title: addressSearch
       type: object
       description: query payload for an address search
       x-examples: {}
       properties:
-        sanction_lists:
-          type: array
-          description: Sanction lists through which the search has to be made
-          items:
-            type: string
+        search_config:
+          $ref: '#/components/schemas/searchConfig'
         address:
           $ref: '#/components/schemas/address'
-        advanced_attribute:
-          type: object
-          properties:
-            additional_address_lines:
-              type: array
-              description: Additional address lines to search for
-              items:
-                type: string
       required:
-        - sanction_lists
+        - search_config
         - address
     person:
       title: person
@@ -604,8 +905,10 @@ components:
           description: First name of the query
         middle_name:
           type: string
+          description: Middle name of the query
         last_name:
           type: string
+          description: Last name of the query
         dob:
           type: string
           description: Date of birth of the person
@@ -622,10 +925,9 @@ components:
           description: Nationalities of a person denoted as by their respective ISO country codes
           items:
             type: string
-        sanction_lists:
-          type: array
-          items:
-            $ref: '#/components/schemas/sanctionListEntryPerUid'
+        list_entry_url:
+          type: string
+          description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the sanction list in which the result is extracted from
       description: person details
     address:
       title: address
@@ -649,44 +951,320 @@ components:
       type: object
       description: query payload for an geo search
       properties:
-        sanction_lists:
-          type: array
-          description: The sanction lists through which the search has to be made
-          items:
-            type: string
+        search_config:
+          $ref: '#/components/schemas/searchConfig'
         geo:
           $ref: '#/components/schemas/geo'
       required:
-        - sanction_lists
+        - search_config
         - geo
     organizationBatchSearch:
       title: organizationBatchSearch
       type: object
+      description: query payload for batch search on organizations
       properties:
-        indices:
-          type: array
-          description: Index assigned to each person being searched for
-          items:
-            type: integer
+        search_config:
+          type: object
+          properties:
+            sanction_lists:
+              type: array
+              items:
+                type: string
+            indices:
+              type: array
+              items:
+                type: integer
+            must_match_attributes:
+              type: array
+              items:
+                type: string
         organizations:
           type: array
           items:
-            $ref: '#/components/schemas/organizationSearch'
-      description: query payload for batch search on organizations
+            $ref: '#/components/schemas/organizationSearchAttributes'
     organizationBatchSearchResult:
       title: organizationBulkSearchResult
       type: object
       description: response payload of batch search on organisations
       properties:
-        indices:
-          type: array
+        index:
           description: Unique index corresponding to each person searched for and for which the results could be found
-          items:
-            type: integer
+          type: integer
         organizations:
           type: array
           items:
-            $ref: '#/components/schemas/organizationSearchResult'
+            $ref: '#/components/schemas/organization'
+    sdn:
+      title: sdn
+      type: object
+      x-tags:
+        - Sanction List Payloads
+      properties:
+        publishDate:
+          type: string
+        recordCount:
+          type: string
+        uid:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        sdnType:
+          type: string
+        program:
+          type: string
+        aka:
+          type: string
+        dateOfBirth:
+          type: string
+        placeOfBirth:
+          type: string
+      x-examples: {}
+    cfsp:
+      title: cfsp
+      type: object
+      x-examples: {}
+      properties:
+        fileGenerationDate:
+          type: string
+        Entity_LogicalId:
+          type: integer
+        Entity_EU_ReferenceNumber:
+          type: string
+        Entity_UnitedNationId:
+          type: string
+        Entity_DesignationDate:
+          type: string
+        Entity_DesignationDetails:
+          type: string
+        Entity_Remark:
+          type: string
+        Entity_SubjectType:
+          type: string
+        Entity_SubjectType_ClassificationCode:
+          type: string
+        Entity_Regulation_Type:
+          type: string
+        Entity_Regulation_OrganisationType:
+          type: string
+        Entity_Regulation_PublicationDate:
+          type: string
+        Entity_Regulation_EntryIntoForceDate:
+          type: string
+        Entity_Regulation_NumberTitle:
+          type: string
+        Entity_Regulation_Programme:
+          type: string
+        Entity_Regulation_PublicationUrl:
+          type: string
+        NameAlias_FirstName:
+          type: string
+        NameAlias_MiddleName:
+          type: string
+        NameAlias_WholeName:
+          type: string
+        NameAlias_NameLanguage:
+          type: string
+        NameAlias_Gender:
+          type: string
+        NameAlias_Title:
+          type: string
+        NameAlias_Function:
+          type: string
+        NameAlias_LogicalId:
+          type: string
+        NameAlias_RegulationLanguage:
+          type: string
+        NameAlias_Remark:
+          type: string
+        NameAlias_Regulation_Type:
+          type: string
+        NameAlias_Regulation_OrganisationType:
+          type: string
+        NameAlias_Regulation_PublicationDate:
+          type: string
+        NameAlias_Regulation_EntryIntoForceDate:
+          type: string
+        NameAlias_Regulation_NumberTitle:
+          type: string
+        NameAlias_Regulation_Programme:
+          type: string
+        NameAlias_Regulation_PublicationUrl:
+          type: string
+        Address_City:
+          type: string
+        Address_Street:
+          type: string
+        Address_PoBox:
+          type: string
+        Address_ZipCode:
+          type: string
+        Address_Region:
+          type: string
+        Address_Place:
+          type: string
+        Address_AsAtListingTime:
+          type: string
+        Address_ContactInfo:
+          type: string
+        Address_CountryIso2Code:
+          type: string
+        Address_CountryDescription:
+          type: string
+        Address_LogicalId:
+          type: string
+        Address_RegulationLanguage:
+          type: string
+        Address_Remark:
+          type: string
+        Address_Regulation_Type:
+          type: string
+        Address_Regulation_OrganisationType:
+          type: string
+        Address_Regulation_PublicationDate:
+          type: string
+        Address_Regulation_EntryIntoForceDate:
+          type: string
+        Address_Regulation_NumberTitle:
+          type: string
+        Address_Regulation_Programme:
+          type: string
+        Address_Regulation_PublicationUrl:
+          type: string
+        BirthDate_BirthDate:
+          type: string
+        BirthDate_Day:
+          type: string
+        BirthDate_Month:
+          type: string
+        BirthDate_Year:
+          type: string
+        BirthDate_YearRangeFrom:
+          type: string
+        BirthDate_YearRangeTo:
+          type: string
+        BirthDate_Circa:
+          type: string
+        BirthDate_CalendarType:
+          type: string
+        BirthDate_ZipCode:
+          type: string
+        BirthDate_Region:
+          type: string
+        BirthDate_Place:
+          type: string
+        BirthDate_City:
+          type: string
+        BirthDate_CountryIso2Code:
+          type: string
+        BirthDate_CountryDescription:
+          type: string
+        BirthDate_LogicalId:
+          type: string
+        BirthDate_RegulationLanguage:
+          type: string
+        BirthDate_Remark:
+          type: string
+        BirthDate_Regulation_Type:
+          type: string
+        BirthDate_Regulation_OrganisationType:
+          type: string
+        BirthDate_Regulation_PublicationDate:
+          type: string
+        BirthDate_Regulation_EntryIntoForceDate:
+          type: string
+        BirthDate_Regulation_NumberTitle:
+          type: string
+        BirthDate_Regulation_Programme:
+          type: string
+        BirthDate_Regulation_PublicationUrl:
+          type: string
+        Identification_Number:
+          type: string
+        Identification_Diplomatic:
+          type: string
+        Identification_KnownExpired:
+          type: string
+        Identification_KnownFalse:
+          type: string
+        Identification_ReportedLost:
+          type: string
+        Identification_RevokedByIssuer:
+          type: string
+        Identification_IssuedBy:
+          type: string
+        Identification_IssuedDate:
+          type: string
+        Identification_ValidFrom:
+          type: string
+        Identification_ValidTo:
+          type: string
+        Identification_LatinNumber:
+          type: string
+        Identification_NameOnDocument:
+          type: string
+        Identification_TypeCode:
+          type: string
+        Identification_TypeDescription:
+          type: string
+        Identification_Region:
+          type: string
+        Identification_CountryIso2Code:
+          type: string
+        Identification_CountryDescription:
+          type: string
+        Identification_LogicalId:
+          type: string
+        Identification_RegulationLanguage:
+          type: string
+        Identification_Remark:
+          type: string
+        Identification_Regulation_Type:
+          type: string
+        Identification_Regulation_OrganisationType:
+          type: string
+        Identification_Regulation_PublicationDate:
+          type: string
+        Identification_Regulation_EntryIntoForceDate:
+          type: string
+        Identification_Regulation_NumberTitle:
+          type: string
+        Identification_Regulation_Programme:
+          type: string
+        Identification_Regulation_PublicationUrl:
+          type: string
+        Citizenship_Region:
+          type: string
+        Citizenship_CountryIso2Code:
+          type: string
+        Citizenship_CountryDescription:
+          type: string
+        Citizenship_LogicalId:
+          type: string
+        Citizenship_RegulationLanguage:
+          type: string
+        Citizenship_Remark:
+          type: string
+        Citizenship_Regulation_Type:
+          type: string
+        Citizenship_Regulation_OrganisationType:
+          type: string
+        Citizenship_Regulation_PublicationDate:
+          type: string
+        Citizenship_Regulation_EntryIntoForceDate:
+          type: string
+        Citizenship_Regulation_NumberTitle:
+          type: string
+        Citizenship_Regulation_Programme:
+          type: string
+        Citizenship_Regulation_PublicationUrl:
+          type: string
+        NameAlias_LastName:
+          type: string
+      x-tags:
+        - Sanction List Payloads
+      description: ''
   securitySchemes:
     cubemos_api_key:
       name: API Key
