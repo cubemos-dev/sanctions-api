@@ -1,4 +1,7 @@
 openapi: 3.0.0
+x-stoplight:
+  docs:
+    showModels: false
 info:
   title: Sanctions List API
   version: '1.0'
