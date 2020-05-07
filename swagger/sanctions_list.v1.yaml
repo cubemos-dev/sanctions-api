@@ -6,7 +6,7 @@ swagger: "2.0"
 info:
   title: Sanctions List API
   version: '1.0'
-  description: "### Introduction\ncubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crimes.\n\n\n\n### Features\n1. Easy integration\n2. Example code for various languages\n3. Strict and fuzzy search \n4. Batch search \n\n### Supported Sanction Lists\n1. EU Financial Sanctions List\n2. UN Sanctions List\n3. Politically Exposed Persons"
+  description: "### Introduction\ncubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime. \n\n### Features\n1. Easy integration\n2. Sample code for various languages\n3. Strict and fuzzy search \n4. Batch search \n\n### Watch Lists\n1. EU Financial Sanctions List\n2. UN Sanctions List\n3. Politically Exposed Persons"
   contact:
     name: cubemos gmbh
     url: www.cubemos.com
@@ -20,8 +20,8 @@ servers:
 paths:
   /search/entities/person:
     post:
-      summary: Search for a person through sanction lists
-      operationId: post-search-entities-organizations
+      summary: person search
+      operationId: post-search-entities-person
       responses:
         '200':
           description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching persons found in the desired sanction lists.'
@@ -46,7 +46,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
                       - person:
                           first_name: Serhii
                           middle_name: ''
@@ -57,7 +57,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
         '400':
           description: Bad Request
         '401':
@@ -119,8 +119,8 @@ paths:
     parameters: []
   /search/entities/organization:
     post:
-      summary: Search for an organization through sanction lists
-      operationId: post-search-entities-organizations
+      summary: organization search
+      operationId: post-search-entities-organization
       responses:
         '200':
           description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching organization found in the desired sanction lists.'
@@ -142,7 +142,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
                       - organization:
                           address:
                             country: DE
@@ -151,7 +151,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
           headers: {}
         '400':
           description: Bad Request
@@ -185,8 +185,8 @@ paths:
     parameters: []
   /search/location/address:
     post:
-      summary: Search for an entity based on an address through sanction lists
-      operationId: post-search-address-geo
+      summary: address search
+      operationId: post-search-address
       responses:
         '200':
           description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching persons found in the desired sanction lists.'
@@ -208,7 +208,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
                       - person:
                           first_name: Serhii
                           middle_name: ''
@@ -219,7 +219,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
                     organizations:
                       - organization:
                           address:
@@ -229,7 +229,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
                       - organization:
                           address:
                             country: DE
@@ -238,7 +238,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry/?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
         '400':
           description: Bad Request
         '401':
@@ -268,7 +268,7 @@ paths:
     parameters: []
   /batchsearch/entities/person:
     post:
-      summary: Search for multiple persons through sanction lists
+      summary: batch person search
       operationId: post-bulksearch-entities-person
       responses:
         '200':
@@ -363,7 +363,7 @@ paths:
                         dob: 12.03.1984
           application/xml:
             schema:
-              $ref: '#/components/schemas/personBulkSearch'
+              $ref: '#/components/schemas/personBatchSearch'
           multipart/form-data:
             schema:
               type: object
@@ -377,8 +377,8 @@ paths:
     parameters: []
   /search/location/geo:
     post:
-      summary: Search for an entity based on geographical co-ordinates through sanction list
-      operationId: post-search-location-geo
+      summary: geo search
+      operationId: post-search-geo
       responses:
         '200':
           description: 'The request was created successfully and the results are available as an array. If the array is empty, there were no matching entities were found in the desired sanction lists.'
@@ -400,7 +400,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
                       - person:
                           first_name: Serhii
                           middle_name: ''
@@ -411,7 +411,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
                     organizations:
                       - organization:
                           address:
@@ -421,7 +421,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
                       - organization:
                           address:
                             country: DE
@@ -430,7 +430,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/entry?entityLogicalID=12345'
+                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
       requestBody:
         content:
           application/json:
@@ -451,7 +451,7 @@ paths:
       parameters: []
   /batchsearch/entities/organization:
     post:
-      summary: Search for multiple organizations through sanction lists
+      summary: batch organization search
       operationId: post-batchsearch-entities-organization
       responses:
         '200':
@@ -476,7 +476,7 @@ paths:
                                 street: Hermann Straße 1
                               headquarter_country: DE
                               aliases: []
-                              list_entry_url: 'GET https://sanctions-api.cubemos.com/sanctions/list/entry/?=12345 HTTP/1.1'
+                              list_entry_url: 'https://sanctions-api.cubemos.com/sanctions/list/cfsp?=12345'
                           - organization:
                               address:
                                 country: DE
@@ -528,9 +528,9 @@ paths:
           In order to perform a search on multiple organizations through the sanction lists, the name and the desired sanction lists are required. Additionally, a unique index has to be assigned to each organization searched for in order to map the results to it in the output payload. The search returns a list with all the possible matches with a score. Advanced attributes can be provided in order to make the search results stricter.
       tags:
         - Batch Search
-  '/list/cfsp/{entityLogicalID}':
+  '/list/cfsp/{id}':
     get:
-      summary: Your GET endpoint
+      summary: CFSP list entry
       tags:
         - Sanction List Entry
       responses:
@@ -669,19 +669,17 @@ paths:
           description: Internal Server Error
       operationId: get-search-sanctions-list-entry
       description: Get the entry from the official sanctions list based on the result from the search calls
-      requestBody:
-        description: ''
       parameters: []
     parameters:
       - schema:
           type: string
-        name: entityLogicalID
+        name: id
         in: path
         required: true
         description: The entity logical ID in the CFSP sanctions list from which all the entries will be returned
-  '/list/sdn/{uid}':
+  '/list/sdn/{id}':
     get:
-      summary: Your GET endpoint
+      summary: SDN list entry
       tags:
         - Sanction List Entry
       responses:
@@ -702,9 +700,10 @@ paths:
     parameters:
       - schema:
           type: string
-        name: uid
+        name: id
         in: path
         description: The UID in the SDN sanctions list from which all the entries will be returned
+        required: true
 components:
   schemas:
     personSearchAttributes:
@@ -741,10 +740,14 @@ components:
           type: string
           description: Date of birth of the person
           example: 01.01.1950
-        nationality:
-          description: Nationalities of the person as an array of 2 letter ISO country code
-          example: USA
+        city:
           type: string
+          description: The city in which the person was known to reside
+          example: Berlin
+        nationality:
+          type: string
+          example: DE
+          description: The 2 letter ISO code of the nationality of the person
       required:
         - full_name
     searchConfig:
@@ -752,7 +755,7 @@ components:
       type: object
       description: Advanced search for a person through a sanction list
       properties:
-        sanction_lists:
+        watch_lists:
           type: array
           description: All the sanction lists as an array through which the search has to be made
           items:
@@ -807,8 +810,7 @@ components:
         address:
           $ref: '#/components/schemas/address'
         headquarter_country:
-          description: |
-            Match similarity for each search result corresponding to the sanction list
+          description: '2 digit ISO country code '
           type: string
         aliases:
           type: array
@@ -818,6 +820,12 @@ components:
         list_entry_url:
           type: string
           description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the sanction list in which the result is extracted from
+      required:
+        - name
+        - address
+        - headquarter_country
+        - aliases
+        - list_entry_url
     geo:
       title: geo
       type: object
@@ -849,6 +857,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/organization'
+      required:
+        - persons
+        - organizations
     personBatchSearch:
       title: personBatchSearch
       type: object
@@ -903,6 +914,7 @@ components:
     person:
       title: person
       type: object
+      description: person details
       properties:
         first_name:
           type: string
@@ -932,7 +944,16 @@ components:
         list_entry_url:
           type: string
           description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the sanction list in which the result is extracted from
-      description: person details
+      required:
+        - first_name
+        - middle_name
+        - last_name
+        - dob
+        - gender
+        - aliases
+        - nationalities
+        - list_entry_url
+      x-examples: {}
     address:
       title: address
       type: object
@@ -1269,8 +1290,4 @@ components:
       x-tags:
         - Sanction List Payloads
       description: ''
-  securitySchemes:
-    cubemos_api_key:
-      name: API Key
-      type: apiKey
-      in: query
+  securitySchemes: {}
