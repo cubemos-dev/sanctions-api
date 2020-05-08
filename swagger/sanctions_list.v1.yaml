@@ -1,4 +1,9 @@
 openapi: 3.0.0
+tags:
+  - name: Sanction List Entry
+    description: 'Full reference information in an official sanction list'
+  - name: Entity Search
+    description: 'Perform a search for a single entity'
 info:
   title: Sanctions List API
   version: '1.0'
