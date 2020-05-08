@@ -53,7 +53,7 @@ You can trigger the api by clicking `send`on the the element below.
 
 ### Investigate opposed sanctions
 
-If you investigate the response you can see that indeed, there is a person under sanctions which matches the name. For further inspection you can now use the id of `list_entry_url` in another request to see the details of the opposed sanctions.
+If you investigate the response of the request above, you can see that indeed, there is a person under sanctions which matches the name. For further inspection you can now use the id of `list_entry_url` in the request below to see the details of the opposed sanctions.
 
 ```json http
 {
@@ -64,4 +64,6 @@ If you investigate the response you can see that indeed, there is a person under
 
 ## For Developers
 
-The workflow of the cubemos 
+The workflow of the cubemos santions API is straightforward.
+1. Get your personal API Key from cubemos. For testing purposes you can also ...
+2. Make a Post request to search for sanctions opposed to a [person](), an [address]() or an [organization]()
