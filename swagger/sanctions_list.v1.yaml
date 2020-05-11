@@ -1,8 +1,13 @@
 openapi: 3.0.0
+tags:
+  - name: Sanction List Entry
+    description: Full reference information in an official sanction list
+  - name: Entity Search
+    description: Perform a search for a single entity
 info:
   title: Sanctions List API
   version: '1.0'
-  description: 'cubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime. '
+  description: "cubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime. \n\n### Description\n[Introduction](../docs/01Welcome.md)  [Quickstart](../docs/04Quickstart.md)"
   contact:
     name: cubemos gmbh
     url: www.cubemos.com
@@ -457,12 +462,6 @@ components:
           type: string
           description: All the known last names of the person
           example: smith
-        aliases:
-          description: 'All the known aliases of the person as an array '
-          example: 'don john, godfather'
-          type: array
-          items:
-            type: string
         gender:
           type: string
           description: 'Gender of the person '
@@ -479,6 +478,12 @@ components:
           type: string
           example: DE
           description: The 2 letter ISO code of the nationality of the person known
+        aliases:
+          description: 'All the known aliases of the person as an array '
+          example: 'don john, godfather'
+          type: array
+          items:
+            type: string
       required:
         - full_name
     searchConfig:
@@ -590,7 +595,6 @@ components:
       title: person
       type: object
       description: person details
-      x-examples: {}
       properties:
         first_name:
           type: string
@@ -629,6 +633,7 @@ components:
         - aliases
         - nationalities
         - list_entry_url
+      x-examples: {}
     address:
       title: address
       type: object
@@ -918,8 +923,3 @@ components:
         - Sanction List Payloads
       description: Output payload of the entry from the CFSP watch list
   securitySchemes: {}
-tags:
-  - name: Sanction List Entry
-    description: Full reference information in an official sanction list
-  - name: Entity Search
-    description: Perform a search for a single entity
