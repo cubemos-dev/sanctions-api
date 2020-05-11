@@ -1,9 +1,4 @@
 openapi: 3.0.0
-tags:
-  - name: Sanction List Entry
-    description: Full reference information in an official sanction list
-  - name: Entity Search
-    description: Perform a search for a single entity
 info:
   title: Sanctions List API
   version: '1.0'
@@ -402,7 +397,7 @@ paths:
         '500':
           description: Internal Server Error
       operationId: get-search-sanctions-list-entry
-      description: Get the entry from the official sanctions list based on the result from the search calls
+      description: 'Get the entry from the official [CFSP watch list](https://eeas.europa.eu/headquarters/headquarters-homepage_en/8442/Consolidated%20list%20of%20sanctions) based on the result from the search calls. '
       parameters: []
     parameters:
       - schema:
@@ -430,7 +425,7 @@ paths:
                     recordCount: ''
                     uid: ''
       operationId: get-list-sdn
-      description: Get the entry from the official sanctions list based on the result from the search calls
+      description: 'Get the entry from the official [SDN watch lists](https://www.treasury.gov/resource-center/sanctions/sdn-list/pages/default.aspx) based on the result from the search calls'
     parameters:
       - schema:
           type: string
@@ -462,6 +457,12 @@ components:
           type: string
           description: All the known last names of the person
           example: smith
+        aliases:
+          description: 'All the known aliases of the person as an array '
+          example: 'don john, godfather'
+          type: array
+          items:
+            type: string
         gender:
           type: string
           description: 'Gender of the person '
@@ -478,12 +479,6 @@ components:
           type: string
           example: DE
           description: The 2 letter ISO code of the nationality of the person known
-        aliases:
-          description: 'All the known aliases of the person as an array '
-          example: 'don john, godfather'
-          type: array
-          items:
-            type: string
       required:
         - full_name
     searchConfig:
@@ -595,6 +590,7 @@ components:
       title: person
       type: object
       description: person details
+      x-examples: {}
       properties:
         first_name:
           type: string
@@ -633,7 +629,6 @@ components:
         - aliases
         - nationalities
         - list_entry_url
-      x-examples: {}
     address:
       title: address
       type: object
@@ -923,3 +918,8 @@ components:
         - Sanction List Payloads
       description: Output payload of the entry from the CFSP watch list
   securitySchemes: {}
+tags:
+  - name: Sanction List Entry
+    description: Full reference information in an official sanction list
+  - name: Entity Search
+    description: Perform a search for a single entity

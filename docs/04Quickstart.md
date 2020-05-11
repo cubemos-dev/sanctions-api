@@ -4,8 +4,6 @@ tags: [04. Quickstart]
 
 # Quickstart
 
-## For Non-Developers
-
 If you want to check out the possibilities of the cubemos sanction list api, you can test the individual endpoints of the api in the "Try it" sections. 
 
 For a start, let's try to check if a specific person (in this case Serhii Kliuiev) is under sanctions. 
@@ -62,8 +60,7 @@ If you investigate the response of the request above, you can see that indeed, t
 }
 ```
 
-## For Developers
+### Workflow
 
-The workflow of the cubemos santions API is straightforward.
 1. Get your personal API Key from cubemos. For testing purposes you can also ...
 2. Make a Post request to search for sanctions opposed to a [person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post), an [address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post) or an [organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post)
