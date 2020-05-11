@@ -12,7 +12,7 @@ For a start, let's try to check if a specific person (in this case Serhii Kliuie
 
 In order to do so we will
 
-- make a request to the [/search/entities/person](<>) endpoint.
+- make a request to the [/search/entities/person](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post) endpoint.
 - use the result to get first-hand information from an official sanction list.
 
 ### Make a search request
@@ -66,4 +66,4 @@ If you investigate the response of the request above, you can see that indeed, t
 
 The workflow of the cubemos santions API is straightforward.
 1. Get your personal API Key from cubemos. For testing purposes you can also ...
-2. Make a Post request to search for sanctions opposed to a [person](), an [address]() or an [organization]()
+2. Make a Post request to search for sanctions opposed to a [person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post), an [address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post) or an [organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post)

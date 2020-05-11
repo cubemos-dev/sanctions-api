@@ -18,9 +18,3 @@ HTTP Response Code | Explanation
  5xx  - Server Error | Something went wrong on our end. If this happens to you please contact [support@cubemos.com](mailto:support@cubemos.com)
 
 
- Error Type | Explanation
----------|----------
- A1 | B1 
- A2 | B2 
- A3 | B3 
-

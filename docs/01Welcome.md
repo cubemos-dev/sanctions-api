@@ -12,7 +12,7 @@ Our Api uses POST requests with Json-encoded payloads to start a search and retu
 
 > ### Try it out!
 >
-> You can [try out]() the api freely in test-mode directly from your browser.
+> You can [try out](https://stoplight.io/p/docs/gh/cubemos-dev/sanctions-api/swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post?srn=gh/cubemos-dev/sanctions-api/swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post&group=develop) the api freely in test-mode directly from your browser. Simply 
 
 
 ## Features
