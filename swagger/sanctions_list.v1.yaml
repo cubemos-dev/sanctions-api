@@ -467,12 +467,10 @@ components:
           type: string
           description: All the known last names of the person
           example: smith
-        aliases:
-          description: 'All the known aliases of the person as an array '
+        alias:
+          description: Alias of the person
           example: 'don john, godfather'
-          type: array
-          items:
-            type: string
+          type: string
         gender:
           type: string
           description: 'Gender of the person '
@@ -550,9 +548,6 @@ components:
           description: Name of the organization
         address:
           $ref: '#/components/schemas/address'
-        headquarter_country:
-          description: "2 digit ISO country code of the organization's headquarter"
-          type: string
         aliases:
           type: array
           description: "List of all the aliases that the organization has for it's name"
@@ -564,7 +559,6 @@ components:
       required:
         - name
         - address
-        - headquarter_country
         - aliases
         - list_entry_url
     locationSearchResult:
@@ -602,6 +596,9 @@ components:
       description: person details
       x-examples: {}
       properties:
+        full_name:
+          type: string
+          description: Full name of the watched person
         first_name:
           type: string
           description: First name of the queried person
@@ -622,22 +619,22 @@ components:
           description: List of all the aliases that the queried person has
           items:
             type: string
-        nationalities:
-          type: array
-          description: Nationalities of a person denoted as by their respective 2 digit ISO country codes
-          items:
-            type: string
+        city:
+          type: string
+          description: City where the person is known to be located
+        nationality:
+          description: Nationality of the person
+          type: string
         list_entry_url:
           type: string
           description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the watch list in which the result is extracted from
       required:
-        - first_name
-        - middle_name
-        - last_name
+        - full_name
         - dob
         - gender
         - aliases
-        - nationalities
+        - city
+        - nationality
         - list_entry_url
     address:
       title: address
@@ -648,7 +645,7 @@ components:
           type: string
           description: '2 digit ISO country code '
         zip_code:
-          type: integer
+          type: string
           description: 'Zip code of the area '
         city:
           type: string
