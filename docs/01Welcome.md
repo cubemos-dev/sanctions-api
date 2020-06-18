@@ -27,7 +27,6 @@ Our Api uses POST requests with Json-encoded payloads to start a search and retu
 
 1. EU Financial Sanctions List
 2. UN Sanctions List
-3. Politically Exposed Persons
 
 ### Just getting started?
 Please see our [Quickstart guide](./04Quickstart.md) for developers to get you up to speed.

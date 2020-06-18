@@ -105,7 +105,7 @@ paths:
             schema:
               type: object
               properties: {}
-        description: "### Payload request schema for single search\nIn order to perform a search on a person through the sanction lists, the full name and the desired watch lists are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
+        description: "### Payload request schema for single search\nIn order to perform a search on a person through the sanction lists, the full name and the desired sanction lists are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
       parameters: []
       tags:
         - Entity Search
@@ -171,8 +171,8 @@ paths:
                     organization:
                       name: cubemos gmbh
                       country_code: DE
-        description: "### Payload request schema for single search\nIn order to perform a search on an organization through the watch lists, the name and the desired watch lists are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
-      description: "### Search an organization through watch lists\nThis API call allows you to perform a search through the desired sanction lists for an organization. The search results returned are a list of all entries from the watch lists which match to the input along with the degree of the match. "
+        description: "### Payload request schema for single search\nIn order to perform a search on an organization through the sanction lists, the name and the desired sanction lists are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
+      description: "### Search an organization through sanction lists\nThis API call allows you to perform a search through the desired sanction lists for an organization. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
       tags:
         - Entity Search
       security:
@@ -256,8 +256,8 @@ paths:
                     zip_code: 12345
                     city: Berlin
                     street: Hermann Straße 1
-        description: "### Payload request scheme for single search\nIn order to search for a location bassed on the address, the watch lists as well as the address details are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
-      description: "### Search on an entity through the desired watch lists in at an address\nThis API call allows you to perform a search through the desired watch lists for all the watched entities at the desired location. "
+        description: "### Payload request scheme for single search\nIn order to search for a location bassed on the address, the sanction lists as well as the address details are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
+      description: "### Search on an entity through the desired sanction lists in at an address\nThis API call allows you to perform a search through the desired sanction lists for all the sanctioned entities at the desired location. "
       tags:
         - Entity Search
       security:
@@ -403,7 +403,7 @@ paths:
         '500':
           description: Internal Server Error
       operationId: get-search-sanctions-list-entry
-      description: 'Get the entry from the official [CFSP watch list](https://eeas.europa.eu/headquarters/headquarters-homepage_en/8442/Consolidated%20list%20of%20sanctions) based on the result from the search calls. '
+      description: 'Get the entry from the official [CFSP sanction list](https://eeas.europa.eu/headquarters/headquarters-homepage_en/8442/Consolidated%20list%20of%20sanctions) based on the result from the search calls. '
       parameters: []
       security:
         - API Key: []
@@ -433,7 +433,7 @@ paths:
                     recordCount: ''
                     uid: ''
       operationId: get-list-sdn
-      description: 'Get the entry from the official [SDN watch lists](https://www.treasury.gov/resource-center/sanctions/sdn-list/pages/default.aspx) based on the result from the search calls'
+      description: 'Get the entry from the official [SDN sanction lists](https://www.treasury.gov/resource-center/sanctions/sdn-list/pages/default.aspx) based on the result from the search calls'
       security:
         - API Key: []
     parameters:
@@ -448,7 +448,7 @@ components:
     personSearchAttributes:
       title: personSearchAttributes
       type: object
-      description: Search identifiers for a person through the watch list
+      description: Search identifiers for a person through the sanction list
       x-examples: {}
       properties:
         full_name:
@@ -494,9 +494,9 @@ components:
       type: object
       description: configure the search on the desired entity
       properties:
-        watch_lists:
+        sanction_lists:
           type: array
-          description: All the watch list names through which the search has to be made
+          description: All the sanction list names through which the search has to be made
           items:
             type: string
         must_match_attributes:
@@ -505,11 +505,11 @@ components:
           items:
             type: string
       required:
-        - watch_lists
+        - sanction_lists
     personSearch:
       title: personSearch
       type: object
-      description: The identifiers based on which the search will be performed for a person through the desired watch lists
+      description: The identifiers based on which the search will be performed for a person through the desired sanction lists
       x-examples: {}
       properties:
         search_config:
@@ -519,7 +519,7 @@ components:
     organizationSearchAttributes:
       title: organizationSearchAttributes
       type: object
-      description: Search for an organization through a watch list
+      description: Search for an organization through a sanction list
       properties:
         name:
           type: string
@@ -532,7 +532,7 @@ components:
     organizationSearch:
       title: organizationSearch
       type: object
-      description: The identifiers based on which the search will be performed for a organization through the desired watch lists
+      description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
       properties:
         search_config:
           $ref: '#/components/schemas/searchConfig'
@@ -564,7 +564,7 @@ components:
     locationSearchResult:
       title: locationSearchResult
       type: object
-      description: Response of a search query based on address through the desired watch lists
+      description: Response of a search query based on address through the desired sanction lists
       properties:
         persons:
           type: array
@@ -598,7 +598,7 @@ components:
       properties:
         full_name:
           type: string
-          description: Full name of the watched person
+          description: Full name of the sanctioned person
         first_name:
           type: string
           description: First name of the queried person
@@ -627,7 +627,7 @@ components:
           type: string
         list_entry_url:
           type: string
-          description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the watch list in which the result is extracted from
+          description: The URL to the list entry which can be used with the GET call to obtain the raw entries from the sanction list in which the result is extracted from
       required:
         - full_name
         - dob
@@ -639,7 +639,7 @@ components:
     address:
       title: address
       type: object
-      description: Basic search identifiers for the address to search through a watch list where a watched entity might be present
+      description: Basic search identifiers for the address to search through a sanction list where a sanctioned entity might be present
       properties:
         country_code:
           type: string
@@ -923,7 +923,7 @@ components:
           type: string
       x-tags:
         - Sanction List Payloads
-      description: Output payload of the entry from the CFSP watch list
+      description: Output payload of the entry from the CFSP sanction list
   securitySchemes:
     API Key:
       name: x-api-key
