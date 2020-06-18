@@ -20,13 +20,12 @@ Our Api uses POST requests with Json-encoded payloads to start a search and retu
 1. Easy integration
 2. Example code for various languages
 3. Strict and fuzzy search 
-4. Batch search 
-5. Get the complete details of the watched person
+4. Get the complete details of the sanctioned person
 
 ## Supported Sanction Lists
 
-1. EU Financial Sanctions List
-2. UN Sanctions List
+1. EU's Common Foreign and Security Policy (CFSP)
+2. Specially Designated Nationals And Blocked Persons List (SDN)
 
 ### Just getting started?
 Please see our [Quickstart guide](./04Quickstart.md) for developers to get you up to speed.
