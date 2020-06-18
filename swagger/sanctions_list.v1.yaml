@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: Sanctions List API
+  title: Sanction List API
   version: '1.0'
-  description: "cubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crime. \n\n### Description\n[Introduction](../docs/01Welcome.md)  [Quickstart](../docs/04Quickstart.md)"
+  description: "cubemos Sanction list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanction, AML and financial crime. \n\n### Description\n[Introduction](../docs/01Welcome.md)  [Quickstart](../docs/04Quickstart.md)"
   contact:
     name: cubemos gmbh
     url: www.cubemos.com
@@ -41,7 +41,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
+                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
                       - person:
                           first_name: Serhii
                           middle_name: ''
@@ -52,7 +52,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
+                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
         '400':
           description: Bad Request
         '401':
@@ -137,7 +137,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
+                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
                       - organization:
                           address:
                             country: DE
@@ -146,7 +146,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
+                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
           headers: {}
         '400':
           description: Bad Request
@@ -203,7 +203,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
+                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
                       - person:
                           first_name: Serhii
                           middle_name: ''
@@ -214,7 +214,7 @@ paths:
                             - Serhiy Klyuyev
                           nationalities:
                             - UA
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
+                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
                     organizations:
                       - organization:
                           address:
@@ -224,7 +224,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
+                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
                       - organization:
                           address:
                             country: DE
@@ -233,7 +233,7 @@ paths:
                             street: Hermann Straße 1
                           headquarter_country: DE
                           aliases: []
-                          list_entry_url: 'https://sanctions-api.cubemos.com/list/cfsp?id=12345'
+                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
         '400':
           description: Bad Request
         '401':
@@ -249,8 +249,8 @@ paths:
               Example:
                 value:
                   sanction_lists:
-                    - EU-financial sanctions list
-                    - UN-sanctions list
+                    - EU-financial sanction list
+                    - UN-sanction list
                   address:
                     country: DE
                     zip_code: 12345
@@ -402,8 +402,8 @@ paths:
           description: Unauthorized
         '500':
           description: Internal Server Error
-      operationId: get-search-sanctions-list-entry
-      description: 'Get the entry from the official [CFSP sanction list](https://eeas.europa.eu/headquarters/headquarters-homepage_en/8442/Consolidated%20list%20of%20sanctions) based on the result from the search calls. '
+      operationId: get-search-sanction-list-entry
+      description: 'Get the entry from the official [CFSP sanction list](https://eeas.europa.eu/headquarters/headquarters-homepage_en/8442/Consolidated%20list%20of%20sanction) based on the result from the search calls. '
       parameters: []
       security:
         - API Key: []
@@ -413,7 +413,7 @@ paths:
         name: id
         in: path
         required: true
-        description: The entity logical ID in the CFSP sanctions list from which all the entries will be returned
+        description: The entity logical ID in the CFSP sanction list from which all the entries will be returned
   '/list/sdn/{id}':
     get:
       summary: SDN list entry
@@ -433,7 +433,7 @@ paths:
                     recordCount: ''
                     uid: ''
       operationId: get-list-sdn
-      description: 'Get the entry from the official [SDN sanction lists](https://www.treasury.gov/resource-center/sanctions/sdn-list/pages/default.aspx) based on the result from the search calls'
+      description: 'Get the entry from the official [SDN sanction lists](https://www.treasury.gov/resource-center/sanction/sdn-list/pages/default.aspx) based on the result from the search calls'
       security:
         - API Key: []
     parameters:
@@ -441,7 +441,7 @@ paths:
           type: string
         name: id
         in: path
-        description: The UID in the SDN sanctions list from which all the entries will be returned
+        description: The UID in the SDN sanction list from which all the entries will be returned
         required: true
 components:
   schemas:
