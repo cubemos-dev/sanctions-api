@@ -11,7 +11,7 @@ info:
     name: cubemos license
   termsOfService: 'https://www.cubemos.com/general-terms/'
 servers:
-  - url: 'https://api.cubemos.com/sanction-list-api-v1'
+  - url: 'https://api.cubemos.com/sanction'
 paths:
   /search/entities/person:
     post:
