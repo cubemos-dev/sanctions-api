@@ -656,30 +656,70 @@ components:
     sdn:
       title: sdn
       type: object
-      x-tags:
-        - Sanction List Payloads
-      properties:
-        publishDate:
-          type: string
-        recordCount:
-          type: string
-        uid:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        sdnType:
-          type: string
-        program:
-          type: string
-        aka:
-          type: string
-        dateOfBirth:
-          type: string
-        placeOfBirth:
-          type: string
       x-examples: {}
+      description: Output payload of the entry from the CFSP sanction list
+      properties:
+        entity_number:
+          type: string
+        sdn:
+          type: array
+          items:
+            type: object
+            properties:
+              sdn_name:
+                type: string
+              sdn_type:
+                type: string
+              program:
+                type: string
+              title:
+                type: string
+              call_sign:
+                type: string
+              vess_type:
+                type: string
+              tonnage:
+                type: string
+              grt:
+                type: string
+              vess_flag:
+                type: string
+              vess_owner:
+                type: string
+              remarks:
+                type: string
+        alt:
+          type: array
+          items:
+            type: object
+            properties:
+              alt_num:
+                type: string
+              alt_type:
+                type: string
+              alt_name:
+                type: string
+              alt_remarks:
+                type: string
+        add:
+          type: array
+          items:
+            type: object
+            properties:
+              add_num:
+                type: string
+              address:
+                type: string
+              city_province_postalcode:
+                type: string
+              country:
+                type: string
+              add_remarks:
+                type: string
+        sdn_comments:
+          type: array
+          items:
+            type: string
     cfsp:
       title: cfsp
       type: object
@@ -921,8 +961,6 @@ components:
           type: string
         NameAlias_LastName:
           type: string
-      x-tags:
-        - Sanction List Payloads
       description: Output payload of the entry from the CFSP sanction list
   securitySchemes:
     API Key:
