@@ -429,9 +429,54 @@ paths:
               examples:
                 example:
                   value:
-                    publishDate: ''
-                    recordCount: ''
-                    uid: ''
+                    entity_number: '10133'
+                    sdn:
+                      - sdn_name: SNIPER AFRICA
+                        sdn_type: '-0- '
+                        program: SDGT
+                        title: '-0- '
+                        call_sign: '-0- '
+                        vess_type: '-0- '
+                        tonnage: '-0- '
+                        grt: '-0- '
+                        vess_flag: '-0- '
+                        vess_owner: '-0- '
+                        remarks: Website www.sniperafrica.com; Registration ID 200302847123; Tax ID No. 9113562152.
+                    alt:
+                      - alt_num: '9835'
+                        alt_type: aka
+                        alt_name: SNIPER OUTDOOR CC
+                        alt_remarks: '-0-'
+                      - alt_num: '9836'
+                        alt_type: aka
+                        alt_name: SNIPER OUTDOORS CC
+                        alt_remarks: '-0-'
+                      - alt_num: '9837'
+                        alt_type: aka
+                        alt_name: TRUE MOTIVES 1236 CC
+                        alt_remarks: '-0-'
+                    add:
+                      - add_num: '13533'
+                        address: '40 Mint Road, Amoka Gardens, Fordsburg'
+                        city_province_postalcode: Johannesburg
+                        country: South Africa
+                        add_remarks: '-0-'
+                      - add_num: '13534'
+                        address: P.O. Box 42928
+                        city_province_postalcode: Fordsburg 2003
+                        country: South Africa
+                        add_remarks: '-0-'
+                      - add_num: '13535'
+                        address: 16 Gold Street
+                        city_province_postalcode: Carletonville 2500
+                        country: South Africa
+                        add_remarks: '-0-'
+                      - add_num: '13536'
+                        address: P.O. Box 28215
+                        city_province_postalcode: Kensington 2101
+                        country: South Africa
+                        add_remarks: '-0-'
+                    sdn_comments: []
         '400':
           description: Bad Request
         '401':
