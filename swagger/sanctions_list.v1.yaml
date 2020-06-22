@@ -89,7 +89,7 @@ paths:
               Example:
                 value:
                   search_config:
-                    watch_lists:
+                    sanction_lists:
                       - cfsp
                       - SDN
                     must_match_attributes:
@@ -210,7 +210,7 @@ paths:
               Example:
                 value:
                   search_config:
-                    watch_lists:
+                    sanction_lists:
                       - cfsp
                       - sdn
                     must_match_attributes:
@@ -280,7 +280,7 @@ paths:
               Example:
                 value:
                   search_config:
-                    watch_lists:
+                    sanction_lists:
                       - cfsp
                       - sdn
                     must_match_attributes:
@@ -1011,38 +1011,30 @@ components:
         full_name:
           type: string
           description: Full name of a person (first_names + middle_names + last_names )
-          example: john junior senior smith
+          example: 'OCHOA VASCO, Fabio Enrique'
         first_name:
           type: string
           description: All the known first names of the person
-          example: john
         middle_name:
           type: string
           description: All the known middle names of the person
-          example: junior senior
         last_name:
           type: string
           description: All the known last names of the person
-          example: smith
         alias:
-          description: Alias of the person
-          example: 'don john, godfather'
           type: string
+          description: Alias of the person
         gender:
           type: string
           description: 'Gender of the person '
-          example: male
         dob:
           type: string
           description: The date of birth of the person known
-          example: 01.01.1950
         city:
           type: string
           description: The city in which the person was known to reside
-          example: Berlin
         nationality:
           type: string
-          example: DE
           description: The 2 letter ISO code of the nationality of the person known
       required:
         - full_name
@@ -1056,6 +1048,7 @@ components:
           description: All the sanction list names through which the search has to be made
           items:
             type: string
+            example: sdn
         must_match_attributes:
           type: array
           description: 'Identifiers of the entry fields against which the output field has to be a 100% match'
@@ -1073,6 +1066,9 @@ components:
           $ref: '#/components/schemas/searchConfig'
         person:
           $ref: '#/components/schemas/personSearchAttributes'
+      required:
+        - search_config
+        - person
     organizationSearchAttributes:
       title: organizationSearchAttributes
       type: object
@@ -1081,11 +1077,12 @@ components:
         name:
           type: string
           description: Name of the organization
-          example: cubemos gmbh
+          example: sniper Africa
         country_code:
           type: string
           description: 2 digit ISO country code of the place where the organization is located
-          example: DE
+      required:
+        - name
     organizationSearch:
       title: organizationSearch
       type: object
@@ -1095,6 +1092,9 @@ components:
           $ref: '#/components/schemas/searchConfig'
         organization:
           $ref: '#/components/schemas/organizationSearchAttributes'
+      required:
+        - search_config
+        - organization
     organization:
       title: organization
       type: object
@@ -1201,15 +1201,19 @@ components:
         country_code:
           type: string
           description: '2 digit ISO country code '
+          example: DE
         zip_code:
           type: string
           description: 'Zip code of the area '
         city:
           type: string
           description: Name of the city
+          example: munich
         street:
           type: string
           description: Name of the street
+      required:
+        - country_code
     sdn:
       title: sdn
       type: object
