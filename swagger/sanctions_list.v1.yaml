@@ -31,28 +31,48 @@ paths:
                 example:
                   value:
                     persons:
-                      - person:
-                          first_name: Serhii
-                          middle_name: ''
-                          last_name: Kliuiev
-                          dob: 19.08.1969
-                          gender: male
-                          alias:
-                            - Serhiy Klyuyev
-                          nationalities:
-                            - UA
-                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
-                      - person:
-                          first_name: Serhii
-                          middle_name: ''
-                          last_name: Kliuiev
-                          dob: 19.08.1969
-                          gender: male
-                          alias:
-                            - Serhiy Klyuyev
-                          nationalities:
-                            - UA
-                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
+                      - city: 'Guadalajara, Jalisco 44690'
+                        nationality: Mexico
+                        dob: 20 Nov 1960
+                        aliases:
+                          - 'MARTINEZ PEREZ, Juan Carlos'
+                          - 'GONZALEZ ZAPATA, Antonio'
+                          - 'OCHOA VASCO, Carlos Mario'
+                          - 'VEGA TOBON, Carlos Mario'
+                        gender: ''
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10214'
+                        full_name: 'OCHOA VASCO, Fabio Enrique'
+                        first_name: ''
+                        middle_name: ''
+                        last_name: ''
+                      - nationality: Colombia
+                        city: 'Medellin, Antioquia'
+                        dob: 20 Nov 1960
+                        gender: ''
+                        aliases:
+                          - 'MARTINEZ PEREZ, Juan Carlos'
+                          - 'VEGA TOBON, Carlos Mario'
+                          - 'GONZALEZ ZAPATA, Antonio'
+                          - 'OCHOA VASCO, Carlos Mario'
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10214'
+                        full_name: 'OCHOA VASCO, Fabio Enrique'
+                        first_name: ''
+                        middle_name: ''
+                        last_name: ''
+                      - aliases:
+                          - 'VEGA TOBON, Carlos Mario'
+                          - 'MARTINEZ PEREZ, Juan Carlos'
+                          - 'OCHOA VASCO, Carlos Mario'
+                          - 'GONZALEZ ZAPATA, Antonio'
+                        nationality: Mexico
+                        dob: 20 Nov 1960
+                        city: 'Zapopan, Jalisco 44020'
+                        gender: ''
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10214'
+                        full_name: 'OCHOA VASCO, Fabio Enrique'
+                        first_name: ''
+                        middle_name: ''
+                        last_name: ''
         '400':
           description: Bad Request
         '401':
@@ -68,23 +88,23 @@ paths:
             examples:
               Example:
                 value:
-                  person_search:
-                    search_config:
-                      sanction_lists:
-                        - cfsp
-                        - sdn
-                      must_match_attributes:
-                        - last_name
-                        - nationality
-                    person:
-                      first_name: Serhii
-                      middle_name: ''
-                      last_name: Kliuiev
-                      full_name: Serhii Kliuiev
-                      alias: Serhiy Klyuyev
-                      gender: male
-                      nationality: UA
-                      dob: 19.08.1969
+                  search_config:
+                    watch_lists:
+                      - cfsp
+                      - SDN
+                    must_match_attributes:
+                      - full_name
+                  person:
+                    full_name: 'OCHOA VASCO, Fabio Enrique'
+                    first_name: ''
+                    middle_name: ''
+                    last_name: ''
+                    aliases:
+                      - Mario
+                    gender: ''
+                    dob: ''
+                    city: ''
+                    nationality: ''
           application/xml:
             schema:
               type: object
@@ -129,24 +149,50 @@ paths:
                 example:
                   value:
                     organizations:
-                      - organization:
-                          address:
-                            country: DE
-                            zip_code: 12345
-                            city: Berlin
-                            street: Hermann Straße 1
-                          headquarter_country: DE
-                          aliases: []
-                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
-                      - organization:
-                          address:
-                            country: DE
-                            zip_code: 87654
-                            city: Munich
-                            street: Hermann Straße 1
-                          headquarter_country: DE
-                          aliases: []
-                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
+                      - aliases:
+                          - SNIPER OUTDOORS CC
+                          - TRUE MOTIVES 1236 CC
+                          - SNIPER OUTDOOR CC
+                        name: SNIPER AFRICA
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10133'
+                        address:
+                          country_code: South Africa
+                          zip_code: Carletonville 2500
+                          city: Carletonville 2500
+                          street: 16 Gold Street
+                      - aliases:
+                          - SNIPER OUTDOOR CC
+                          - SNIPER OUTDOORS CC
+                          - TRUE MOTIVES 1236 CC
+                        name: SNIPER AFRICA
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10133'
+                        address:
+                          country_code: South Africa
+                          zip_code: Carletonville 2500
+                          city: Carletonville 2500
+                          street: 16 Gold Street
+                      - aliases:
+                          - SNIPER OUTDOORS CC
+                          - SNIPER OUTDOOR CC
+                          - TRUE MOTIVES 1236 CC
+                        name: SNIPER AFRICA
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10133'
+                        address:
+                          country_code: South Africa
+                          zip_code: Carletonville 2500
+                          city: Carletonville 2500
+                          street: 16 Gold Street
+                      - aliases:
+                          - SNIPER OUTDOOR CC
+                          - SNIPER OUTDOORS CC
+                          - TRUE MOTIVES 1236 CC
+                        name: SNIPER AFRICA
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10133'
+                        address:
+                          country_code: South Africa
+                          zip_code: Carletonville 2500
+                          city: Carletonville 2500
+                          street: 16 Gold Street
           headers: {}
         '400':
           description: Bad Request
@@ -163,14 +209,15 @@ paths:
             examples:
               Example:
                 value:
-                  organization_search:
-                    search_config:
-                      sanction_lists:
-                        - cfsp
-                        - sdn
-                    organization:
-                      name: cubemos gmbh
-                      country_code: DE
+                  search_config:
+                    watch_lists:
+                      - cfsp
+                      - sdn
+                    must_match_attributes:
+                      - name
+                  organization:
+                    name: sniper Africa
+                    country_code: ''
         description: "### Payload request schema for single search\nIn order to perform a search on an organization through the sanction lists, the name and the desired sanction lists are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
       description: "### Search an organization through sanction lists\nThis API call allows you to perform a search through the desired sanction lists for an organization. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
       tags:
@@ -193,47 +240,31 @@ paths:
                 example:
                   value:
                     persons:
-                      - person:
-                          first_name: Serhii
-                          middle_name: ''
-                          last_name: Kliuiev
-                          dob: 19.08.1969
-                          gender: male
-                          alias:
-                            - Serhiy Klyuyev
-                          nationalities:
-                            - UA
-                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
-                      - person:
-                          first_name: Serhii
-                          middle_name: ''
-                          last_name: Kliuiev
-                          dob: 19.08.1969
-                          gender: male
-                          alias:
-                            - Serhiy Klyuyev
-                          nationalities:
-                            - UA
-                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
-                    organizations:
-                      - organization:
-                          address:
-                            country: DE
-                            zip_code: 12345
-                            city: Berlin
-                            street: Hermann Straße 1
-                          headquarter_country: DE
-                          aliases: []
-                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
-                      - organization:
-                          address:
-                            country: DE
-                            zip_code: 87654
-                            city: Munich
-                            street: Hermann Straße 1
-                          headquarter_country: DE
-                          aliases: []
-                          list_entry_url: 'https://sanction-api.cubemos.com/list/cfsp?id=12345'
+                      - gender: ''
+                        dob: 01 Jul 1971
+                        aliases:
+                          - 'HAMAWANDI, Kawa'
+                          - 'OMAR ACHMED, Kaua'
+                        full_name: 'AHMAD, Farhad Kanabi'
+                        first_name: ''
+                        middle_name: ''
+                        last_name: ''
+                        nationality: Germany
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/9588'
+                      - gender: ''
+                        dob: 21 Jan 1963
+                        aliases:
+                          - 'AYADI CHAFIK, Ben Muhammad'
+                          - 'AIADY, Ben Muhammad'
+                          - 'AYADI SHAFIQ, Ben Muhammad'
+                          - 'AIADI, Ben Muhammad'
+                        full_name: 'BIN MUHAMMAD, Ayadi Chafiq'
+                        first_name: ''
+                        middle_name: ''
+                        last_name: ''
+                        nationality: Germany
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/6946'
+                    organizations: []
         '400':
           description: Bad Request
         '401':
@@ -248,14 +279,17 @@ paths:
             examples:
               Example:
                 value:
-                  sanction_lists:
-                    - EU-financial sanction list
-                    - UN-sanction list
+                  search_config:
+                    watch_lists:
+                      - cfsp
+                      - sdn
+                    must_match_attributes:
+                      - ''
                   address:
-                    country: DE
-                    zip_code: 12345
-                    city: Berlin
-                    street: Hermann Straße 1
+                    country_code: germany
+                    zip_code: ''
+                    city: munich
+                    street: ''
         description: "### Payload request scheme for single search\nIn order to search for a location bassed on the address, the sanction lists as well as the address details are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
       description: "### Search on an entity through the desired sanction lists in at an address\nThis API call allows you to perform a search through the desired sanction lists for all the sanctioned entities at the desired location. "
       tags:
@@ -278,124 +312,596 @@ paths:
               examples:
                 example:
                   value:
-                    fileGenerationDate: 29/04/2020
-                    Entity_LogicalId: 43
-                    Entity_EU_ReferenceNumber: EU.85.7
-                    Entity_UnitedNationId: ''
-                    Entity_DesignationDate: ''
-                    Entity_DesignationDetails: ''
-                    Entity_Remark: (UNSC RESOLUTION 1483 BASIS)
-                    Entity_SubjectType: P
-                    Entity_SubjectType_ClassificationCode: person
-                    Entity_Regulation_Type: regulation
-                    Entity_Regulation_OrganisationType: commission
-                    Entity_Regulation_PublicationDate: '2003-07-08'
-                    Entity_Regulation_EntryIntoForceDate: '2003-07-07'
-                    Entity_Regulation_NumberTitle: 1210/2003 (OJ L169)
-                    Entity_Regulation_Programme: IRQ
-                    Entity_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
-                    NameAlias_LastName: ''
-                    NameAlias_FirstName: ''
-                    NameAlias_MiddleName: ''
-                    NameAlias_WholeName: Aziz Salih al-Numan
-                    NameAlias_NameLanguage: ''
-                    NameAlias_Gender: ''
-                    NameAlias_Title: ''
-                    NameAlias_Function: Former Governor of Karbala and An Najaf;
-                    NameAlias_LogicalId: 64
-                    NameAlias_RegulationLanguage: EN
-                    NameAlias_Remark: ''
-                    NameAlias_Regulation_Type: regulation
-                    NameAlias_Regulation_OrganisationType: commission
-                    NameAlias_Regulation_PublicationDate: '2003-07-08'
-                    NameAlias_Regulation_EntryIntoForceDate: '2003-07-07'
-                    NameAlias_Regulation_NumberTitle: 1210/2003 (OJ L169)
-                    NameAlias_Regulation_Programme: IRQ
-                    NameAlias_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
-                    Address_City: ''
-                    Address_Street: ''
-                    Address_PoBox: ''
-                    Address_ZipCode: ''
-                    Address_Region: ''
-                    Address_Place: ''
-                    Address_AsAtListingTime: ''
-                    Address_ContactInfo: ''
-                    Address_CountryIso2Code: ''
-                    Address_CountryDescription: ''
-                    Address_LogicalId: ''
-                    Address_RegulationLanguage: ''
-                    Address_Remark: ''
-                    Address_Regulation_Type: ''
-                    Address_Regulation_OrganisationType: ''
-                    Address_Regulation_PublicationDate: ''
-                    Address_Regulation_EntryIntoForceDate: ''
-                    Address_Regulation_NumberTitle: ''
-                    Address_Regulation_Programme: ''
-                    Address_Regulation_PublicationUrl: ''
-                    BirthDate_BirthDate: ''
-                    BirthDate_Day: ''
-                    BirthDate_Month: ''
-                    BirthDate_Year: ''
-                    BirthDate_YearRangeFrom: ''
-                    BirthDate_YearRangeTo: ''
-                    BirthDate_Circa: ''
-                    BirthDate_CalendarType: ''
-                    BirthDate_ZipCode: ''
-                    BirthDate_Region: ''
-                    BirthDate_Place: ''
-                    BirthDate_City: ''
-                    BirthDate_CountryIso2Code: ''
-                    BirthDate_CountryDescription: ''
-                    BirthDate_LogicalId: ''
-                    BirthDate_RegulationLanguage: ''
-                    BirthDate_Remark: ''
-                    BirthDate_Regulation_Type: ''
-                    BirthDate_Regulation_OrganisationType: ''
-                    BirthDate_Regulation_PublicationDate: ''
-                    BirthDate_Regulation_EntryIntoForceDate: ''
-                    BirthDate_Regulation_NumberTitle: ''
-                    BirthDate_Regulation_Programme: ''
-                    BirthDate_Regulation_PublicationUrl: ''
-                    Identification_Number: ''
-                    Identification_Diplomatic: ''
-                    Identification_KnownExpired: ''
-                    Identification_KnownFalse: ''
-                    Identification_ReportedLost: ''
-                    Identification_RevokedByIssuer: ''
-                    Identification_IssuedBy: ''
-                    Identification_IssuedDate: ''
-                    Identification_ValidFrom: ''
-                    Identification_ValidTo: ''
-                    Identification_LatinNumber: ''
-                    Identification_NameOnDocument: ''
-                    Identification_TypeCode: ''
-                    Identification_TypeDescription: ''
-                    Identification_Region: ''
-                    Identification_CountryIso2Code: ''
-                    Identification_CountryDescription: ''
-                    Identification_LogicalId: ''
-                    Identification_RegulationLanguage: ''
-                    Identification_Remark: ''
-                    Identification_Regulation_Type: ''
-                    Identification_Regulation_OrganisationType: ''
-                    Identification_Regulation_PublicationDate: ''
-                    Identification_Regulation_EntryIntoForceDate: ''
-                    Identification_Regulation_NumberTitle: ''
-                    Identification_Regulation_Programme: ''
-                    Identification_Regulation_PublicationUrl: ''
-                    Citizenship_Region: ''
-                    Citizenship_CountryIso2Code: ''
-                    Citizenship_CountryDescription: ''
-                    Citizenship_LogicalId: ''
-                    Citizenship_RegulationLanguage: ''
-                    Citizenship_Remark: ''
-                    Citizenship_Regulation_Type: ''
-                    Citizenship_Regulation_OrganisationType: ''
-                    Citizenship_Regulation_PublicationDate: ''
-                    Citizenship_Regulation_EntryIntoForceDate: ''
-                    Citizenship_Regulation_NumberTitle: ''
-                    Citizenship_Regulation_Programme: ''
-                    Citizenship_Regulation_PublicationUrl: ''
+                    - fileGenerationDate: 18/05/2020
+                      entity_logicalid: '13'
+                      Entity_EU_ReferenceNumber: EU.27.28
+                      Entity_UnitedNationId: ''
+                      Entity_DesignationDate: ''
+                      Entity_DesignationDetails: ''
+                      Entity_Remark: (UNSC RESOLUTION 1483)
+                      Entity_SubjectType: P
+                      Entity_SubjectType_ClassificationCode: person
+                      Entity_Regulation_Type: regulation
+                      Entity_Regulation_OrganisationType: commission
+                      Entity_Regulation_PublicationDate: '2003-07-08'
+                      Entity_Regulation_EntryIntoForceDate: '2003-07-07'
+                      Entity_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      Entity_Regulation_Programme: IRQ
+                      Entity_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                      NameAlias_LastName: Hussein Al-Tikriti
+                      NameAlias_FirstName: Saddam
+                      NameAlias_MiddleName: ''
+                      NameAlias_WholeName: Saddam Hussein Al-Tikriti
+                      NameAlias_NameLanguage: ''
+                      NameAlias_Gender: M
+                      NameAlias_Title: ''
+                      NameAlias_Function: ''
+                      NameAlias_LogicalId: '17.0'
+                      NameAlias_RegulationLanguage: EN
+                      NameAlias_Remark: ''
+                      NameAlias_Regulation_Type: regulation
+                      NameAlias_Regulation_OrganisationType: commission
+                      NameAlias_Regulation_PublicationDate: '2003-07-08'
+                      NameAlias_Regulation_EntryIntoForceDate: '2003-07-07'
+                      NameAlias_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      NameAlias_Regulation_Programme: IRQ
+                      NameAlias_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                      address_city: ''
+                      Address_Street: ''
+                      Address_PoBox: ''
+                      Address_ZipCode: ''
+                      Address_Region: ''
+                      Address_Place: ''
+                      Address_AsAtListingTime: ''
+                      Address_ContactInfo: ''
+                      Address_CountryIso2Code: ''
+                      Address_CountryDescription: ''
+                      Address_LogicalId: ''
+                      Address_RegulationLanguage: ''
+                      Address_Remark: ''
+                      Address_Regulation_Type: ''
+                      Address_Regulation_OrganisationType: ''
+                      Address_Regulation_PublicationDate: ''
+                      Address_Regulation_EntryIntoForceDate: ''
+                      Address_Regulation_NumberTitle: ''
+                      Address_Regulation_Programme: ''
+                      Address_Regulation_PublicationUrl: ''
+                      BirthDate_BirthDate: ''
+                      BirthDate_Day: ''
+                      BirthDate_Month: ''
+                      BirthDate_Year: ''
+                      BirthDate_YearRangeFrom: ''
+                      BirthDate_YearRangeTo: ''
+                      BirthDate_Circa: ''
+                      BirthDate_CalendarType: ''
+                      BirthDate_ZipCode: ''
+                      BirthDate_Region: ''
+                      BirthDate_Place: ''
+                      BirthDate_City: ''
+                      BirthDate_CountryIso2Code: ''
+                      BirthDate_CountryDescription: ''
+                      BirthDate_LogicalId: ''
+                      BirthDate_RegulationLanguage: ''
+                      BirthDate_Remark: ''
+                      BirthDate_Regulation_Type: ''
+                      BirthDate_Regulation_OrganisationType: ''
+                      BirthDate_Regulation_PublicationDate: ''
+                      BirthDate_Regulation_EntryIntoForceDate: ''
+                      BirthDate_Regulation_NumberTitle: ''
+                      BirthDate_Regulation_Programme: ''
+                      BirthDate_Regulation_PublicationUrl: ''
+                      Identification_Number: ''
+                      Identification_Diplomatic: ''
+                      Identification_KnownExpired: ''
+                      Identification_KnownFalse: ''
+                      Identification_ReportedLost: ''
+                      Identification_RevokedByIssuer: ''
+                      Identification_IssuedBy: ''
+                      Identification_IssuedDate: ''
+                      Identification_ValidFrom: ''
+                      Identification_ValidTo: ''
+                      Identification_LatinNumber: ''
+                      Identification_NameOnDocument: ''
+                      Identification_TypeCode: ''
+                      Identification_TypeDescription: ''
+                      Identification_Region: ''
+                      Identification_CountryIso2Code: ''
+                      Identification_CountryDescription: ''
+                      Identification_LogicalId: ''
+                      Identification_RegulationLanguage: ''
+                      Identification_Remark: ''
+                      Identification_Regulation_Type: ''
+                      Identification_Regulation_OrganisationType: ''
+                      Identification_Regulation_PublicationDate: ''
+                      Identification_Regulation_EntryIntoForceDate: ''
+                      Identification_Regulation_NumberTitle: ''
+                      Identification_Regulation_Programme: ''
+                      Identification_Regulation_PublicationUrl: ''
+                      Citizenship_Region: ''
+                      Citizenship_CountryIso2Code: ''
+                      Citizenship_CountryDescription: ''
+                      Citizenship_LogicalId: ''
+                      Citizenship_RegulationLanguage: ''
+                      Citizenship_Remark: ''
+                      Citizenship_Regulation_Type: ''
+                      Citizenship_Regulation_OrganisationType: ''
+                      Citizenship_Regulation_PublicationDate: ''
+                      Citizenship_Regulation_EntryIntoForceDate: ''
+                      Citizenship_Regulation_NumberTitle: ''
+                      Citizenship_Regulation_Programme: ''
+                      Citizenship_Regulation_PublicationUrl: ''
+                    - fileGenerationDate: 18/05/2020
+                      entity_logicalid: '13'
+                      Entity_EU_ReferenceNumber: EU.27.28
+                      Entity_UnitedNationId: ''
+                      Entity_DesignationDate: ''
+                      Entity_DesignationDetails: ''
+                      Entity_Remark: (UNSC RESOLUTION 1483)
+                      Entity_SubjectType: P
+                      Entity_SubjectType_ClassificationCode: person
+                      Entity_Regulation_Type: regulation
+                      Entity_Regulation_OrganisationType: commission
+                      Entity_Regulation_PublicationDate: '2003-07-08'
+                      Entity_Regulation_EntryIntoForceDate: '2003-07-07'
+                      Entity_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      Entity_Regulation_Programme: IRQ
+                      Entity_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                      NameAlias_LastName: ''
+                      NameAlias_FirstName: ''
+                      NameAlias_MiddleName: ''
+                      NameAlias_WholeName: Abu Ali
+                      NameAlias_NameLanguage: ''
+                      NameAlias_Gender: ''
+                      NameAlias_Title: ''
+                      NameAlias_Function: ''
+                      NameAlias_LogicalId: '19.0'
+                      NameAlias_RegulationLanguage: EN
+                      NameAlias_Remark: ''
+                      NameAlias_Regulation_Type: regulation
+                      NameAlias_Regulation_OrganisationType: commission
+                      NameAlias_Regulation_PublicationDate: '2003-07-08'
+                      NameAlias_Regulation_EntryIntoForceDate: '2003-07-07'
+                      NameAlias_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      NameAlias_Regulation_Programme: IRQ
+                      NameAlias_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                      address_city: ''
+                      Address_Street: ''
+                      Address_PoBox: ''
+                      Address_ZipCode: ''
+                      Address_Region: ''
+                      Address_Place: ''
+                      Address_AsAtListingTime: ''
+                      Address_ContactInfo: ''
+                      Address_CountryIso2Code: ''
+                      Address_CountryDescription: ''
+                      Address_LogicalId: ''
+                      Address_RegulationLanguage: ''
+                      Address_Remark: ''
+                      Address_Regulation_Type: ''
+                      Address_Regulation_OrganisationType: ''
+                      Address_Regulation_PublicationDate: ''
+                      Address_Regulation_EntryIntoForceDate: ''
+                      Address_Regulation_NumberTitle: ''
+                      Address_Regulation_Programme: ''
+                      Address_Regulation_PublicationUrl: ''
+                      BirthDate_BirthDate: ''
+                      BirthDate_Day: ''
+                      BirthDate_Month: ''
+                      BirthDate_Year: ''
+                      BirthDate_YearRangeFrom: ''
+                      BirthDate_YearRangeTo: ''
+                      BirthDate_Circa: ''
+                      BirthDate_CalendarType: ''
+                      BirthDate_ZipCode: ''
+                      BirthDate_Region: ''
+                      BirthDate_Place: ''
+                      BirthDate_City: ''
+                      BirthDate_CountryIso2Code: ''
+                      BirthDate_CountryDescription: ''
+                      BirthDate_LogicalId: ''
+                      BirthDate_RegulationLanguage: ''
+                      BirthDate_Remark: ''
+                      BirthDate_Regulation_Type: ''
+                      BirthDate_Regulation_OrganisationType: ''
+                      BirthDate_Regulation_PublicationDate: ''
+                      BirthDate_Regulation_EntryIntoForceDate: ''
+                      BirthDate_Regulation_NumberTitle: ''
+                      BirthDate_Regulation_Programme: ''
+                      BirthDate_Regulation_PublicationUrl: ''
+                      Identification_Number: ''
+                      Identification_Diplomatic: ''
+                      Identification_KnownExpired: ''
+                      Identification_KnownFalse: ''
+                      Identification_ReportedLost: ''
+                      Identification_RevokedByIssuer: ''
+                      Identification_IssuedBy: ''
+                      Identification_IssuedDate: ''
+                      Identification_ValidFrom: ''
+                      Identification_ValidTo: ''
+                      Identification_LatinNumber: ''
+                      Identification_NameOnDocument: ''
+                      Identification_TypeCode: ''
+                      Identification_TypeDescription: ''
+                      Identification_Region: ''
+                      Identification_CountryIso2Code: ''
+                      Identification_CountryDescription: ''
+                      Identification_LogicalId: ''
+                      Identification_RegulationLanguage: ''
+                      Identification_Remark: ''
+                      Identification_Regulation_Type: ''
+                      Identification_Regulation_OrganisationType: ''
+                      Identification_Regulation_PublicationDate: ''
+                      Identification_Regulation_EntryIntoForceDate: ''
+                      Identification_Regulation_NumberTitle: ''
+                      Identification_Regulation_Programme: ''
+                      Identification_Regulation_PublicationUrl: ''
+                      Citizenship_Region: ''
+                      Citizenship_CountryIso2Code: ''
+                      Citizenship_CountryDescription: ''
+                      Citizenship_LogicalId: ''
+                      Citizenship_RegulationLanguage: ''
+                      Citizenship_Remark: ''
+                      Citizenship_Regulation_Type: ''
+                      Citizenship_Regulation_OrganisationType: ''
+                      Citizenship_Regulation_PublicationDate: ''
+                      Citizenship_Regulation_EntryIntoForceDate: ''
+                      Citizenship_Regulation_NumberTitle: ''
+                      Citizenship_Regulation_Programme: ''
+                      Citizenship_Regulation_PublicationUrl: ''
+                    - fileGenerationDate: 18/05/2020
+                      entity_logicalid: '13'
+                      Entity_EU_ReferenceNumber: EU.27.28
+                      Entity_UnitedNationId: ''
+                      Entity_DesignationDate: ''
+                      Entity_DesignationDetails: ''
+                      Entity_Remark: (UNSC RESOLUTION 1483)
+                      Entity_SubjectType: P
+                      Entity_SubjectType_ClassificationCode: person
+                      Entity_Regulation_Type: regulation
+                      Entity_Regulation_OrganisationType: commission
+                      Entity_Regulation_PublicationDate: '2003-07-08'
+                      Entity_Regulation_EntryIntoForceDate: '2003-07-07'
+                      Entity_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      Entity_Regulation_Programme: IRQ
+                      Entity_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                      NameAlias_LastName: ''
+                      NameAlias_FirstName: ''
+                      NameAlias_MiddleName: ''
+                      NameAlias_WholeName: Abou Ali
+                      NameAlias_NameLanguage: FR
+                      NameAlias_Gender: ''
+                      NameAlias_Title: ''
+                      NameAlias_Function: ''
+                      NameAlias_LogicalId: '380.0'
+                      NameAlias_RegulationLanguage: EN
+                      NameAlias_Remark: ''
+                      NameAlias_Regulation_Type: regulation
+                      NameAlias_Regulation_OrganisationType: commission
+                      NameAlias_Regulation_PublicationDate: '2003-07-08'
+                      NameAlias_Regulation_EntryIntoForceDate: '2003-07-07'
+                      NameAlias_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      NameAlias_Regulation_Programme: IRQ
+                      NameAlias_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                      address_city: ''
+                      Address_Street: ''
+                      Address_PoBox: ''
+                      Address_ZipCode: ''
+                      Address_Region: ''
+                      Address_Place: ''
+                      Address_AsAtListingTime: ''
+                      Address_ContactInfo: ''
+                      Address_CountryIso2Code: ''
+                      Address_CountryDescription: ''
+                      Address_LogicalId: ''
+                      Address_RegulationLanguage: ''
+                      Address_Remark: ''
+                      Address_Regulation_Type: ''
+                      Address_Regulation_OrganisationType: ''
+                      Address_Regulation_PublicationDate: ''
+                      Address_Regulation_EntryIntoForceDate: ''
+                      Address_Regulation_NumberTitle: ''
+                      Address_Regulation_Programme: ''
+                      Address_Regulation_PublicationUrl: ''
+                      BirthDate_BirthDate: ''
+                      BirthDate_Day: ''
+                      BirthDate_Month: ''
+                      BirthDate_Year: ''
+                      BirthDate_YearRangeFrom: ''
+                      BirthDate_YearRangeTo: ''
+                      BirthDate_Circa: ''
+                      BirthDate_CalendarType: ''
+                      BirthDate_ZipCode: ''
+                      BirthDate_Region: ''
+                      BirthDate_Place: ''
+                      BirthDate_City: ''
+                      BirthDate_CountryIso2Code: ''
+                      BirthDate_CountryDescription: ''
+                      BirthDate_LogicalId: ''
+                      BirthDate_RegulationLanguage: ''
+                      BirthDate_Remark: ''
+                      BirthDate_Regulation_Type: ''
+                      BirthDate_Regulation_OrganisationType: ''
+                      BirthDate_Regulation_PublicationDate: ''
+                      BirthDate_Regulation_EntryIntoForceDate: ''
+                      BirthDate_Regulation_NumberTitle: ''
+                      BirthDate_Regulation_Programme: ''
+                      BirthDate_Regulation_PublicationUrl: ''
+                      Identification_Number: ''
+                      Identification_Diplomatic: ''
+                      Identification_KnownExpired: ''
+                      Identification_KnownFalse: ''
+                      Identification_ReportedLost: ''
+                      Identification_RevokedByIssuer: ''
+                      Identification_IssuedBy: ''
+                      Identification_IssuedDate: ''
+                      Identification_ValidFrom: ''
+                      Identification_ValidTo: ''
+                      Identification_LatinNumber: ''
+                      Identification_NameOnDocument: ''
+                      Identification_TypeCode: ''
+                      Identification_TypeDescription: ''
+                      Identification_Region: ''
+                      Identification_CountryIso2Code: ''
+                      Identification_CountryDescription: ''
+                      Identification_LogicalId: ''
+                      Identification_RegulationLanguage: ''
+                      Identification_Remark: ''
+                      Identification_Regulation_Type: ''
+                      Identification_Regulation_OrganisationType: ''
+                      Identification_Regulation_PublicationDate: ''
+                      Identification_Regulation_EntryIntoForceDate: ''
+                      Identification_Regulation_NumberTitle: ''
+                      Identification_Regulation_Programme: ''
+                      Identification_Regulation_PublicationUrl: ''
+                      Citizenship_Region: ''
+                      Citizenship_CountryIso2Code: ''
+                      Citizenship_CountryDescription: ''
+                      Citizenship_LogicalId: ''
+                      Citizenship_RegulationLanguage: ''
+                      Citizenship_Remark: ''
+                      Citizenship_Regulation_Type: ''
+                      Citizenship_Regulation_OrganisationType: ''
+                      Citizenship_Regulation_PublicationDate: ''
+                      Citizenship_Regulation_EntryIntoForceDate: ''
+                      Citizenship_Regulation_NumberTitle: ''
+                      Citizenship_Regulation_Programme: ''
+                      Citizenship_Regulation_PublicationUrl: ''
+                    - fileGenerationDate: 18/05/2020
+                      entity_logicalid: '13'
+                      Entity_EU_ReferenceNumber: EU.27.28
+                      Entity_UnitedNationId: ''
+                      Entity_DesignationDate: ''
+                      Entity_DesignationDetails: ''
+                      Entity_Remark: (UNSC RESOLUTION 1483)
+                      Entity_SubjectType: P
+                      Entity_SubjectType_ClassificationCode: person
+                      Entity_Regulation_Type: regulation
+                      Entity_Regulation_OrganisationType: commission
+                      Entity_Regulation_PublicationDate: '2003-07-08'
+                      Entity_Regulation_EntryIntoForceDate: '2003-07-07'
+                      Entity_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      Entity_Regulation_Programme: IRQ
+                      Entity_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                      NameAlias_LastName: ''
+                      NameAlias_FirstName: ''
+                      NameAlias_MiddleName: ''
+                      NameAlias_WholeName: ''
+                      NameAlias_NameLanguage: ''
+                      NameAlias_Gender: ''
+                      NameAlias_Title: ''
+                      NameAlias_Function: ''
+                      NameAlias_LogicalId: ''
+                      NameAlias_RegulationLanguage: ''
+                      NameAlias_Remark: ''
+                      NameAlias_Regulation_Type: ''
+                      NameAlias_Regulation_OrganisationType: ''
+                      NameAlias_Regulation_PublicationDate: ''
+                      NameAlias_Regulation_EntryIntoForceDate: ''
+                      NameAlias_Regulation_NumberTitle: ''
+                      NameAlias_Regulation_Programme: ''
+                      NameAlias_Regulation_PublicationUrl: ''
+                      address_city: ''
+                      Address_Street: ''
+                      Address_PoBox: ''
+                      Address_ZipCode: ''
+                      Address_Region: ''
+                      Address_Place: ''
+                      Address_AsAtListingTime: ''
+                      Address_ContactInfo: ''
+                      Address_CountryIso2Code: ''
+                      Address_CountryDescription: ''
+                      Address_LogicalId: ''
+                      Address_RegulationLanguage: ''
+                      Address_Remark: ''
+                      Address_Regulation_Type: ''
+                      Address_Regulation_OrganisationType: ''
+                      Address_Regulation_PublicationDate: ''
+                      Address_Regulation_EntryIntoForceDate: ''
+                      Address_Regulation_NumberTitle: ''
+                      Address_Regulation_Programme: ''
+                      Address_Regulation_PublicationUrl: ''
+                      BirthDate_BirthDate: '1937-04-28'
+                      BirthDate_Day: '28.0'
+                      BirthDate_Month: '4.0'
+                      BirthDate_Year: '1937.0'
+                      BirthDate_YearRangeFrom: ''
+                      BirthDate_YearRangeTo: ''
+                      BirthDate_Circa: 'NO'
+                      BirthDate_CalendarType: GREGORIAN
+                      BirthDate_ZipCode: ''
+                      BirthDate_Region: ''
+                      BirthDate_Place: ''
+                      BirthDate_City: 'al-Awja, near Tikrit'
+                      BirthDate_CountryIso2Code: IQ
+                      BirthDate_CountryDescription: IRAQ
+                      BirthDate_LogicalId: '14.0'
+                      BirthDate_RegulationLanguage: EN
+                      BirthDate_Remark: ''
+                      BirthDate_Regulation_Type: regulation
+                      BirthDate_Regulation_OrganisationType: commission
+                      BirthDate_Regulation_PublicationDate: '2003-07-08'
+                      BirthDate_Regulation_EntryIntoForceDate: '2003-07-07'
+                      BirthDate_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      BirthDate_Regulation_Programme: IRQ
+                      BirthDate_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                      Identification_Number: ''
+                      Identification_Diplomatic: ''
+                      Identification_KnownExpired: ''
+                      Identification_KnownFalse: ''
+                      Identification_ReportedLost: ''
+                      Identification_RevokedByIssuer: ''
+                      Identification_IssuedBy: ''
+                      Identification_IssuedDate: ''
+                      Identification_ValidFrom: ''
+                      Identification_ValidTo: ''
+                      Identification_LatinNumber: ''
+                      Identification_NameOnDocument: ''
+                      Identification_TypeCode: ''
+                      Identification_TypeDescription: ''
+                      Identification_Region: ''
+                      Identification_CountryIso2Code: ''
+                      Identification_CountryDescription: ''
+                      Identification_LogicalId: ''
+                      Identification_RegulationLanguage: ''
+                      Identification_Remark: ''
+                      Identification_Regulation_Type: ''
+                      Identification_Regulation_OrganisationType: ''
+                      Identification_Regulation_PublicationDate: ''
+                      Identification_Regulation_EntryIntoForceDate: ''
+                      Identification_Regulation_NumberTitle: ''
+                      Identification_Regulation_Programme: ''
+                      Identification_Regulation_PublicationUrl: ''
+                      Citizenship_Region: ''
+                      Citizenship_CountryIso2Code: ''
+                      Citizenship_CountryDescription: ''
+                      Citizenship_LogicalId: ''
+                      Citizenship_RegulationLanguage: ''
+                      Citizenship_Remark: ''
+                      Citizenship_Regulation_Type: ''
+                      Citizenship_Regulation_OrganisationType: ''
+                      Citizenship_Regulation_PublicationDate: ''
+                      Citizenship_Regulation_EntryIntoForceDate: ''
+                      Citizenship_Regulation_NumberTitle: ''
+                      Citizenship_Regulation_Programme: ''
+                      Citizenship_Regulation_PublicationUrl: ''
+                    - fileGenerationDate: 18/05/2020
+                      entity_logicalid: '13'
+                      Entity_EU_ReferenceNumber: EU.27.28
+                      Entity_UnitedNationId: ''
+                      Entity_DesignationDate: ''
+                      Entity_DesignationDetails: ''
+                      Entity_Remark: (UNSC RESOLUTION 1483)
+                      Entity_SubjectType: P
+                      Entity_SubjectType_ClassificationCode: person
+                      Entity_Regulation_Type: regulation
+                      Entity_Regulation_OrganisationType: commission
+                      Entity_Regulation_PublicationDate: '2003-07-08'
+                      Entity_Regulation_EntryIntoForceDate: '2003-07-07'
+                      Entity_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      Entity_Regulation_Programme: IRQ
+                      Entity_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
+                      NameAlias_LastName: ''
+                      NameAlias_FirstName: ''
+                      NameAlias_MiddleName: ''
+                      NameAlias_WholeName: ''
+                      NameAlias_NameLanguage: ''
+                      NameAlias_Gender: ''
+                      NameAlias_Title: ''
+                      NameAlias_Function: ''
+                      NameAlias_LogicalId: ''
+                      NameAlias_RegulationLanguage: ''
+                      NameAlias_Remark: ''
+                      NameAlias_Regulation_Type: ''
+                      NameAlias_Regulation_OrganisationType: ''
+                      NameAlias_Regulation_PublicationDate: ''
+                      NameAlias_Regulation_EntryIntoForceDate: ''
+                      NameAlias_Regulation_NumberTitle: ''
+                      NameAlias_Regulation_Programme: ''
+                      NameAlias_Regulation_PublicationUrl: ''
+                      address_city: ''
+                      Address_Street: ''
+                      Address_PoBox: ''
+                      Address_ZipCode: ''
+                      Address_Region: ''
+                      Address_Place: ''
+                      Address_AsAtListingTime: ''
+                      Address_ContactInfo: ''
+                      Address_CountryIso2Code: ''
+                      Address_CountryDescription: ''
+                      Address_LogicalId: ''
+                      Address_RegulationLanguage: ''
+                      Address_Remark: ''
+                      Address_Regulation_Type: ''
+                      Address_Regulation_OrganisationType: ''
+                      Address_Regulation_PublicationDate: ''
+                      Address_Regulation_EntryIntoForceDate: ''
+                      Address_Regulation_NumberTitle: ''
+                      Address_Regulation_Programme: ''
+                      Address_Regulation_PublicationUrl: ''
+                      BirthDate_BirthDate: ''
+                      BirthDate_Day: ''
+                      BirthDate_Month: ''
+                      BirthDate_Year: ''
+                      BirthDate_YearRangeFrom: ''
+                      BirthDate_YearRangeTo: ''
+                      BirthDate_Circa: ''
+                      BirthDate_CalendarType: ''
+                      BirthDate_ZipCode: ''
+                      BirthDate_Region: ''
+                      BirthDate_Place: ''
+                      BirthDate_City: ''
+                      BirthDate_CountryIso2Code: ''
+                      BirthDate_CountryDescription: ''
+                      BirthDate_LogicalId: ''
+                      BirthDate_RegulationLanguage: ''
+                      BirthDate_Remark: ''
+                      BirthDate_Regulation_Type: ''
+                      BirthDate_Regulation_OrganisationType: ''
+                      BirthDate_Regulation_PublicationDate: ''
+                      BirthDate_Regulation_EntryIntoForceDate: ''
+                      BirthDate_Regulation_NumberTitle: ''
+                      BirthDate_Regulation_Programme: ''
+                      BirthDate_Regulation_PublicationUrl: ''
+                      Identification_Number: ''
+                      Identification_Diplomatic: ''
+                      Identification_KnownExpired: ''
+                      Identification_KnownFalse: ''
+                      Identification_ReportedLost: ''
+                      Identification_RevokedByIssuer: ''
+                      Identification_IssuedBy: ''
+                      Identification_IssuedDate: ''
+                      Identification_ValidFrom: ''
+                      Identification_ValidTo: ''
+                      Identification_LatinNumber: ''
+                      Identification_NameOnDocument: ''
+                      Identification_TypeCode: ''
+                      Identification_TypeDescription: ''
+                      Identification_Region: ''
+                      Identification_CountryIso2Code: ''
+                      Identification_CountryDescription: ''
+                      Identification_LogicalId: ''
+                      Identification_RegulationLanguage: ''
+                      Identification_Remark: ''
+                      Identification_Regulation_Type: ''
+                      Identification_Regulation_OrganisationType: ''
+                      Identification_Regulation_PublicationDate: ''
+                      Identification_Regulation_EntryIntoForceDate: ''
+                      Identification_Regulation_NumberTitle: ''
+                      Identification_Regulation_Programme: ''
+                      Identification_Regulation_PublicationUrl: ''
+                      Citizenship_Region: ''
+                      Citizenship_CountryIso2Code: IQ
+                      Citizenship_CountryDescription: ''
+                      Citizenship_LogicalId: '1.0'
+                      Citizenship_RegulationLanguage: EN
+                      Citizenship_Remark: ''
+                      Citizenship_Regulation_Type: regulation
+                      Citizenship_Regulation_OrganisationType: commission
+                      Citizenship_Regulation_PublicationDate: '2003-07-08'
+                      Citizenship_Regulation_EntryIntoForceDate: '2003-07-07'
+                      Citizenship_Regulation_NumberTitle: 1210/2003 (OJ L169)
+                      Citizenship_Regulation_Programme: IRQ
+                      Citizenship_Regulation_PublicationUrl: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2003:169:0006:0023:EN:PDF'
         '400':
           description: Bad Request
         '401':
