@@ -1021,9 +1021,11 @@ components:
         last_name:
           type: string
           description: All the known last names of the person
-        alias:
-          type: string
-          description: Alias of the person
+        aliases:
+          type: array
+          description: Aliases of the person
+          items:
+            type: string
         gender:
           type: string
           description: 'Gender of the person '
