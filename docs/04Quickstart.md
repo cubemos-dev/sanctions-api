@@ -20,7 +20,7 @@ You can trigger the api by clicking `send`on the the element below.
 ```json http
 {
   "method": "post",
-  "url": "https://akegb6b3l7.execute-api.eu-central-1.amazonaws.com/v1_staging/search/entities/person",
+  "url": "https://api.cubemos.com/sanction/search/entities/person",
   "headers": {
     "Content-Type": "application/json"
   },
@@ -56,7 +56,7 @@ If you investigate the response of the request above, you can see that indeed, t
 ```json http
 {
   "method": "get",
-  "url": "https://akegb6b3l7.execute-api.eu-central-1.amazonaws.com/v1_staging/list/12345"
+  "url": "https://api.cubemos.com/sanction/list/sdn/10133"
 }
 ```
 
