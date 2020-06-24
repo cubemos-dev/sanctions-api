@@ -1530,6 +1530,7 @@ components:
       name: x-api-key
       type: apiKey
       in: header
+      description: 'Trial API Key: sanction_api_cubemos'
 tags:
   - name: Sanction List Entry
     description: Full reference information in an official sanction list
