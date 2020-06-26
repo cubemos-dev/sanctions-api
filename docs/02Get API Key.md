@@ -1,5 +1,5 @@
 ---
-tags: [03. Get API Key]
+tags: [02. Get API Key]
 ---
 
 # How to get an API key

@@ -1,5 +1,5 @@
 ---
-tags: [02. Quickstart]
+tags: [01. Quickstart]
 ---
 
 # Quick start
