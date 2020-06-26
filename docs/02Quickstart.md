@@ -6,7 +6,7 @@ tags: [02. Quickstart]
 
 If you want to check out the possibilities of the cubemos sanction list api, you can test the individual endpoints of the api in the "Try it" sections. 
 
-For a start, let's try to check if a specific person (in this case Serhii Kliuiev) is under sanctions. 
+For a start, let's try to check if a specific person (in this case Fabio Enrique Ochoa Vasco) is under sanctions. 
 
 In order to do so we will
 
@@ -23,7 +23,7 @@ You can trigger the api by clicking `send`on the the element below.
   "url": "https://api.cubemos.com/sanction/search/entities/person",
   "headers": {
     "Content-Type": "application/json",
-    "x-api-key": "cubemos_sanction_api"
+    "x-api-key": "sanction_api_cubemos"
   },
   "body": {
     "search_config": {
@@ -61,7 +61,7 @@ If you investigate the response of the request above, you can see that indeed, t
   "method": "get",
   "url": "https://api.cubemos.com/sanction/list/sdn/10133",
    "headers": {
-    "x-api-key": "cubemos_sanction_api"
+    "x-api-key": "sanction_api_cubemos"
   }
 }
 ```
