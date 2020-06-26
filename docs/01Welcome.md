@@ -1,10 +1,10 @@
 ---
-tags: [01. Overview]
+tags: [01. Introduction]
 ---
 
-# Overview
+# cubemos Sanction List API
 
-The cubemos Sanctions List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe.
+The cubemos Sanction List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe.
 
 You can search for:
 1. Persons
@@ -14,7 +14,7 @@ You can search for:
 To facilitate the search, you can search with the exact names or for the fuzzy phonetical representation. 
 
 
-![](../assets/images/workflow.png)
+![](../assets/images/workflow.PNG)
 
 Now you can get started: [Try out the API](../docs/02Quickstart.md) in the test mode or get started with your implementation immediately. 
 
