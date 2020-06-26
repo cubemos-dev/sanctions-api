@@ -65,8 +65,12 @@ In order to do so we will
 
 ### Workflow of integration
 
-1. Get your personal API Key from cubemos. 
+1. Get your personal API Key from cubemos 
 2. Make a POST request to search for sanctions opposed to a [person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post), an [organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post) or an [address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post)
-3. Go to code generation tab and copy the code that you need to be integrated into your programming environment
+3. Go to code generation tab
+4. Select your development language of choice
+5. Copy the generated code and paste into your project
+
+![](../assets/images/codeIntegration.png)
 
 
