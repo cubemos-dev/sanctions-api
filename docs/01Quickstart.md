@@ -1,8 +1,8 @@
 ---
-tags: [01. Quickstart]
+tags: [01. API reference]
 ---
 
-# cubemos Sanction List API
+# API reference
 
 The cubemos Sanction List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe. Visit the [overview](swagger/sanctions_list.v1.yaml) page to get to know the possibilities in detail.
 
