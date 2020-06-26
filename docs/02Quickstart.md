@@ -13,9 +13,9 @@ In order to do so we will
 - make a request to the [/search/entities/person](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post) endpoint.
 - use the result to get first-hand information from an official sanction list.
 
-### Make a search request
+### Make a POST request
 
-You can trigger the api by clicking `send`on the the element below.
+1. You can trigger the api by clicking `send` on the the element below.
 
 ```json http
 {
@@ -51,22 +51,22 @@ You can trigger the api by clicking `send`on the the element below.
   }
 }
 ```
-
-### Investigate opposed sanctions
-
-If you investigate the response of the request above, you can see that indeed, there is a person under sanctions which matches the name. For further inspection you can now use the id of `list_entry_url` in the request below to see the details of the opposed sanctions.
+2. Inspect the response in case the was a person found. To retrieve the full original entry, you need to use the ID of the `list_entry_url` in a GET request. The example below uses the ID 10214 from the result of the above POST request and the SDN list as the original source.
 
 ```json http
 {
   "method": "get",
-  "url": "https://api.cubemos.com/sanction/list/sdn/10133",
+  "url": "https://api.cubemos.com/sanction/list/sdn/10214",
    "headers": {
     "x-api-key": "sanction_api_cubemos"
   }
 }
 ```
 
-### Workflow
+### Workflow of integration
 
 1. Get your personal API Key from cubemos. 
-2. Make a POST request to search for sanctions opposed to a [person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post), an [address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post) or an [organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post)
+2. Make a POST request to search for sanctions opposed to a [person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post), an [organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post) or an [address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post)
+3. Go to code generation tab and copy the code that you need to be integrated into your programming environment
+
+

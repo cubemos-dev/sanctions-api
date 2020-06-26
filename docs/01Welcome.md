@@ -14,7 +14,7 @@ You can search for:
 To facilitate the search, you can search with the exact names or for the fuzzy phonetical representation. 
 
 
-![](assets/images/workflow.PNG)
+![](../assets/images/workflow.png)
 
 Now you can get started: [Try out the API](../docs/02Quickstart.md) in the test mode or get started with your implementation immediately. 
 
