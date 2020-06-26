@@ -1,8 +1,8 @@
 ---
-tags: [04. Quickstart]
+tags: [02. Quickstart]
 ---
 
-# Quickstart
+# Quick start
 
 If you want to check out the possibilities of the cubemos sanction list api, you can test the individual endpoints of the api in the "Try it" sections. 
 
@@ -22,7 +22,8 @@ You can trigger the api by clicking `send`on the the element below.
   "method": "post",
   "url": "https://api.cubemos.com/sanction/search/entities/person",
   "headers": {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "x-api-key": "cubemos_sanction_api"
   },
   "body": {
     "search_config": {
@@ -58,7 +59,10 @@ If you investigate the response of the request above, you can see that indeed, t
 ```json http
 {
   "method": "get",
-  "url": "https://api.cubemos.com/sanction/list/sdn/10133"
+  "url": "https://api.cubemos.com/sanction/list/sdn/10133",
+   "headers": {
+    "x-api-key": "cubemos_sanction_api"
+  }
 }
 ```
 

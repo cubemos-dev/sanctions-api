@@ -1,5 +1,5 @@
 ---
-tags: [03. Error Codes]
+tags: [04. Error Codes]
 ---
 # Error Codes
 cubemos uses standard HTTP Response Codes to indicate the success or failure of a request. In general this means: 

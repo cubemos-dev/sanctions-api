@@ -1,8 +1,8 @@
 ---
-tags: [01. Introduction]
+tags: [01. Overview]
 ---
 
-# Introduction
+# Overview
 
 cubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crimes.
 

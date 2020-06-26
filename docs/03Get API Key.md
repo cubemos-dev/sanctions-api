@@ -1,8 +1,8 @@
 ---
-tags: [02. Authentication]
+tags: [03. Get API Key]
 ---
 
-# Authentication
+# Get API Key
 
 Sanction List API from cubemos expects an API key to be included in all of its REST API calls. Without the key, the API request will fail with the error code 401. The key needs to be included in the header like so: 
 <!-- theme: info -->

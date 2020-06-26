@@ -2,7 +2,11 @@ openapi: 3.0.0
 info:
   title: Sanction List API
   version: '1.0'
-  description: "cubemos Sanction list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanction, AML and financial crime. \n\n### Description\n[Introduction](../docs/01Welcome.md)  [Quickstart](../docs/04Quickstart.md)"
+  description: |-
+    cubemos Sanction list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanction, AML and financial crime. 
+
+    ### Description
+    [Overview](../docs/01Overview.md)  [Quickstart](../docs/02Quickstart.md)
   contact:
     name: cubemos gmbh
     url: www.cubemos.com
@@ -79,7 +83,9 @@ paths:
           description: Unauthorized
         '500':
           description: Internal Server Error
-      description: "### Search a person through sanction lists\nThis API call allows you to perform a search through the desired sanction lists for a person. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
+      description: |-
+        ### Search a person through sanction lists
+        This API call allows you to perform a search through the desired sanction lists for a person. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. 
       requestBody:
         content:
           application/json:
@@ -125,12 +131,14 @@ paths:
             schema:
               type: object
               properties: {}
-        description: "### Payload request schema for single search\nIn order to perform a search on a person through the sanction lists, the full name and the desired sanction lists are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
+        description: |-
+          ### Payload request schema for single search
+          In order to perform a search on a person through the sanction lists, the full name and the desired sanction lists are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  
       parameters: []
-      tags:
-        - Entity Search
       security:
         - API Key: []
+      tags:
+        - API Search Call
     parameters: []
   /search/entities/organization:
     post:
@@ -218,12 +226,16 @@ paths:
                   organization:
                     name: sniper Africa
                     country_code: ''
-        description: "### Payload request schema for single search\nIn order to perform a search on an organization through the sanction lists, the name and the desired sanction lists are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
-      description: "### Search an organization through sanction lists\nThis API call allows you to perform a search through the desired sanction lists for an organization. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. "
-      tags:
-        - Entity Search
+        description: |-
+          ### Payload request schema for single search
+          In order to perform a search on an organization through the sanction lists, the name and the desired sanction lists are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  
+      description: |-
+        ### Search an organization through sanction lists
+        This API call allows you to perform a search through the desired sanction lists for an organization. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. 
       security:
         - API Key: []
+      tags:
+        - API Search Call
     parameters: []
   /search/location/address:
     post:
@@ -290,18 +302,20 @@ paths:
                     zip_code: ''
                     city: munich
                     street: ''
-        description: "### Payload request scheme for single search\nIn order to search for a location bassed on the address, the sanction lists as well as the address details are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  "
-      description: "### Search on an entity through the desired sanction lists in at an address\nThis API call allows you to perform a search through the desired sanction lists for all the sanctioned entities at the desired location. "
-      tags:
-        - Entity Search
+        description: |-
+          ### Payload request scheme for single search
+          In order to search for a location bassed on the address, the sanction lists as well as the address details are required. Please note that the higher the ambiguity in input, the bigger could be the output response payload.  
+      description: |-
+        ### Search on an entity through the desired sanction lists in at an address
+        This API call allows you to perform a search through the desired sanction lists for all the sanctioned entities at the desired location. 
       security:
         - API Key: []
+      tags:
+        - API Search Call
     parameters: []
   '/list/cfsp/{id}':
     get:
       summary: CFSP list entry
-      tags:
-        - Sanction List Entry
       responses:
         '200':
           description: OK
@@ -913,6 +927,8 @@ paths:
       parameters: []
       security:
         - API Key: []
+      tags:
+        - Oroginal List Entry Call
     parameters:
       - schema:
           type: string
@@ -923,8 +939,6 @@ paths:
   '/list/sdn/{id}':
     get:
       summary: SDN list entry
-      tags:
-        - Sanction List Entry
       responses:
         '200':
           description: OK
@@ -993,6 +1007,8 @@ paths:
       description: 'Get the entry from the official [SDN sanction lists](https://www.treasury.gov/resource-center/sanction/sdn-list/pages/default.aspx) based on the result from the search calls'
       security:
         - API Key: []
+      tags:
+        - Oroginal List Entry Call
     parameters:
       - schema:
           type: string
@@ -1040,6 +1056,8 @@ components:
           description: The 2 letter ISO code of the nationality of the person known
       required:
         - full_name
+      x-tags:
+        - Object Descriptions
     searchConfig:
       title: search config
       type: object
@@ -1053,11 +1071,13 @@ components:
             example: sdn
         must_match_attributes:
           type: array
-          description: 'Identifiers of the entry fields against which the output field has to be a 100% match'
+          description: Identifiers of the entry fields against which the output field has to be a 100% match
           items:
             type: string
       required:
         - sanction_lists
+      x-tags:
+        - Object Descriptions
     personSearch:
       title: personSearch
       type: object
@@ -1071,6 +1091,8 @@ components:
       required:
         - search_config
         - person
+      x-tags:
+        - Object Descriptions
     organizationSearchAttributes:
       title: organizationSearchAttributes
       type: object
@@ -1085,6 +1107,8 @@ components:
           description: 2 digit ISO country code of the place where the organization is located
       required:
         - name
+      x-tags:
+        - Object Descriptions
     organizationSearch:
       title: organizationSearch
       type: object
@@ -1097,6 +1121,8 @@ components:
       required:
         - search_config
         - organization
+      x-tags:
+        - Object Descriptions
     organization:
       title: organization
       type: object
@@ -1109,7 +1135,7 @@ components:
           $ref: '#/components/schemas/address'
         aliases:
           type: array
-          description: "List of all the aliases that the organization has for it's name"
+          description: List of all the aliases that the organization has for it's name
           items:
             type: string
         list_entry_url:
@@ -1120,6 +1146,8 @@ components:
         - address
         - aliases
         - list_entry_url
+      x-tags:
+        - Object Descriptions
     locationSearchResult:
       title: locationSearchResult
       type: object
@@ -1136,6 +1164,8 @@ components:
       required:
         - persons
         - organizations
+      x-tags:
+        - Object Descriptions
     addressSearch:
       title: addressSearch
       type: object
@@ -1149,6 +1179,8 @@ components:
       required:
         - search_config
         - address
+      x-tags:
+        - Object Descriptions
     person:
       title: person
       type: object
@@ -1195,6 +1227,8 @@ components:
         - city
         - nationality
         - list_entry_url
+      x-tags:
+        - Object Descriptions
     address:
       title: address
       type: object
@@ -1216,6 +1250,8 @@ components:
           description: Name of the street
       required:
         - country_code
+      x-tags:
+        - Object Descriptions
     sdn:
       title: sdn
       type: object
@@ -1283,6 +1319,8 @@ components:
           type: array
           items:
             type: string
+      x-tags:
+        - Object Descriptions
     cfsp:
       title: cfsp
       type: object
@@ -1525,6 +1563,8 @@ components:
         NameAlias_LastName:
           type: string
       description: Output payload of the entry from the CFSP sanction list
+      x-tags:
+        - Object Descriptions
   securitySchemes:
     API Key:
       name: x-api-key
@@ -1532,7 +1572,5 @@ components:
       in: header
       description: 'Trial API Key: sanction_api_cubemos'
 tags:
-  - name: Sanction List Entry
-    description: Full reference information in an official sanction list
-  - name: Entity Search
-    description: Perform a search for a single entity
+  - name: API Search Call
+  - name: Oroginal List Entry Call
