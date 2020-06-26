@@ -2,7 +2,11 @@
 tags: [01. Quickstart]
 ---
 
-# Quick start
+# cubemos Sanction List API
+
+The cubemos Sanction List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe. Visit the [overview](swagger/sanctions_list.v1.yaml) page to get to know the possibilities in detail.
+
+### Quick start
 
 If you want to check out the possibilities of the cubemos sanction list api, you can test the individual endpoints of the api in the "Try it" sections. 
 
