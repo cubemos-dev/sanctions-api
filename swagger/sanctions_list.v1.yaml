@@ -923,7 +923,12 @@ paths:
         '500':
           description: Internal Server Error
       operationId: get-search-sanction-list-entry
-      description: 'Get the entry from the official [CFSP sanction list](https://eeas.europa.eu/headquarters/headquarters-homepage_en/8442/Consolidated%20list%20of%20sanction) based on the result from the search calls. '
+      description: |-
+        Get the entry from the official [CFSP sanction list](https://eeas.europa.eu/headquarters/headquarters-homepage_en/8442/Consolidated%20list%20of%20sanction) based on the result from the search calls. 
+
+        The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found.
+
+        ![](../assets/images/originallistid.png)
       parameters: []
       security:
         - API Key: []
@@ -1004,10 +1009,12 @@ paths:
         '500':
           description: Internal Server Error
       operationId: get-list-sdn
-      description: |
+      description: |-
         Get the entry from the official [SDN sanction lists](https://www.treasury.gov/resource-center/sanction/sdn-list/pages/default.aspx) based on the result from the POST calls. 
 
-        The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found
+        The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found.
+
+        ![](../assets/images/originallistid.png)
       security:
         - API Key: []
       tags:
