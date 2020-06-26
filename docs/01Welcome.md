@@ -4,16 +4,19 @@ tags: [01. Overview]
 
 # Overview
 
-cubemos Sanctions list API is a RESTful API which can be used to avoid prosecution and be compliant with international regulation on sanctions, AML and financial crimes.
+The cubemos Sanctions List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe.
 
-Our Api uses POST requests with Json-encoded payloads to start a search and returns json-encoded responses with industry standard [error codes](./03ErrorCodes.md).
+You can search for:
+1. Persons
+2. Organizations
+3. Addresses
 
-<!-- theme: info -->
+To facilitate the search, you can search with the exact names or for the fuzzy phonetical representation. 
 
-> ### Try it out!
->
-> You can [try out](https://stoplight.io/p/docs/gh/cubemos-dev/sanctions-api/swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post?srn=gh/cubemos-dev/sanctions-api/swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post&group=develop) the api freely in test-mode directly from your browser. 
 
+![](assets/images/workflow.PNG)
+
+Now you can get started: [Try out the API](../docs/02Quickstart.md) in the test mode or get started with your implementation immediately. 
 
 ## Features
 
@@ -26,6 +29,3 @@ Our Api uses POST requests with Json-encoded payloads to start a search and retu
 
 1. EU's Common Foreign and Security Policy (CFSP)
 2. Specially Designated Nationals And Blocked Persons List (SDN)
-
-### Just getting started?
-Please see our [Quickstart guide](./04Quickstart.md) for developers to get you up to speed.
