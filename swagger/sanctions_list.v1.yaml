@@ -928,7 +928,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - Oroginal List Entry Call
+        - Original List Entry Call
     parameters:
       - schema:
           type: string
@@ -1008,7 +1008,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - Oroginal List Entry Call
+        - Original List Entry Call
     parameters:
       - schema:
           type: string
@@ -1573,4 +1573,4 @@ components:
       description: 'Trial API Key: sanction_api_cubemos'
 tags:
   - name: API Search Call
-  - name: Oroginal List Entry Call
+  - name: Original List Entry Call
