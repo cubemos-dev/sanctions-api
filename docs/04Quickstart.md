@@ -28,23 +28,25 @@ You can trigger the api by clicking `send`on the the element below.
     "search_config": {
       "sanction_lists": [
         "cfsp",
-        "sdn"
+        "SDN"
       ],
       "must_match_attributes": [
-        "last_name",
-        "nationality"
+        "full_name"
       ]
     },
-  "person": {
-    "first_name": "Serhii",
-    "middle_name": "",
-    "last_name": "Kliuiev",
-    "full_name": "Serhii Kliuiev",
-    "alias": "Serhiy Klyuyev",
-    "gender": "male",
-    "nationality": "UA",
-    "dob": "19.08.1969"
-  }
+    "person": {
+      "full_name": "OCHOA VASCO, Fabio Enrique",
+      "first_name": "",
+      "middle_name": "",
+      "last_name": "",
+      "aliases": [
+        "Mario"
+      ],
+      "gender": "",
+      "dob": "",
+      "city": "",
+      "nationality": ""
+    }
   }
 }
 ```
