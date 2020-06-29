@@ -931,7 +931,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - Original List Entry Call
+        - Original List Entry Search
     parameters:
       - schema:
           type: string
@@ -1018,7 +1018,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - Original List Entry Call
+        - Original List Entry Search
     parameters:
       - schema:
           type: string
@@ -1583,7 +1583,7 @@ components:
       description: 'Trial key: sanction_api_cubemos'
 tags:
   - name: API Search Call
-  - name: Original List Entry Call
   - name: Person Search
   - name: Organization Search
   - name: Address Search
+  - name: Original List Entry Search
