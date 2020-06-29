@@ -925,6 +925,8 @@ paths:
         The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found.
 
         ![](../assets/images/originallistid.png)
+
+        You can try out the call using the id: "13" in the "Body" of the call.
       parameters: []
       security:
         - API Key: []
@@ -1011,6 +1013,8 @@ paths:
         The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found.
 
         ![](../assets/images/originallistid.png)
+
+        You can try out the call using the id: "10214" in the "Body" of the call. 
       security:
         - API Key: []
       tags:
