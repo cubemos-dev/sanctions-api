@@ -12,7 +12,7 @@ servers:
 paths:
   /search/entities/person:
     post:
-      summary: 1 Person search
+      summary: Person search
       operationId: post-search-entities-person
       responses:
         '200':
