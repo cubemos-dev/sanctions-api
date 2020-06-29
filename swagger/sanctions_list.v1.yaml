@@ -12,7 +12,7 @@ servers:
 paths:
   /search/entities/person:
     post:
-      summary: Person search
+      summary: POST /search/entities/person
       operationId: post-search-entities-person
       responses:
         '200':
@@ -135,7 +135,7 @@ paths:
     parameters: []
   /search/entities/organization:
     post:
-      summary: Organization search
+      summary: POST /search/entities/organization
       operationId: post-search-entities-organization
       responses:
         '200':
@@ -232,7 +232,7 @@ paths:
     parameters: []
   /search/location/address:
     post:
-      summary: Address search
+      summary: POST /search/entities/address
       operationId: post-search-address
       responses:
         '200':
