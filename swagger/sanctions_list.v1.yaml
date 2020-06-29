@@ -133,6 +133,8 @@ paths:
       parameters: []
       security:
         - API Key: []
+      tags:
+        - Person Search
     parameters: []
   /search/entities/organization:
     post:
@@ -228,6 +230,8 @@ paths:
         This API call allows you to perform a search for sanction lists entries of organizations. The result is a list of all entries which match to the inputs along with the degree of the match (which indicates the confidence if the desired match was found with a percentage representation).
       security:
         - API Key: []
+      tags:
+        - Organization Search
     parameters: []
   /search/location/address:
     post:
@@ -302,6 +306,8 @@ paths:
         This API call allows you to perform a sanction list search for all the sanctioned entities at the address or location of interest. 
       security:
         - API Key: []
+      tags:
+        - Address Search
     parameters: []
   '/list/cfsp/{id}':
     get:
@@ -1574,3 +1580,6 @@ components:
 tags:
   - name: API Search Call
   - name: Original List Entry Call
+  - name: Person Search
+  - name: Organization Search
+  - name: Address Search
