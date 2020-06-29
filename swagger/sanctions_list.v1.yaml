@@ -131,7 +131,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - '{5000.!}'
+        - 1. Person Search
     parameters: []
   /search/entities/organization:
     post:
@@ -1583,4 +1583,4 @@ tags:
   - name: 4 Original List Entry Search
   - name: 2. Organization Search
   - name: 3. Address Search
-  - name: '{5000.!}'
+  - name: 1. Person Search
