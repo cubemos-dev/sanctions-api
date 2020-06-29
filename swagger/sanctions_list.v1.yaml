@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Sanction List API
   version: '1.0'
-  description: "The cubemos Sanction List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe.\n\nYou can search for:\v\n1. Persons\n2. Organizations\n3. Addresses\n\nTo facilitate the search, you can search with the exact names or for the fuzzy phonetical representation. \n\n\n![Workflow with the cubemos sanction list API](../assets/images/workflow.png)\n\nNow you can get started: [Try out the API](../docs/01Quickstart.md) in the quick start mode or get started with your implementation immediately. \n\n## Features\n\n1. Easy integration\n2. Example code for various languages\n3. Strict and fuzzy search \n4. Get the complete details of the sanctioned person\n\n## Supported Sanction Lists\n\n1. EU's Common Foreign and Security Policy (CFSP)\n2. Specially Designated Nationals And Blocked Persons List (SDN)"    
+  description: "The cubemos Sanction List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe.\n\nYou can search for:\v\n1. Persons\n2. Organizations\n3. Addresses\n\nTo facilitate the search, you can search with the exact names or for the fuzzy phonetical representation. \n\n\n![Workflow with the cubemos sanction list API](../assets/images/workflow.png)\n\nNow you can get started: [Try out the API](../docs/01Quickstart.md) in the quick start mode or get started with your implementation immediately. \n\n## Features\n\n1. Easy integration\n2. Example code for various languages\n3. Strict and fuzzy search \n4. Get the complete details of the sanctioned person\n\n## Supported Sanction Lists\n\n1. EU's Common Foreign and Security Policy (CFSP)\n2. Specially Designated Nationals And Blocked Persons List (SDN)"
   contact:
     name: cubemos gmbh
     url: www.cubemos.com
@@ -133,8 +133,6 @@ paths:
       parameters: []
       security:
         - API Key: []
-      tags:
-        - API Search Call
     parameters: []
   /search/entities/organization:
     post:
@@ -230,8 +228,6 @@ paths:
         This API call allows you to perform a search for sanction lists entries of organizations. The result is a list of all entries which match to the inputs along with the degree of the match (which indicates the confidence if the desired match was found with a percentage representation).
       security:
         - API Key: []
-      tags:
-        - API Search Call
     parameters: []
   /search/location/address:
     post:
@@ -306,8 +302,6 @@ paths:
         This API call allows you to perform a sanction list search for all the sanctioned entities at the address or location of interest. 
       security:
         - API Key: []
-      tags:
-        - API Search Call
     parameters: []
   '/list/cfsp/{id}':
     get:
