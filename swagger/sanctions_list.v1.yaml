@@ -12,7 +12,7 @@ servers:
 paths:
   /search/entities/person:
     post:
-      summary: person search
+      summary: 1 Person search
       operationId: post-search-entities-person
       responses:
         '200':
@@ -130,12 +130,10 @@ paths:
       parameters: []
       security:
         - API Key: []
-      tags:
-        - 01. Person Search
     parameters: []
   /search/entities/organization:
     post:
-      summary: organization search
+      summary: 2 Organization search
       operationId: post-search-entities-organization
       responses:
         '200':
@@ -227,12 +225,10 @@ paths:
         This API call allows you to perform a search for sanction lists entries of organizations. The result is a list of all entries which match to the inputs along with the degree of the match (which indicates the confidence if the desired match was found with a percentage representation).
       security:
         - API Key: []
-      tags:
-        - 02. Organization Search
     parameters: []
   /search/location/address:
     post:
-      summary: address search
+      summary: 3 Address search
       operationId: post-search-address
       responses:
         '200':
@@ -303,12 +299,10 @@ paths:
         This API call allows you to perform a sanction list search for all the sanctioned entities at the address or location of interest. 
       security:
         - API Key: []
-      tags:
-        - 03. Address Search
     parameters: []
   '/list/cfsp/{id}':
     get:
-      summary: CFSP list entry
+      summary: 4.1 CFSP list entry
       responses:
         '200':
           description: OK
@@ -928,7 +922,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - Original List Entry Search
+        - 4 Original List Entry Search
     parameters:
       - schema:
           type: string
@@ -938,7 +932,7 @@ paths:
         description: The entity logical ID in the CFSP sanction list from which all the entries will be returned
   '/list/sdn/{id}':
     get:
-      summary: SDN list entry
+      summary: 4.2 SDN list entry
       responses:
         '200':
           description: OK
@@ -1015,7 +1009,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - Original List Entry Search
+        - 4 Original List Entry Search
     parameters:
       - schema:
           type: string
@@ -1580,7 +1574,4 @@ components:
       description: 'Trial key: sanction_api_cubemos'
 tags:
   - name: API Search Call
-  - name: Original List Entry Search
-  - name: 01. Person Search
-  - name: 03. Address Search
-  - name: 02. Organization Search
+  - name: 4 Original List Entry Search
