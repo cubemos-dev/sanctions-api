@@ -308,7 +308,7 @@ paths:
     parameters: []
   '/list/cfsp/{id}':
     get:
-      summary: 4.1 CFSP list entry
+      summary: 'GET /list/cfsp/{id}'
       responses:
         '200':
           description: OK
@@ -938,7 +938,7 @@ paths:
         description: The entity logical ID in the CFSP sanction list from which all the entries will be returned
   '/list/sdn/{id}':
     get:
-      summary: 4.2 SDN list entry
+      summary: 'GET /list/sdn/{id}'
       responses:
         '200':
           description: OK
