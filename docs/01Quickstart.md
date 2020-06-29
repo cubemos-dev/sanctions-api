@@ -73,7 +73,7 @@ In order to do so we will
 2. Make a POST request to search for sanctions opposed to a [person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post), an [organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post) or an [address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post)
 3. Go to code generation tab
 4. Select your development language of choice
-5. Copy the generated code and paste into your project
+5. Copy the generated code as in the image shown below and paste into your project
 
 ![](../assets/images/codeIntegration.png)
 
