@@ -131,7 +131,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - Person Search
+        - 01. Person Search
     parameters: []
   /search/entities/organization:
     post:
@@ -228,7 +228,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - Organization Search
+        - 02. Organization Search
     parameters: []
   /search/location/address:
     post:
@@ -304,7 +304,7 @@ paths:
       security:
         - API Key: []
       tags:
-        - Address Search
+        - 03. Address Search
     parameters: []
   '/list/cfsp/{id}':
     get:
@@ -1580,7 +1580,7 @@ components:
       description: 'Trial key: sanction_api_cubemos'
 tags:
   - name: API Search Call
-  - name: Person Search
-  - name: Organization Search
-  - name: Address Search
   - name: Original List Entry Search
+  - name: 01. Person Search
+  - name: 03. Address Search
+  - name: 02. Organization Search
