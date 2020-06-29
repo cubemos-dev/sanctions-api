@@ -135,7 +135,7 @@ paths:
     parameters: []
   /search/entities/organization:
     post:
-      summary: 2 Organization search
+      summary: Organization search
       operationId: post-search-entities-organization
       responses:
         '200':
@@ -232,7 +232,7 @@ paths:
     parameters: []
   /search/location/address:
     post:
-      summary: 3 Address search
+      summary: Address search
       operationId: post-search-address
       responses:
         '200':
