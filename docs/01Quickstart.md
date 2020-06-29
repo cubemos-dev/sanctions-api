@@ -6,20 +6,26 @@ tags: [01. API reference]
 
 The cubemos Sanction List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe. Visit the [overview](../swagger/sanctions_list.v1.yaml) page to get to know the possibilities in detail.
 
+---
+
 ### Quick start
 
-If you want to check out the possibilities of the cubemos sanction list api, you can test the individual endpoints of the api in the "Try it" sections. 
+Check for sanctionized person or organization based on their attributes or get all the sanctionized entities at an address using the following POST calls: 
+1. [/search/entities/person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post) 
+2. [search/entities/organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post) 
+3. [search/location/address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post)
 
-For a start, let's try to check if a specific person (in this case Fabio Enrique Ochoa Vasco) is under sanctions. 
+Review the original sanction list entries for the sanctionized person using the following GET calls:
 
-In order to do so we will
+4. [/list/cfsp/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1cfsp~1{id}/get)
+5. [/list/sdn/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1sdn~1{id}/get)
 
-- make a request to the [/search/entities/person](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post) endpoint.
-- use the result to get first-hand information from an official sanction list.
 
-### Make a POST request
+---
+#### **Investigate a sanctionized person**
 
-1. You can trigger the api by clicking `send` on the the element below.
+###### 1. Check if the person is black-listed
+Test it right now by clicking on `send` button.
 
 ```json http
 {
@@ -55,7 +61,9 @@ In order to do so we will
   }
 }
 ```
-2. Inspect the response in case the was a person found. To retrieve the full original entry, you need to use the ID of the `list_entry_url` in a GET request. The example below uses the ID 10214 from the result of the above POST request and the SDN list as the original source.
+
+###### 2. In case the person was found, review the original sanction list entry
+Retrieve the full original entry based on the ID of the `list_entry_url` of the above POST request.
 
 ```json http
 {
@@ -67,14 +75,5 @@ In order to do so we will
 }
 ```
 
-### Workflow of integration
-
-1. Get your personal API Key from cubemos 
-2. Make a POST request to search for sanctions opposed to a [person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post), an [organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post) or an [address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post)
-3. Go to code generation tab
-4. Select your development language of choice
-5. Copy the generated code as in the image shown below and paste into your project
-
-![](../assets/images/codeIntegration.png)
 
 
