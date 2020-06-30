@@ -300,7 +300,7 @@ paths:
           In order to search for sanction lists entries, at least the specific country code is required. Please note though that the higher the ambiguity of input, the higher the output response payload can become. 
       description: |
         ### Search for a sanction list entry based on the address
-        This API call allows you to perform a sanction list search for all the sanctioned entities at the address or location of interest. 
+        This API call allows you to perform a sanction list search for all the sanctioned entities at the address or location of interest.
       security:
         - API Key: []
       tags:
