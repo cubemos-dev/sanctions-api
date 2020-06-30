@@ -1008,7 +1008,7 @@ paths:
 
         The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found.
 
-        ![list_entry_url](../assets/images/originallistid.png)
+        ![list_entry_url](../assets/images/listEntryURL.png)
 
         You can try out the call using the id: "10214" in the "Body" of the call. 
       security:
@@ -1103,6 +1103,8 @@ components:
       title: organizationSearchAttributes
       type: object
       description: Search for an organization through a sanction list
+      x-tags:
+        - Payload Definitions
       properties:
         name:
           type: string
@@ -1110,11 +1112,11 @@ components:
           example: sniper Africa
         country_code:
           type: string
-          description: 2 digit ISO country code of the place where the organization is located
+          description: |-
+            2 digit ISO country code. Hover here to see all the valid country codes. 
+            <iframe src="https://datahub.io/core/country-list/r/0.html" width="100%" height="100%" frameborder="0"></iframe>
       required:
         - name
-      x-tags:
-        - Payload Definitions
     organizationSearch:
       title: organizationSearch
       type: object
@@ -1239,10 +1241,14 @@ components:
       title: address
       type: object
       description: Basic search identifiers for the address to search through a sanction list where a sanctioned entity might be present
+      x-tags:
+        - Payload Definitions
       properties:
         country_code:
           type: string
-          description: '2 digit ISO country code '
+          description: |-
+            2 digit ISO country code. Hover here to see all the valid country codes. 
+            <iframe src="https://datahub.io/core/country-list/r/0.html" width="100%" height="100%" frameborder="0"></iframe>
           example: DE
         zip_code:
           type: string
@@ -1256,8 +1262,6 @@ components:
           description: Name of the street
       required:
         - country_code
-      x-tags:
-        - Payload Definitions
     sdn:
       title: sdn
       type: object

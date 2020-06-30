@@ -20,7 +20,6 @@ Review the original sanction list entries for the sanctionized person using the 
 4. [/list/cfsp/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1cfsp~1{id}/get)
 5. [/list/sdn/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1sdn~1{id}/get)
 
-
 ---
 #### **Investigate a sanctionized person**
 
