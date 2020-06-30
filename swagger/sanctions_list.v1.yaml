@@ -12,7 +12,7 @@ servers:
 paths:
   /search/entities/person:
     post:
-      summary: person search
+      summary: POST /search/entities/person
       operationId: post-search-entities-person
       responses:
         '200':
@@ -131,11 +131,11 @@ paths:
       security:
         - API Key: []
       tags:
-        - Person Search
+        - 1. Person Search
     parameters: []
   /search/entities/organization:
     post:
-      summary: organization search
+      summary: POST /search/entities/organization
       operationId: post-search-entities-organization
       responses:
         '200':
@@ -228,11 +228,11 @@ paths:
       security:
         - API Key: []
       tags:
-        - Organization Search
+        - 2. Organization Search
     parameters: []
   /search/location/address:
     post:
-      summary: address search
+      summary: POST /search/entities/address
       operationId: post-search-address
       responses:
         '200':
@@ -304,11 +304,11 @@ paths:
       security:
         - API Key: []
       tags:
-        - Address Search
+        - 3. Address Search
     parameters: []
   '/list/cfsp/{id}':
     get:
-      summary: CFSP list entry
+      summary: 'GET /list/cfsp/{id}'
       responses:
         '200':
           description: OK
@@ -921,14 +921,14 @@ paths:
 
         The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found.
 
-        ![](../assets/images/originallistid.png)
+        ![list_entry_url](../assets/images/originallistid.png)
 
         You can try out the call using the id: "13" in the "Body" of the call.
       parameters: []
       security:
         - API Key: []
       tags:
-        - Original List Entry Search
+        - 4 Original List Entry Search
     parameters:
       - schema:
           type: string
@@ -938,7 +938,7 @@ paths:
         description: The entity logical ID in the CFSP sanction list from which all the entries will be returned
   '/list/sdn/{id}':
     get:
-      summary: SDN list entry
+      summary: 'GET /list/sdn/{id}'
       responses:
         '200':
           description: OK
@@ -1009,13 +1009,13 @@ paths:
 
         The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found.
 
-        ![](../assets/images/originallistid.png)
+        ![list_entry_url](../assets/images/originallistid.png)
 
         You can try out the call using the id: "10214" in the "Body" of the call. 
       security:
         - API Key: []
       tags:
-        - Original List Entry Search
+        - 4 Original List Entry Search
     parameters:
       - schema:
           type: string
@@ -1064,7 +1064,7 @@ components:
       required:
         - full_name
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     searchConfig:
       title: search config
       type: object
@@ -1084,7 +1084,7 @@ components:
       required:
         - sanction_lists
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     personSearch:
       title: personSearch
       type: object
@@ -1099,7 +1099,7 @@ components:
         - search_config
         - person
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     organizationSearchAttributes:
       title: organizationSearchAttributes
       type: object
@@ -1115,7 +1115,7 @@ components:
       required:
         - name
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     organizationSearch:
       title: organizationSearch
       type: object
@@ -1129,7 +1129,7 @@ components:
         - search_config
         - organization
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     organization:
       title: organization
       type: object
@@ -1154,7 +1154,7 @@ components:
         - aliases
         - list_entry_url
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     locationSearchResult:
       title: locationSearchResult
       type: object
@@ -1172,7 +1172,7 @@ components:
         - persons
         - organizations
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     addressSearch:
       title: addressSearch
       type: object
@@ -1187,7 +1187,7 @@ components:
         - search_config
         - address
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     person:
       title: person
       type: object
@@ -1235,7 +1235,7 @@ components:
         - nationality
         - list_entry_url
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     address:
       title: address
       type: object
@@ -1258,7 +1258,7 @@ components:
       required:
         - country_code
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     sdn:
       title: sdn
       type: object
@@ -1327,7 +1327,7 @@ components:
           items:
             type: string
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
     cfsp:
       title: cfsp
       type: object
@@ -1571,7 +1571,7 @@ components:
           type: string
       description: Output payload of the entry from the CFSP sanction list
       x-tags:
-        - Payload Definitions
+        - Object Descriptions
   securitySchemes:
     API Key:
       name: x-api-key
@@ -1580,7 +1580,7 @@ components:
       description: 'Trial key: sanction_api_cubemos'
 tags:
   - name: API Search Call
-  - name: Person Search
-  - name: Organization Search
-  - name: Address Search
-  - name: Original List Entry Search
+  - name: 4 Original List Entry Search
+  - name: 2. Organization Search
+  - name: 3. Address Search
+  - name: 1. Person Search
