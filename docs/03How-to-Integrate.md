@@ -11,4 +11,4 @@ tags: [02. How to Integrate]
 5. Select your development language of choice
 6. Copy the generated code as in the image shown below and paste into your project
 
-![](../assets/images/codeIntegration.png)
+![](../assets/images/codeExample.png)
