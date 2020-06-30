@@ -78,7 +78,7 @@ paths:
           description: Internal Server Error
       description: |-
         ### Search a person through sanction lists
-        This API call allows you to perform a search through the desired sanction lists for a person. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match
+        This API call allows you to perform a search through the desired sanction lists for a person. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. 
       requestBody:
         content:
           application/json:
