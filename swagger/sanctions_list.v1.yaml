@@ -78,6 +78,9 @@ paths:
       description: |-
         ### Search a person through sanction lists
         This API call allows you to perform a search through the desired sanction lists for a person. The search results returned are a list of all entries from the sanction lists which match to the input along with the degree of the match. 
+
+        <!-- theme: warning -->
+        > Please enter "sanction_api_cubemos" as the x-api-key in the "Try-it out" section and hit send to get the results
       requestBody:
         content:
           application/json:
@@ -224,6 +227,9 @@ paths:
       description: |-
         ### Search for a sanction list entry based on the organization name
         This API call allows you to perform a search for sanction lists entries of organizations. The result is a list of all entries which match to the inputs along with the degree of the match (which indicates the confidence if the desired match was found with a percentage representation).
+
+        <!-- theme: warning -->
+        > Please enter "sanction_api_cubemos" as the x-api-key in the "Try-it out" section and hit send to get the results
       security:
         - API Key: []
       tags:
@@ -297,9 +303,12 @@ paths:
         description: |-
           ### Payload request scheme
           In order to search for sanction lists entries, at least the specific country code is required. Please note though that the higher the ambiguity of input, the higher the output response payload can become. 
-      description: |
+      description: |-
         ### Search for a sanction list entry based on the address
         This API call allows you to perform a sanction list search for all the sanctioned entities at the address or location of interest.
+
+        <!-- theme: warning -->
+        > Please enter "sanction_api_cubemos" as the x-api-key in the "Try-it out" section and hit send to get the results
       security:
         - API Key: []
       tags:
@@ -918,11 +927,8 @@ paths:
       description: |-
         Get the entry from the official [CFSP sanction list](https://eeas.europa.eu/headquarters/headquarters-homepage_en/8442/Consolidated%20list%20of%20sanction) based on the result from the search calls. 
 
-        The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found.
-
-        ![list_entry_url](../assets/images/listEntryURL.png)
-
-        You can try out the call using the id: "13" in the "Body" of the call.
+        <!-- theme: warning -->
+        > Please enter "sanction_api_cubemos" as the x-api-key and "13" as an example ID in the "Body"in the "Try-it out" section and hit send to get the results
       parameters: []
       security:
         - API Key: []
@@ -1006,11 +1012,8 @@ paths:
       description: |-
         Get the entry from the official [SDN sanction lists](https://www.treasury.gov/resource-center/sanction/sdn-list/pages/default.aspx) based on the result from the POST calls. 
 
-        The image below shows the place in the response payload of the person search POST call where the id for getting the original list entry can be found.
-
-        ![list_entry_url](../assets/images/listEntryURL.png)
-
-        You can try out the call using the id: "10214" in the "Body" of the call. 
+        <!-- theme: warning -->
+        > Please enter "sanction_api_cubemos" as the x-api-key and "10214" as an example ID in the "Body"in the "Try-it out" section and hit send to get the results
       security:
         - API Key: []
       tags:
