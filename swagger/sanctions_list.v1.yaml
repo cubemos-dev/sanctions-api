@@ -1029,45 +1029,55 @@ components:
       type: object
       description: Search identifiers for a person through the sanction list
       x-examples: {}
+      x-tags:
+        - Payload Definitions
       properties:
         full_name:
           type: string
           description: Full name of a person (first_names + middle_names + last_names )
-          example: 'OCHOA VASCO, Fabio Enrique'
+          example: Paulina
         first_name:
           type: string
           description: All the known first names of the person
+          example: Paulina
         middle_name:
           type: string
           description: All the known middle names of the person
+          example: Paulina
         last_name:
           type: string
           description: All the known last names of the person
+          example: Paulina
         aliases:
           type: array
           description: Aliases of the person
           items:
             type: string
+            example: Paulina
         gender:
           type: string
           description: 'Gender of the person '
+          example: Female
         dob:
           type: string
           description: The date of birth of the person known
+          example: 03 Oct 1984
         city:
           type: string
           description: The city in which the person was known to reside
+          example: Zapopan
         nationality:
           type: string
           description: The 2 letter ISO code of the nationality of the person known
+          example: MX
       required:
         - full_name
-      x-tags:
-        - Payload Definitions
-    searchConfig:
+    organizationSearchConfig:
       title: search config
       type: object
       description: configure the search on the desired entity
+      x-tags:
+        - Payload Definitions
       properties:
         sanction_lists:
           type: array
@@ -1078,12 +1088,34 @@ components:
         must_match_attributes:
           type: array
           description: Identifiers of the entry fields against which the output field has to be a 100% match
+          uniqueItems: true
           items:
             type: string
+            example: name
       required:
         - sanction_lists
+    personSearchConfig:
+      title: search config
+      type: object
+      description: configure the search on the desired entity
       x-tags:
         - Payload Definitions
+      properties:
+        sanction_lists:
+          type: array
+          description: All the sanction list names through which the search has to be made
+          items:
+            type: string
+            example: sdn
+        must_match_attributes:
+          type: array
+          description: Identifiers of the entry fields against which the output field has to be a 100% match
+          uniqueItems: true
+          items:
+            type: string
+            example: dob
+      required:
+        - sanction_lists
     personSearch:
       title: personSearch
       type: object
@@ -1091,7 +1123,7 @@ components:
       x-examples: {}
       properties:
         search_config:
-          $ref: '#/components/schemas/searchConfig'
+          $ref: '#/components/schemas/personSearchConfig'
         person:
           $ref: '#/components/schemas/personSearchAttributes'
       required:
@@ -1109,12 +1141,13 @@ components:
         name:
           type: string
           description: Name of the organization
-          example: sniper Africa
+          example: ASCOTEC STEEL TRADING GMBH
         country_code:
           type: string
           description: |-
             2 digit ISO country code. Hover here to see all the valid country codes. 
             <iframe src="https://datahub.io/core/country-list/r/0.html" width="100%" height="100%" frameborder="0"></iframe>
+          example: DE
       required:
         - name
     organizationSearch:
@@ -1123,7 +1156,7 @@ components:
       description: The identifiers based on which the search will be performed for a organization through the desired sanction lists
       properties:
         search_config:
-          $ref: '#/components/schemas/searchConfig'
+          $ref: '#/components/schemas/organizationSearchConfig'
         organization:
           $ref: '#/components/schemas/organizationSearchAttributes'
       required:
