@@ -1073,7 +1073,7 @@ components:
       required:
         - full_name
     organizationSearchConfig:
-      title: search config
+      title: search config for organization
       type: object
       description: configure the search on the desired entity
       x-tags:
@@ -1095,7 +1095,7 @@ components:
       required:
         - sanction_lists
     personSearchConfig:
-      title: search config
+      title: search config for person
       type: object
       description: configure the search on the desired entity
       x-tags:
