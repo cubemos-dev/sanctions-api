@@ -1072,6 +1072,28 @@ components:
           example: MX
       required:
         - full_name
+    addressSearchConfig:
+      title: search config for address based search
+      type: object
+      description: configure the search on the desired entity
+      x-tags:
+        - Payload Definitions
+      properties:
+        sanction_lists:
+          type: array
+          description: All the sanction list names through which the search has to be made
+          items:
+            type: string
+            example: sdn
+        must_match_attributes:
+          type: array
+          description: Identifiers of the entry fields against which the output field has to be a 100% match
+          uniqueItems: true
+          items:
+            type: string
+            example: country_code
+      required:
+        - sanction_lists
     organizationSearchConfig:
       title: search config for organization
       type: object
@@ -1212,16 +1234,16 @@ components:
       type: object
       description: query payload for an address search
       x-examples: {}
+      x-tags:
+        - Payload Definitions
       properties:
         search_config:
-          $ref: '#/components/schemas/searchConfig'
+          $ref: '#/components/schemas/addressSearchConfig'
         address:
           $ref: '#/components/schemas/address'
       required:
         - search_config
         - address
-      x-tags:
-        - Payload Definitions
     person:
       title: person
       type: object
@@ -1286,13 +1308,15 @@ components:
         zip_code:
           type: string
           description: 'Zip code of the area '
+          example: '81477'
         city:
           type: string
           description: Name of the city
-          example: munich
+          example: Munich
         street:
           type: string
           description: Name of the street
+          example: Lochhamer Str
       required:
         - country_code
     sdn:
