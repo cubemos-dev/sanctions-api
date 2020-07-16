@@ -12,8 +12,8 @@ The cubemos Sanction List API is a RESTful API which can be used to ensure compl
 
 Check for sanctionized person or organization based on their attributes or get all the sanctionized entities at an address using the following POST calls: 
 1. [/search/entities/person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post) 
-2. [search/entities/organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post) 
-3. [search/location/address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post)
+2. [/search/entities/organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post) 
+3. [/search/location/address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post)
 
 Review the original sanction list entries for the sanctionized person using the following GET calls:
 
