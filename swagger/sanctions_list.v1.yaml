@@ -941,9 +941,9 @@ paths:
         in: path
         required: true
         description: The entity logical ID in the CFSP sanction list from which all the entries will be returned
-  '/list/ofac_sdn/{id}':
+  '/list/ofac-sdn/{id}':
     get:
-      summary: 'GET /list/ofac_sdn/{id}'
+      summary: 'GET /list/ofac-sdn/{id}'
       responses:
         '200':
           description: OK
@@ -1025,9 +1025,9 @@ paths:
         in: path
         description: The UID in the SDN sanction list from which all the entries will be returned
         required: true
-  '/list/hm_treasury/{id}':
+  '/list/hm-treasury/{id}':
     get:
-      summary: 'GET /list/hm_treasury/{id}'
+      summary: 'GET /list/hm-treasury/{id}'
       tags:
         - 4 Original List Entry Search
       responses:
@@ -1513,14 +1513,18 @@ paths:
       operationId: get-list-hm_treasury
       security:
         - API Key: []
-      description: ''
+      description: |-
+        Get the entry from the official [HM Treasury sanction lists](https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets/consolidated-list-of-targets) based on the result from the POST calls. 
+
+        <!-- theme: warning -->
+        > Please enter "sanction_api_cubemos" as the x-api-key in the "Header" and "13869" as the ID in the "Path" of the "Try-it out" section and hit send to get the results
     parameters:
       - schema:
           type: string
         name: id
         in: path
         required: true
-  '/list/ofac_csl/{id}':
+  '/list/ofac-csl/{id}':
     parameters:
       - schema:
           type: string
@@ -1528,7 +1532,7 @@ paths:
         in: path
         required: true
     get:
-      summary: 'GET /list/ofac_csl/{id}'
+      summary: 'GET /list/ofac-csl/{id}'
       tags:
         - 4 Original List Entry Search
       responses:
@@ -1538,6 +1542,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ofacCSL'
+              examples:
+                example:
+                  value:
+                    entity_number: '15268'
+                    ofac_csl:
+                      - cons_name: BANK OF KUNLUN CO LTD
+                        cons_type: '-0-'
+                        program: 561-Related
+                        title: '-0-'
+                        call_sign: '-0-'
+                        vess_type: '-0-'
+                        tonnage: '-0-'
+                        grt: '-0-'
+                        vess_flag: '-0-'
+                        vess_owner: '-0-'
+                        remarks: 'SWIFT/BIC CKLBCNBJ; United States financial institutions are prohibited from opening or maintaining a correspondent account or a payable-through account for the foreign financial institution listed here, pursuant to 31 C.F.R. section 561.201(c).'
+                    alt:
+                      - alt_num: '22509'
+                        alt_type: fka
+                        alt_name: KARAMAY URBAN CREDIT COOPERATIVES
+                        alt_remarks: '-0-'
+                      - alt_num: '22510'
+                        alt_type: fka
+                        alt_name: KARAMAY CITY COMMERCIAL BANK CO LTD.
+                        alt_remarks: '-0-'
+                    add:
+                      - add_num: '22761'
+                        address: '172 Xibin Rd, Ranghulu District, (Daqing, Heilongjiang Branch)'
+                        city_province_postalcode: Daqing 163453
+                        country: China
+                        add_remarks: '-0-'
+                      - add_num: '22762'
+                        address: '9 Dongzhimen North Street, Dongcheng District, (Head Office)'
+                        city_province_postalcode: Beijing 100007
+                        country: China
+                        add_remarks: '-0-'
+                      - add_num: '22763'
+                        address: 'No. 7 Century Ave, (Registered Office)'
+                        city_province_postalcode: 'Xinjiang, Karamay 834000'
+                        country: China
+                        add_remarks: '-0-'
+                      - add_num: '22764'
+                        address: 'No. 68 Zhongya South Rd, Economic and Technological Development Zone, (Urumqi, Xinjiang Branch)'
+                        city_province_postalcode: Urumqi 830026
+                        country: China
+                        add_remarks: '-0-'
+                    comments: []
         '400':
           description: Bad Request
         '401':
@@ -1547,6 +1598,11 @@ paths:
       operationId: get-list-ofac_csl-id
       security:
         - API Key: []
+      description: |-
+        Get the entry from the official [OFAC SDN sanction lists](https://www.treasury.gov/resource-center/sanction/sdn-list/pages/default.aspx) based on the result from the POST calls. 
+
+        <!-- theme: warning -->
+        > Please enter "sanction_api_cubemos" as the x-api-key in the "Header" and "15268" as the ID in the "Path" of the "Try-it out" section and hit send to get the results
 components:
   schemas:
     personSearchAttributes:
