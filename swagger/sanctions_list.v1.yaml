@@ -1654,7 +1654,7 @@ components:
           description: All the sanction list names through which the search has to be made
           items:
             type: string
-            example: sdn
+            example: ofac_csl
         must_match_attributes:
           type: array
           description: Identifiers of the entry fields against which the output field has to be a 100% match
@@ -1676,7 +1676,7 @@ components:
           description: All the sanction list names through which the search has to be made
           items:
             type: string
-            example: sdn
+            example: ofac_sdn
         must_match_attributes:
           type: array
           description: Identifiers of the entry fields against which the output field has to be a 100% match
@@ -1698,7 +1698,7 @@ components:
           description: All the sanction list names through which the search has to be made
           items:
             type: string
-            example: sdn
+            example: ofac_sdn
         must_match_attributes:
           type: array
           description: Identifiers of the entry fields against which the output field has to be a 100% match
