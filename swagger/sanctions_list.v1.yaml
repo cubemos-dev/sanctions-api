@@ -281,7 +281,7 @@ paths:
                     sanction_lists:
                       - ofac_csl
                     must_match_attributes:
-                      - ''
+                      - country_code
                   address:
                     country_code: CN
                     zip_code: '100007'
@@ -1661,7 +1661,7 @@ components:
           uniqueItems: true
           items:
             type: string
-            example: city
+            example: country_code
       required:
         - sanction_lists
     organizationSearchConfig:
