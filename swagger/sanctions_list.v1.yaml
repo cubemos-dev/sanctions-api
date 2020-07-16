@@ -1661,7 +1661,7 @@ components:
           uniqueItems: true
           items:
             type: string
-            example: country_code
+            example: city
       required:
         - sanction_lists
     organizationSearchConfig:
@@ -1874,19 +1874,19 @@ components:
           description: |-
             2 digit ISO country code. Hover here to see all the valid country codes. 
             <iframe src="https://datahub.io/core/country-list/r/0.html" width="100%" height="100%" frameborder="0"></iframe>
-          example: DE
+          example: CN
         zip_code:
           type: string
           description: 'Zip code of the area '
-          example: '81477'
+          example: '100007'
         city:
           type: string
           description: Name of the city
-          example: Munich
+          example: Beijing
         street:
           type: string
           description: Name of the street
-          example: Lochhamer Str
+          example: Dongzhimen
       required:
         - country_code
     ofacSDN:
