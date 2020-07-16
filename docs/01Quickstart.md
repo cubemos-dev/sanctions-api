@@ -72,7 +72,7 @@ Retrieve the full original entry based on the ID of the `list_entry_url` of the 
 ```json http
 {
   "method": "get",
-  "url": "https://api.cubemos.com/sanction/list/sdn/10214",
+  "url": "https://api.cubemos.com/sanction/list/ofac-sdn/10214",
    "headers": {
     "x-api-key": "sanction_api_cubemos"
   }
