@@ -941,16 +941,16 @@ paths:
         in: path
         required: true
         description: The entity logical ID in the CFSP sanction list from which all the entries will be returned
-  '/list/sdn/{id}':
+  '/list/ofac_sdn/{id}':
     get:
-      summary: 'GET /list/sdn/{id}'
+      summary: 'GET /list/ofac_sdn/{id}'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/sdn'
+                $ref: '#/components/schemas/ofacSDN'
               examples:
                 example:
                   value:
@@ -1010,7 +1010,7 @@ paths:
           description: Internal Server Error
       operationId: get-list-sdn
       description: |-
-        Get the entry from the official [SDN sanction lists](https://www.treasury.gov/resource-center/sanction/sdn-list/pages/default.aspx) based on the result from the POST calls. 
+        Get the entry from the official [OFAC SDN sanction lists](https://www.treasury.gov/resource-center/sanction/sdn-list/pages/default.aspx) based on the result from the POST calls. 
 
         <!-- theme: warning -->
         > Please enter "sanction_api_cubemos" as the x-api-key in the "Header" and "10214" as the ID in the "Path" of the "Try-it out" section and hit send to get the results
@@ -1025,6 +1025,528 @@ paths:
         in: path
         description: The UID in the SDN sanction list from which all the entries will be returned
         required: true
+  '/list/hm_treasury/{id}':
+    get:
+      summary: 'GET /list/hm_treasury/{id}'
+      tags:
+        - 4 Original List Entry Search
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/hmTreasury'
+              examples:
+                example-1:
+                  value:
+                    - name_6: AL-QAHTANI
+                      name_1: Sheikh
+                      name_2: Farooq
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1980
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-QAHTANI
+                      name_1: Sheikh
+                      name_2: Farooq
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1981
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL QATARI
+                      name_1: Farouq
+                      name_2: al-Qahtani
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1980
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL QATARI
+                      name_1: Farouq
+                      name_2: al-Qahtani
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1981
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-HABABI
+                      name_1: Nayf
+                      name_2: Salam
+                      name_3: Muhammad
+                      name_4: Ujaym
+                      name_5: null
+                      title: null
+                      dob: 00/00/1980
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-HABABI
+                      name_1: Nayf
+                      name_2: Salam
+                      name_3: Muhammad
+                      name_4: Ujaym
+                      name_5: null
+                      title: null
+                      dob: 00/00/1981
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-HABABI
+                      name_1: Nayef
+                      name_2: Salam
+                      name_3: Muhammad
+                      name_4: Ujaym
+                      name_5: null
+                      title: null
+                      dob: 00/00/1980
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: Prime Alias
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-HABABI
+                      name_1: Nayef
+                      name_2: Salam
+                      name_3: Muhammad
+                      name_4: Ujaym
+                      name_5: null
+                      title: null
+                      dob: 00/00/1981
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: Prime Alias
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-QAHTANI
+                      name_1: Faruq
+                      name_2: null
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1980
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-QAHTANI
+                      name_1: Faruq
+                      name_2: null
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1981
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-QATARI
+                      name_1: Faruq
+                      name_2: null
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1980
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-QATARI
+                      name_1: Faruq
+                      name_2: null
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1981
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-QATARI
+                      name_1: Sheikh
+                      name_2: Faroq
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1980
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: AL-QATARI
+                      name_1: Sheikh
+                      name_2: Faroq
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1981
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: SHAYKH
+                      name_1: Imran
+                      name_2: Farouk
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1980
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+                    - name_6: SHAYKH
+                      name_1: Imran
+                      name_2: Farouk
+                      name_3: null
+                      name_4: null
+                      name_5: null
+                      title: null
+                      dob: 00/00/1981
+                      town_of_birth: null
+                      country_of_birth: Saudi Arabia
+                      nationality: 1) Saudi Arabia 2) Qatar
+                      passport_details: 'Passport No: 592667 (Qatari passport issued on 3 May 2007).'
+                      ni_number: null
+                      position: null
+                      address_1: null
+                      address_2: null
+                      address_3: null
+                      address_4: null
+                      address_5: null
+                      address_6: null
+                      postzip_code: null
+                      country: Afghanistan (since 2009)
+                      other_information: UN Ref QDe.004. Emir for the eastern zone of Afghanistan. Has led an Al-Qaida battalion in Afghanistan since at least mid-2010.
+                      group_type: Individual
+                      alias_type: AKA
+                      regime: The ISIL (Da'esh) and Al-Qaida organisations
+                      listed_on: 01/04/2016
+                      last_updated: 01/04/2016
+                      group_id: '13349'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      operationId: get-list-hm_treasury
+      security:
+        - API Key: []
+      description: ''
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+  '/list/ofac_csl/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: 'GET /list/ofac_csl/{id}'
+      tags:
+        - 4 Original List Entry Search
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ofacCSL'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      operationId: get-list-ofac_csl-id
+      security:
+        - API Key: []
 components:
   schemas:
     personSearchAttributes:
@@ -1322,11 +1844,11 @@ components:
           example: Lochhamer Str
       required:
         - country_code
-    sdn:
-      title: sdn
+    ofacSDN:
+      title: ofac sdn
       type: object
       x-examples: {}
-      description: Output payload of the entry from the SDN lists
+      description: Output payload of the entry from the OFAC SDN lists
       properties:
         entity_number:
           type: string
@@ -1635,6 +2157,140 @@ components:
       description: Output payload of the entry from the CFSP sanction list
       x-tags:
         - Payload Definitions
+    hmTreasury:
+      title: hmTreasury
+      type: object
+      properties:
+        hmTreasury:
+          type: array
+          items:
+            type: object
+            properties:
+              name_6:
+                type: string
+              name_1:
+                type: string
+              name_2:
+                type: string
+              name_3:
+                type: string
+              name_4:
+                type: string
+              name_5:
+                type: string
+              title:
+                type: string
+              dob:
+                type: string
+              town_of_birth:
+                type: string
+              country_of_birth:
+                type: string
+              nationality:
+                type: string
+              passport_details:
+                type: string
+              ni_number:
+                type: string
+              position:
+                type: string
+              address_1:
+                type: string
+              address_2:
+                type: string
+              address_3:
+                type: string
+              address_4:
+                type: string
+              address_5:
+                type: string
+              address_6:
+                type: string
+              postzip_code:
+                type: string
+              country:
+                type: string
+              other_information:
+                type: string
+              group_type:
+                type: string
+              alias_type:
+                type: string
+              regime:
+                type: string
+              listed_on:
+                type: string
+              last_updated:
+                type: string
+              group_id:
+                type: string
+    ofacCSL:
+      title: ofacCSL
+      type: object
+      x-examples: {}
+      description: Output payload of the entry from the OFAC SDN lists
+      properties:
+        entity_number:
+          type: string
+        sdn:
+          type: array
+          items:
+            type: object
+            properties:
+              cons_name:
+                type: string
+              cons_type:
+                type: string
+              program:
+                type: string
+              title:
+                type: string
+              call_sign:
+                type: string
+              vess_type:
+                type: string
+              tonnage:
+                type: string
+              grt:
+                type: string
+              vess_flag:
+                type: string
+              vess_owner:
+                type: string
+              remarks:
+                type: string
+        alt:
+          type: array
+          items:
+            type: object
+            properties:
+              alt_num:
+                type: string
+              alt_type:
+                type: string
+              alt_name:
+                type: string
+              alt_remarks:
+                type: string
+        add:
+          type: array
+          items:
+            type: object
+            properties:
+              add_num:
+                type: string
+              address:
+                type: string
+              city_province_postalcode:
+                type: string
+              country:
+                type: string
+              add_remarks:
+                type: string
+        sdn_comments:
+          type: array
+          items:
+            type: string
   securitySchemes:
     API Key:
       name: x-api-key
