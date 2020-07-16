@@ -5,7 +5,9 @@ info:
   description: "The cubemos Sanction List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe.\n\nYou can search for:\v\n1. Persons\n2. Organizations\n3. Addresses\n\nTo facilitate the search, you can search with the exact names or for the fuzzy phonetical representation. \n\n![Sanction List API architectural overview](../assets/images/sanctionsAPIoverview.png)\n\nNow you can get started: [Try out the API](../docs/01Quickstart.md) in the quick start mode or get started with your implementation immediately. \n\n## Features\n\n1. Easy integration\n2. Example code for various languages\n3. Strict and fuzzy search \n4. Get the complete details of the sanctioned person\n\n## Supported Sanction Lists\n\n1. EU's Common Foreign and Security Policy (CFSP)\n2. Specially Designated Nationals And Blocked Persons List (SDN)\n\nAre you missing a list? \nLet us know and we will integrate it for you into our API.\nWrite an email to meet@cubemos.com"
   contact:
     name: cubemos gmbh
-  license: {}
+  license:
+    url: 'https://www.cubemos.com/terms-and-conditions'
+    name: Terms of Service
 servers:
   - url: 'https://api.cubemos.com/sanction'
 paths:
@@ -923,7 +925,7 @@ paths:
           description: Unauthorized
         '500':
           description: Internal Server Error
-      operationId: get-search-sanction-list-entry
+      operationId: get-list-cfsp
       description: |-
         Get the entry from the official [CFSP sanction list](https://eeas.europa.eu/headquarters/headquarters-homepage_en/8442/Consolidated%20list%20of%20sanction) based on the result from the search calls. 
 
@@ -1008,7 +1010,7 @@ paths:
           description: Unauthorized
         '500':
           description: Internal Server Error
-      operationId: get-list-sdn
+      operationId: get-list-ofac-sdn
       description: |-
         Get the entry from the official [OFAC SDN sanction lists](https://www.treasury.gov/resource-center/sanction/sdn-list/pages/default.aspx) based on the result from the POST calls. 
 
@@ -1023,7 +1025,7 @@ paths:
           type: string
         name: id
         in: path
-        description: The UID in the SDN sanction list from which all the entries will be returned
+        description: The UID in the OFAC SDN sanction list from which all the entries will be returned
         required: true
   '/list/hm-treasury/{id}':
     get:
@@ -1510,7 +1512,7 @@ paths:
           description: Unauthorized
         '500':
           description: Internal Server Error
-      operationId: get-list-hm_treasury
+      operationId: get-list-hm-treasury
       security:
         - API Key: []
       description: |-
@@ -1523,6 +1525,7 @@ paths:
           type: string
         name: id
         in: path
+        description: The UID in the HM Treasury sanction list from which all the entries will be returned
         required: true
   '/list/ofac-csl/{id}':
     parameters:
@@ -1531,6 +1534,7 @@ paths:
         name: id
         in: path
         required: true
+        description: The UID in the OFAC CSL sanction list from which all the entries will be returned
     get:
       summary: 'GET /list/ofac-csl/{id}'
       tags:
@@ -1595,7 +1599,7 @@ paths:
           description: Unauthorized
         '500':
           description: Internal Server Error
-      operationId: get-list-ofac_csl-id
+      operationId: get-list-ofac-csl
       security:
         - API Key: []
       description: |-
