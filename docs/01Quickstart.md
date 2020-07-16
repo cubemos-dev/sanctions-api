@@ -18,7 +18,9 @@ Check for sanctionized person or organization based on their attributes or get a
 Review the original sanction list entries for the sanctionized person using the following GET calls:
 
 4. [/list/cfsp/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1cfsp~1{id}/get)
-5. [/list/sdn/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1sdn~1{id}/get)
+5. [/list/ofac-sdn/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1ofac-sdn~1{id}/get)
+5. [/list/ofac-csl/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1ofac-csl~1{id}/get)
+5. [/list/hm-treasury/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1hm-treasury~1{id}/get)
 
 <!-- theme: warning -->
 > Please enter "sanction_api_cubemos" as the x-api-key in the "Try-it out" section of each call in order to execute them and get the results for each example

@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Sanction List API
   version: '1.0'
-  description: "The cubemos Sanction List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe.\n\nYou can search for:\v\n1. Persons\n2. Organizations\n3. Addresses\n\nTo facilitate the search, you can search with the exact names or for the fuzzy phonetical representation. \n\n![Sanction List API architectural overview](../assets/images/sanctionsAPIoverview.png)\n\nNow you can get started: [Try out the API](../docs/01Quickstart.md) in the quick start mode or get started with your implementation immediately. \n\n## Features\n\n1. Easy integration\n2. Example code for various languages\n3. Strict and fuzzy search \n4. Get the complete details of the sanctioned person\n\n## Supported Sanction Lists\n\n1. EU's Common Foreign and Security Policy (CFSP)\n2. Specially Designated Nationals And Blocked Persons List (SDN)\n\nAre you missing a list? \nLet us know and we will integrate it for you into our API.\nWrite an email to meet@cubemos.com"
+  description: "The cubemos Sanction List API is a RESTful API which can be used to ensure compliance with relevant regulations across the globe.\n\nYou can search for:\v\n1. Persons\n2. Organizations\n3. Addresses\n\nTo facilitate the search, you can search with the exact names or for the fuzzy phonetical representation. \n\n![Sanction List API architectural overview](../assets/images/sanctionsAPIoverview.png)\n\nNow you can get started: [Try out the API](../docs/01Quickstart.md) in the quick start mode or get started with your implementation immediately. \n\n## Features\n\n1. Easy integration\n2. Example code for various languages\n3. Strict and fuzzy search \n4. Get the complete details of the sanctioned person\n\n## Supported Sanction Lists\n\n1. EU's Common Foreign and Security Policy (CFSP)\n2. OFAC Specially Designated Nationals And Blocked Persons List (OFAC-SDN)\n3. OFAC Consolidated Sanctions Lists (OFAC-CSL)\n4. UK HM Treasury Financial Targets List \n\n\nAre you missing a list? \nLet us know and we will integrate it for you into our API.\nWrite an email to meet@cubemos.com"
   contact:
     name: cubemos gmbh
   license:
@@ -38,7 +38,7 @@ paths:
                           - 'OCHOA VASCO, Carlos Mario'
                           - 'VEGA TOBON, Carlos Mario'
                         gender: ''
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10214'
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac-sdn/10214'
                         full_name: 'OCHOA VASCO, Fabio Enrique'
                         first_name: ''
                         middle_name: ''
@@ -52,7 +52,7 @@ paths:
                           - 'VEGA TOBON, Carlos Mario'
                           - 'GONZALEZ ZAPATA, Antonio'
                           - 'OCHOA VASCO, Carlos Mario'
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10214'
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac-sdn/10214'
                         full_name: 'OCHOA VASCO, Fabio Enrique'
                         first_name: ''
                         middle_name: ''
@@ -66,7 +66,7 @@ paths:
                         dob: 20 Nov 1960
                         city: 'Zapopan, Jalisco 44020'
                         gender: ''
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10214'
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac-sdn/10214'
                         full_name: 'OCHOA VASCO, Fabio Enrique'
                         first_name: ''
                         middle_name: ''
@@ -159,7 +159,7 @@ paths:
                           - TRUE MOTIVES 1236 CC
                           - SNIPER OUTDOOR CC
                         name: SNIPER AFRICA
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10133'
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac-sdn/10133'
                         address:
                           country_code: South Africa
                           zip_code: Carletonville 2500
@@ -170,7 +170,7 @@ paths:
                           - SNIPER OUTDOORS CC
                           - TRUE MOTIVES 1236 CC
                         name: SNIPER AFRICA
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10133'
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac-sdn/10133'
                         address:
                           country_code: South Africa
                           zip_code: Carletonville 2500
@@ -181,7 +181,7 @@ paths:
                           - SNIPER OUTDOOR CC
                           - TRUE MOTIVES 1236 CC
                         name: SNIPER AFRICA
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10133'
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac-sdn/10133'
                         address:
                           country_code: South Africa
                           zip_code: Carletonville 2500
@@ -192,7 +192,7 @@ paths:
                           - SNIPER OUTDOORS CC
                           - TRUE MOTIVES 1236 CC
                         name: SNIPER AFRICA
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/10133'
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac-sdn/10133'
                         address:
                           country_code: South Africa
                           zip_code: Carletonville 2500
@@ -257,7 +257,7 @@ paths:
                           - KARAMAY CITY COMMERCIAL BANK CO LTD.
                           - KARAMAY URBAN CREDIT COOPERATIVES
                         name: BANK OF KUNLUN CO LTD
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac_csl/15268'
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac-csl/15268'
                         address:
                           country_code: China
                           zip_code: Beijing 100007
@@ -1588,7 +1588,7 @@ paths:
       security:
         - API Key: []
       description: |-
-        Get the entry from the official [OFAC SDN sanction lists](https://www.treasury.gov/resource-center/sanction/sdn-list/pages/default.aspx) based on the result from the POST calls. 
+        Get the entry from the official [OFAC CSL sanction lists](https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/consolidated.aspx) based on the result from the POST calls. 
 
         <!-- theme: warning -->
         > Please enter "sanction_api_cubemos" as the x-api-key in the "Header" and "15268" as the ID in the "Path" of the "Try-it out" section and hit send to get the results
