@@ -43,7 +43,7 @@ Test it right now by clicking on `send` button.
     "search_config": {
       "sanction_lists": [
         "cfsp",
-        "SDN"
+        "ofac_sdn"
       ],
       "must_match_attributes": [
         "full_name"
