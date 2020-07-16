@@ -94,7 +94,7 @@ paths:
                   search_config:
                     sanction_lists:
                       - cfsp
-                      - SDN
+                      - ofac_sdn
                     must_match_attributes:
                       - full_name
                   person:
@@ -217,12 +217,12 @@ paths:
                   search_config:
                     sanction_lists:
                       - cfsp
-                      - sdn
+                      - ofac_sdn
                     must_match_attributes:
                       - name
                   organization:
                     name: sniper Africa
-                    country_code: ''
+                    country_code: za
         description: |
           ### Payload request schema
           In order to perform a search for an organization, the name and the desired sanction lists are required. Please note that the higher the ambiguity of input, the higher the output response payload can become.
@@ -251,32 +251,18 @@ paths:
               examples:
                 example:
                   value:
-                    persons:
-                      - gender: ''
-                        dob: 01 Jul 1971
-                        aliases:
-                          - 'HAMAWANDI, Kawa'
-                          - 'OMAR ACHMED, Kaua'
-                        full_name: 'AHMAD, Farhad Kanabi'
-                        first_name: ''
-                        middle_name: ''
-                        last_name: ''
-                        nationality: Germany
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/9588'
-                      - gender: ''
-                        dob: 21 Jan 1963
-                        aliases:
-                          - 'AYADI CHAFIK, Ben Muhammad'
-                          - 'AIADY, Ben Muhammad'
-                          - 'AYADI SHAFIQ, Ben Muhammad'
-                          - 'AIADI, Ben Muhammad'
-                        full_name: 'BIN MUHAMMAD, Ayadi Chafiq'
-                        first_name: ''
-                        middle_name: ''
-                        last_name: ''
-                        nationality: Germany
-                        list_entry_url: 'https://api.cubemos.com/sanction/list/sdn/6946'
-                    organizations: []
+                    persons: []
+                    organizations:
+                      - aliases:
+                          - KARAMAY CITY COMMERCIAL BANK CO LTD.
+                          - KARAMAY URBAN CREDIT COOPERATIVES
+                        name: BANK OF KUNLUN CO LTD
+                        list_entry_url: 'https://api.cubemos.com/sanction/list/ofac_csl/15268'
+                        address:
+                          country_code: China
+                          zip_code: Beijing 100007
+                          city: Beijing 100007
+                          street: '9 Dongzhimen North Street, Dongcheng District, (Head Office)'
         '400':
           description: Bad Request
         '401':
@@ -293,15 +279,14 @@ paths:
                 value:
                   search_config:
                     sanction_lists:
-                      - cfsp
-                      - sdn
+                      - ofac_csl
                     must_match_attributes:
                       - ''
                   address:
-                    country_code: germany
-                    zip_code: ''
-                    city: munich
-                    street: ''
+                    country_code: CN
+                    zip_code: '100007'
+                    city: Beijing
+                    street: Dongzhimen
         description: |-
           ### Payload request scheme
           In order to search for sanction lists entries, at least the specific country code is required. Please note though that the higher the ambiguity of input, the higher the output response payload can become. 
