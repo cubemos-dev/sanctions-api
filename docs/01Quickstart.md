@@ -12,15 +12,18 @@ The cubemos Sanction List API is a RESTful API which can be used to ensure compl
 
 Check for sanctioned person or organization based on their attributes or get all the sanctioned entities at an address using the following POST calls: 
 1. [/search/entities/person](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1person/post) 
-2. [search/entities/organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post) 
-3. [search/location/address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post)
+2. [/search/entities/organization](../swagger/sanctions_list.v1.yaml/paths/~1search~1entities~1organization/post) 
+3. [/search/location/address](../swagger/sanctions_list.v1.yaml/paths/~1search~1location~1address/post)
 
 Review the original sanction list entries for the sanctioned person using the following GET calls:
 
 4. [/list/cfsp/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1cfsp~1{id}/get)
-5. [/list/sdn/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1sdn~1{id}/get)
+5. [/list/ofac-sdn/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1ofac-sdn~1{id}/get)
+5. [/list/ofac-csl/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1ofac-csl~1{id}/get)
+5. [/list/hm-treasury/{id}](../swagger/sanctions_list.v1.yaml/paths/~1list~1hm-treasury~1{id}/get)
 
-Please enter "sanction_api_cubemos" as the x-api-key in the "Try-it out" section of each call in order to execute them and get the results for each example
+<!-- theme: warning -->
+> Please enter "sanction_api_cubemos" as the x-api-key in the "Try-it out" section of each call in order to execute them and get the results for each example
 
 ---
 #### **Investigate a sanctionized person**
@@ -40,7 +43,7 @@ Test it right now by clicking on `send` button.
     "search_config": {
       "sanction_lists": [
         "cfsp",
-        "SDN"
+        "ofac_sdn"
       ],
       "must_match_attributes": [
         "full_name"
@@ -69,7 +72,7 @@ Retrieve the full original entry based on the ID of the `list_entry_url` of the 
 ```json http
 {
   "method": "get",
-  "url": "https://api.cubemos.com/sanction/list/sdn/10214",
+  "url": "https://api.cubemos.com/sanction/list/ofac-sdn/10214",
    "headers": {
     "x-api-key": "sanction_api_cubemos"
   }
